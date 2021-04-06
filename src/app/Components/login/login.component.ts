@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   private rolUser: string = "Usuario Corriente";
   statusRegistro: any;
   statusLoginIncorrecto: any;
-  statusLoginCorrecto:any;
+  statusLoginCorrecto: any;
   codeErrorGUI: string;
 
   constructor(private BuilderRegistroForm: FormBuilder, private BuilderLoginForm: FormBuilder, private WebServiceUser: LoginService) {
@@ -80,7 +80,11 @@ export class LoginComponent implements OnInit {
 
     }
 
-    this.WebServiceUser.PostAuth(registro).subscribe(start => {});
+    this.WebServiceUser.PostAuth(registro).subscribe(start => {
+
+      this.statusLoginCorrecto = true;
+      this.codeErrorGUI = JSON.stringify(start);
+    });
 
   }
 

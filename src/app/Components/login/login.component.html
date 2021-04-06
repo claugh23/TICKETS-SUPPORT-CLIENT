@@ -26,6 +26,12 @@
                     <button class="btn btn-outline-danger" type="submit" [disabled]="FormLogin.invalid">INICIAR
                         SESION</button>
                     <hr>
+                    <div class="alert alert-success" role="alert" *ngIf="statusLoginCorrecto">
+                        <strong>INICIANDO SESION....</strong>
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="statusLoginIncorrecto">
+                        <strong>{{codeErrorGUI}}</strong>
+                    </div>
                 </form>
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
