@@ -7,11 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 //componentes
 import { AppComponent } from './app.component';
 import { LoginComponent} from 'src/app/Components/login/login.component'
+import { TicketsLandingPageComponent } from "src/app/Components/tickets-landing-page/tickets-landing-page.component";
+import { GenerateTicketsRequestComponent } from "src/app/Components/generate-tickets-request/generate-tickets-request.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    TicketsLandingPageComponent,
+    GenerateTicketsRequestComponent
   ],
   imports: [
     BrowserModule,

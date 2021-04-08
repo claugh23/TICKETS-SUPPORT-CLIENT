@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
   statusRegistro: any;
   statusLoginIncorrecto: any;
   statusLoginCorrecto: any;
+  statusLoginGUI:boolean = true;
+  CurrentLocalStorageState:string;
   codeErrorGUI: string;
 
   constructor(private BuilderRegistroForm: FormBuilder, private BuilderLoginForm: FormBuilder, private WebServiceUser: LoginService) {
@@ -72,7 +74,12 @@ export class LoginComponent implements OnInit {
   }
 
   async ServiceAutentication() {
-    this.statusLoginIncorrecto = false;
+    
+
+    
+   this.CurrentLocalStorageState = localStorage.getItem('StateLoginGUI');
+
+    
     const registro: AuthModel = {
 
       Email: this.FormLogin.get('FormUserEmail').value,
@@ -80,15 +87,17 @@ export class LoginComponent implements OnInit {
 
     }
 
-    this.WebServiceUser.PostAuth(registro).subscribe(start => {
-
-      this.statusLoginCorrecto = true;
-      this.codeErrorGUI = JSON.stringify(start);
+    this.WebServiceUser.PostAuth(registro).subscribe((start):any => {
+      
+      if(this.CurrentLocalStorageState === 'true'){
+        this.statusLoginGUI = false;
+      }
     });
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    localStorage.setItem('StateLoginGUI','true');
   }
 
 }
