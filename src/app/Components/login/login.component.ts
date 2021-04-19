@@ -1,5 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthModel } from 'src/app/Interfaces/IAuth';
 import { UsersModel } from 'src/app/Interfaces/IUsers';
 import { LoginService } from 'src/app/Services/Autentication/login.service';
@@ -7,10 +14,9 @@ import { LoginService } from 'src/app/Services/Autentication/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   //Formularios
   FormRegistroUser: FormGroup;
   FormLogin: FormGroup;
@@ -27,77 +33,65 @@ export class LoginComponent implements OnInit {
   private FormUserPass = new FormControl();
 
   //variables dinamicas
-  private rolUser: string = "Usuario Corriente";
+  private rolUser: string = 'Usuario Corriente';
   statusRegistro: any;
   statusLoginIncorrecto: any;
   statusLoginCorrecto: any;
-  statusLoginGUI:boolean = true;
-  CurrentLocalStorageState:string;
+  statusLoginGUI: boolean = true;
+  CurrentLocalStorageState: string;
   codeErrorGUI: string;
 
-  constructor(private BuilderRegistroForm: FormBuilder, private BuilderLoginForm: FormBuilder, private WebServiceUser: LoginService) {
-
+  constructor(
+    private BuilderRegistroForm: FormBuilder,
+    private BuilderLoginForm: FormBuilder,
+    private WebServiceUser: LoginService,
+    private navegacionRouter:Router
+  ) {
     this.FormRegistroUser = this.BuilderRegistroForm.group({
       FormName: ['', Validators.required],
       FormLastName: ['', Validators.required],
       FormPhone: ['', Validators.required],
       FormEmail: ['', Validators.required],
-      FormPass: ['', Validators.required]
+      FormPass: ['', Validators.required],
     });
 
     this.FormLogin = this.BuilderLoginForm.group({
       FormUserEmail: ['', Validators.required],
-      FormUserPass: ['', Validators.required]
-    })
-
+      FormUserPass: ['', Validators.required],
+    });
   }
 
   async ServiceRegistroUsuario() {
-
     const registro: UsersModel = {
       Name: this.FormRegistroUser.get('FormName').value,
       LastName: this.FormRegistroUser.get('FormLastName').value,
       Phone: this.FormRegistroUser.get('FormPhone').value,
       Email: this.FormRegistroUser.get('FormEmail').value,
       Pass: this.FormRegistroUser.get('FormPass').value,
-      Rol: this.rolUser
-    }
+      Rol: this.rolUser,
+    };
 
-    this.WebServiceUser.PostUser(registro).subscribe(result => {
-
-
-    }, (RegistroCompleto: any) => {
-      this.statusRegistro = true;
-
-    })
-
+    this.WebServiceUser.PostUser(registro).subscribe(
+      (result) => {},
+      (RegistroCompleto: any) => {
+        this.statusRegistro = true;
+      }
+    );
   }
 
-  async ServiceAutentication() {
-    
-
-    
-   this.CurrentLocalStorageState = localStorage.getItem('StateLoginGUI');
-
-    
+  ServiceAutentication() {
     const registro: AuthModel = {
-
       Email: this.FormLogin.get('FormUserEmail').value,
       Pass: this.FormLogin.get('FormUserPass').value,
+    };
 
-    }
-
-    this.WebServiceUser.PostAuth(registro).subscribe((start):any => {
+    this.WebServiceUser.PostAuth(registro).subscribe(
+      (start) => {
+        alert(JSON.stringify(start));
+      },
       
-      if(this.CurrentLocalStorageState === 'true'){
-        this.statusLoginGUI = false;
-      }
-    });
-
+    );
   }
 
-  ngOnInit() {
-    localStorage.setItem('StateLoginGUI','true');
-  }
-
+  ngOnInit() {}
 }
