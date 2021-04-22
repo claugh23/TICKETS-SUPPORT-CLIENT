@@ -5,5 +5,5 @@ export interface UsersModel {
     Phone:string;
     Email:string;
     Pass:string;
-    Rol:string;
+    Role:string;
 }

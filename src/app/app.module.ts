@@ -6,12 +6,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 //componentes
 import { AppComponent } from './app.component';
-import { LoginComponent} from 'src/app/Components/login/login.component'
+import { LoginComponent} from 'src/app/Components/login/login.component';
+import { GenerateTicketsRequestComponent } from "src/app/Components/generate-tickets-request/generate-tickets-request.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    GenerateTicketsRequestComponent
   ],
   imports: [
     BrowserModule,

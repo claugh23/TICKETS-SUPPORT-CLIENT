@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<router-outlet></router-outlet>
+<div class="container-fluid" >
 
     <div class="card border-warning" style="margin-top: 10%;">
         <div class="card-header bg-warning">
@@ -15,22 +16,15 @@
                     <label>Password</label>
                     <input class="form-control" type="password" placeholder="xxxxxxxx" required role="textbox"
                         formControlName="FormUserPass">
-                        <br>
-                        <div class="alert alert-danger" role="alert" *ngIf="statusLoginIncorrecto">
-                            <strong>{{codeErrorGUI}}</strong>
-                        </div>
-                        <div class="alert alert-danger" role="alert" *ngIf="statusLoginCorrecto">
-                            <strong>{{codeErrorGUI}}</strong>
-                        </div>
+                    <br>
+
                     <hr>
                     <button class="btn btn-outline-danger" type="submit" [disabled]="FormLogin.invalid">INICIAR
                         SESION</button>
                     <hr>
-                    <div class="alert alert-success" role="alert" *ngIf="statusLoginCorrecto">
-                        <strong>INICIANDO SESION....</strong>
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="statusLoginIncorrecto">
-                        <strong>{{codeErrorGUI}}</strong>
+
+                    <div class="alert alert-sucess" role="alert" *ngIf="statusLoginIncorrecto">
+                        <strong>Iniciando Sesion... </strong>
                     </div>
                 </form>
 
