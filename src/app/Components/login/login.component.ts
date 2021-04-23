@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthModel } from 'src/app/Interfaces/IAuth';
 import { UsersModel } from 'src/app/Interfaces/IUsers';
 import { LoginService } from 'src/app/Services/Autentication/login.service';
 
@@ -35,6 +34,8 @@ export class LoginComponent implements OnInit {
   statusLoginGUI: boolean = true;
   CurrentLocalStorageState: string;
   codeErrorGUI: string;
+  RolActual: string;
+  ErrorMessageLogin:string;
 
   constructor(private BuilderRegistroForm: FormBuilder, private BuilderLoginForm: FormBuilder, private WebServiceUser: LoginService, private enrutamiento: Router) {
 
@@ -74,6 +75,7 @@ export class LoginComponent implements OnInit {
 
   async ServiceAutentication() {
 
+
     this.statusLoginIncorrecto = false;
 
     const credentials: UsersModel = {
@@ -90,20 +92,24 @@ export class LoginComponent implements OnInit {
 
     this.WebServiceUser.PostUserAutentication(credentials).subscribe(
       (result: any) => {
-        alert("Solicitud: " + JSON.stringify(result))
+
+        this.RolActual = result[0];
+
+        if (this.RolActual === "User") {
+          this.enrutamiento.navigate(['/GenerateTicketsRequest']);
+        } else if (this.RolActual === "Admin") {
+          this.enrutamiento.navigate(['/TicketsLandingPage']);
+        }
+
       },
       (error: HttpErrorResponse) => {
 
-        alert(JSON.stringify(error.error));
-
         this.statusLoginIncorrecto = true;
 
-        this.enrutamiento.navigate(['/TicketsSupportModule']);
+        this.ErrorMessageLogin = JSON.stringify(error.error);
 
       }
     )
-
-
 
   }
 

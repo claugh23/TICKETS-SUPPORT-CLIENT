@@ -1,5 +1,5 @@
-<router-outlet></router-outlet>
-<div class="container-fluid" >
+
+<div class="container-fluid">
 
     <div class="card border-warning" style="margin-top: 10%;">
         <div class="card-header bg-warning">
@@ -23,8 +23,8 @@
                         SESION</button>
                     <hr>
 
-                    <div class="alert alert-sucess" role="alert" *ngIf="statusLoginIncorrecto">
-                        <strong>Iniciando Sesion... </strong>
+                    <div class="alert alert-danger" role="alert" *ngIf="statusLoginIncorrecto">
+                        <strong>{{ErrorMessageLogin}}</strong>
                     </div>
                 </form>
 

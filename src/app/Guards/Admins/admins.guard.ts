@@ -6,8 +6,8 @@ import { LoginService } from 'src/app/Services/Autentication/login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersAutenticationGuard implements CanActivate {
-
+export class AdminsGuard implements CanActivate {
+  
   statusLogin: any;
 
 
@@ -15,8 +15,11 @@ export class UsersAutenticationGuard implements CanActivate {
 
   canActivate():boolean{
 
+  
+
    
-    if(this.autenticationAdmin.IsUser_AdminLoggingIn()){
+
+    if( this.autenticationAdmin.IsUser_AdminLoggingIn()){
       
       return true;
 
@@ -27,4 +30,5 @@ export class UsersAutenticationGuard implements CanActivate {
 
 
   }
+  
 }
