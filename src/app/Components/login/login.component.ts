@@ -108,30 +108,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    Rol: this.rolUser,
-    };
-
-    this.WebServiceUser.PostUser(registro).subscribe(
-      (result) => { },
-      (RegistroCompleto: any) => {
-        this.statusRegistro = true;
-      }
-    );
   }
 
-ServiceAutentication() {
-  const registro: AuthModel = {
-    Email: this.FormLogin.get('FormUserEmail').value,
-    Pass: this.FormLogin.get('FormUserPass').value,
-  };
-
-  this.WebServiceUser.PostAuth(registro).subscribe(
-    (start) => {
-      alert(JSON.stringify(start));
-    },
-
-  );
-}
-
-ngOnInit() { }
 }
