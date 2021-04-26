@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit {
 
         this.statusLoginIncorrecto = true;
 
-        this.ErrorMessageLogin = JSON.stringify(error.error);
+        this.ErrorMessageLogin = JSON.stringify("Ocurrio un error al validar la informacion con el servidor: "+error.error);
 
       }
     )
