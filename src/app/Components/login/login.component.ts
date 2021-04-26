@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   codeErrorGUI: string;
   RolActual: string;
   ErrorMessageLogin:string;
+  CurrentSessionStorage:UsersModel[];
 
   constructor(private BuilderRegistroForm: FormBuilder, private BuilderLoginForm: FormBuilder, private WebServiceUser: LoginService, private enrutamiento: Router) {
 
@@ -93,7 +94,11 @@ export class LoginComponent implements OnInit {
     this.WebServiceUser.PostUserAutentication(credentials).subscribe(
       (result: any) => {
 
-        this.RolActual = result[0];
+        this.CurrentSessionStorage = result;
+        localStorage.setItem("UserInfo",JSON.stringify(this.CurrentSessionStorage));
+
+        
+        
 
         if (this.RolActual === "User") {
           this.enrutamiento.navigate(['/GenerateTicketsRequest']);

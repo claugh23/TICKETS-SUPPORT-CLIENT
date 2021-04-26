@@ -10,7 +10,28 @@
             </li>
 
             <li class="nav-item active mr-2">
-                <a class="nav-link btn btn-outline-success">USER PROFILE</a>
+                <a class="nav-link btn btn-outline-success" data-toggle="modal" data-target="#modelId">USER PROFILE</a>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">CURRENT PROFILE {{CurrentUser}}</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <div class="modal-body">
+                                Body
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
             <li class="nav-item active" style="margin-right: 1cm;">
                 <a class="nav-link btn btn-danger" href="/">LOG OUT</a>
@@ -31,21 +52,21 @@
 
             <hr>
             <div class="form-group col-md-8 mx-auto">
-                <form>
+                <form [formGroup]="FormTicket" (ngSubmit)="CreateTicket()">
                     <label for="" class="text-white">NAME</label>
-                    <input class="form-control" type="text" required>
+                    <input class="form-control" type="text" required formControlName="FormTicketName">
                     <br>
                     <label for="" class="text-white">LAST NAME</label>
-                    <input class="form-control" type="text" required>
+                    <input class="form-control" type="text" required  formControlName="FormTicketLastName">
                     <br>
                     <label for="" class="text-white">EMAIL ADDRESS</label>
-                    <input class="form-control" type="email" required placeholder="email@domain.com">
+                    <input class="form-control" type="email" required placeholder="email@domain.com"  formControlName="FormTicketEmail">
                     <br>
                     <label for="" class="text-white">PHONE</label>
-                    <input class="form-control" type="text" required placeholder="xxxxxxxx">
+                    <input class="form-control" type="text" required placeholder="12345678"  formControlName="FormTicketPhone">
                     <br>
                     <label for="" class="text-white">PLEASE SELECT THE CATEGORY OF YOUR TICKETS</label>
-                    <select class="form-control" required>
+                    <select class="form-control" required  formControlName="FormTicketCategory">
                         <option selected>Computer Support</option>
                         <option>Printer Support</option>
                         <option>Email Support</option>
@@ -61,9 +82,9 @@
                             style="text-decoration: underline;">DETAILS</strong> YOUR
                         REQUEST</label>
 
-                    <textarea class="form-control" cols="30" rows="10" required title="details"></textarea>
+                    <textarea class="form-control" cols="30" rows="10" required title="details"  formControlName="FormTicketDetails"></textarea>
                     <br>
-                    <button type="submit" class="btn btn-outline-danger">CREATE REQUEST</button>
+                    <button type="submit" class="btn btn-warning"[disabled]="FormTicket.invalid">CREATE REQUEST</button>
                 </form>
             </div>
         </div>
