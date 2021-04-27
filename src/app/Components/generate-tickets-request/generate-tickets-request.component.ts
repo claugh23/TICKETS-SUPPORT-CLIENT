@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TicketRequesModel } from "src/app/Interfaces/ITickets";
 import { TicketsService } from "src/app/Services/Tickets/tickets.service";
+
 @Component({
   selector: 'app-generate-tickets-request',
   templateUrl: './generate-tickets-request.component.html',
@@ -20,9 +21,10 @@ export class GenerateTicketsRequestComponent implements OnInit {
   FormTicketDetails = new FormControl('');
 
   //Variables Dinamicas
-  CurrentUser
-  CurrentEmail
-  Current
+  CurrentName:string;
+  CurrentLastName:string;
+  CurrentEmail:string;
+  CurrentRole:string;
 
   constructor(private FormTicketBuilder: FormBuilder, private TicketAPI: TicketsService) {
 
@@ -61,10 +63,15 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   }
 
-
+  CleanCache(){
+    localStorage.clear();
+  }
   ngOnInit() {
 
-    this.CurrentUser = localStorage.getItem("Name");
+    this.CurrentName= localStorage.getItem("Name");
+    this.CurrentLastName = localStorage.getItem("LastName");
+    this.CurrentEmail = localStorage.getItem("Email");
+    this.CurrentRole = localStorage.getItem("Role");
   }
 
 }

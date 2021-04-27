@@ -9,6 +9,9 @@ export class NavigationComponent implements OnInit {
 
   constructor() { }
 
+  CleanCache(){
+    localStorage.clear();
+  }
   ngOnInit(): void {
   }
 
