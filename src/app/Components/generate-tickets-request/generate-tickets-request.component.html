@@ -6,38 +6,107 @@
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active mr-2">
-                <a class="nav-link btn btn-outline-danger text-dark">CURRENT TICKETS</a>
-            </li>
-
-            <li class="nav-item active mr-2">
-                <a class="nav-link btn btn-outline-success" data-toggle="modal" data-target="#modelId">USER PROFILE</a>
+                <a class="nav-link btn btn-outline-danger text-dark" data-toggle="modal" data-target="#ModalTickets"
+                    (click)="SearchTicketsFromCurrentUser()">CURRENT TICKETS</a>
 
                 <!-- Modal -->
-                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                <div class="modal fade" id="ModalTickets" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-xl" role="table">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header mx-auto">
+                                <h5 class="modal-title ">MY TICKETS FOR IT SUPPORT</h5>
 
-
-                                <h2 class="text-center">MY PROFILE INFORMATION</h2>
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                             </div>
                             <div class="modal-body">
-                                <h3 class="text-center">MY NAME: <br> {{CurrentName}}</h3>
-                                <hr>
-                                <h3 class="text-center">MY LASTNAME: <br> {{CurrentLastName}}</h3>
-                                <hr>
-                                <h3 class="text-center">MY EMAIL ADDRESS: <br> {{CurrentEmail}}</h3>
-                                <hr>
-                                <h3 class="text-center">MY PROFILE TYPE: <br> {{CurrentRole}}</h3>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>TICKET NUMBER</th>
+                                            <th>TYPE OF REQUEST</th>
+                                            <th>DETAILS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let items of CurrentTicketsList">
+                                        <tr>
+                                            <td>{{items.ticketNumber}}</td>
+                                            <td>{{items.typeRequest}}</td>
+                                            <td>{{items.details}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item active mr-2">
+                <a class="nav-link btn btn-outline-success" data-toggle="modal" data-target="#ModalProfile">USER
+                    PROFILE</a>
+
+                <!-- Modal -->
+                <div class="modal fade" id="ModalProfile" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header mx-auto">
+                                <h2 class="modal-title text-center">THIS IS YOUR CURRENT PROFILE</h2>
+
+
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="card-deck">
+                                    <div class="card border-info">
+                                        <div class="card-header">
+                                            <h3 class="text-center">USER</h3>
+                                        </div>
+
+                                        <div class="card-body">
+
+                                            <h4 class="text-center">{{CurrentName}} {{CurrentLastName}}</h4>
+
+                                        </div>
+                                    </div>
+                                    <div class="card border-info">
+                                        <div class="card-header">
+                                            <h3 class="text-center">EMAIL</h3>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h4 class="text-center">{{CurrentEmail}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="card-deck">
+                                    <div class="card border-info">
+                                        <div class="card-header">
+                                            <h3 class="text-center">PHONE</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="text-center">{{CurrentPhone}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card border-info">
+                                        <div class="card-header">
+                                            <h3 class="text-center">PROFILE ROL</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="text-center">{{CurrentRole}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                             </div>
                         </div>
                     </div>
@@ -64,18 +133,18 @@
             <div class="form-group col-md-8 mx-auto">
                 <form [formGroup]="FormTicket" (ngSubmit)="CreateTicket()">
                     <label for="" class="text-white">NAME</label>
-                    <input class="form-control" type="text" required formControlName="FormTicketName">
+                    <input class="form-control" type="text" required disabled value="{{CurrentName}}">
                     <br>
                     <label for="" class="text-white">LAST NAME</label>
-                    <input class="form-control" type="text" required formControlName="FormTicketLastName">
+                    <input class="form-control" type="text" required disabled value="{{CurrentLastName}}">
                     <br>
                     <label for="" class="text-white">EMAIL ADDRESS</label>
                     <input class="form-control" type="email" required placeholder="email@domain.com"
-                        formControlName="FormTicketEmail">
+                        disabled value="{{CurrentEmail}}">
                     <br>
                     <label for="" class="text-white">PHONE</label>
                     <input class="form-control" type="text" required placeholder="12345678"
-                        formControlName="FormTicketPhone">
+                        disabled value="{{CurrentPhone}}">
                     <br>
                     <label for="" class="text-white">PLEASE SELECT THE CATEGORY OF YOUR TICKETS</label>
                     <select class="form-control" required formControlName="FormTicketCategory">

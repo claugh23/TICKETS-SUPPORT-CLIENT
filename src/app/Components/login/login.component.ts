@@ -104,12 +104,14 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("LastName",result[1]);
           localStorage.setItem("Email",result[2]);
           localStorage.setItem("Role",result[3]);
+          localStorage.setItem("Phone",result[4]);
           this.enrutamiento.navigate(['/GenerateTicketsRequest']);
         } else if (this.RolActual === 'Admin') {
           localStorage.setItem("Name",result[0]);
           localStorage.setItem("LastName",result[1]);
           localStorage.setItem("Email",result[2]);
           localStorage.setItem("Role",result[3]);
+          localStorage.setItem("Phone",result[4]);
           this.enrutamiento.navigate(['/TicketsLandingPage']);
         }
       },
@@ -118,7 +120,7 @@ export class LoginComponent implements OnInit {
 
         this.ErrorMessageLogin = JSON.stringify(
           'Ocurrio un error al validar la informacion con el servidor: ' +
-            error.error
+            JSON.stringify(error.error)
         );
       }
     );

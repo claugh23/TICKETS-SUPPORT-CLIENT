@@ -1,55 +1,37 @@
 <app-navigation></app-navigation>
 <h2 class="text-center text-white">CURRENT TICKETS IN THE SYSTEM</h2>
-<button class="btn btn-outline-warning">REFRESH DATABASE</button>
-<div class="container-fluid">
+<hr class="bg-light">
+<button class="btn btn-outline-warning d-block mx-auto" (click)=" GetTicketsAll()">REFRESH DATABASE</button>
+<hr class="bg-light">
+<div class="table-wrapper-scroll-y my-custom-scrollbar container-fluid">
 
     <br>
-
-    <table class="table">
-        <thead>
+    
+    <table class="table table-stripped bg-dark">
+        <thead class="thead-dark">
             <tr>
-                <th class="text-white">NAME</th>
-                <th class="text-white">LASTNAME</th>
-                <th class="text-white">EMAIL ADDRESS</th>
-                <th class="text-white">TYPE OF REQUEST</th>
-                <th class="text-white">REQUEST DETAILS</th>
-                <th class="text-white">ACTIONS</th>
+                <th class="text-white text-center">TICKET NUMBER</th>
+                <th class="text-white text-center">NAME</th>
+                <th class="text-white text-center">LASTNAME</th>
+                <th class="text-white text-center">EMAIL ADDRESS</th>
+                <th class="text-white text-center">TYPE OF REQUEST</th>
+                <th class="text-white text-center">REQUEST DETAILS</th>
+                <th class="text-white text-center">ACTIONS</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let item of ListaCurrentTickets">
             <tr>
-                <td scope="row" class="text-white">Claudio</td>
-                <td class="text-white">Gonzalez Hernandez</td>
-                <td class="text-white">email@test.com</td>
-                <td class="text-white">Bases de datos</td>
-                <td class="text-white">Quiero generar una base de datos en sql pero no se como hacerla, me podrias
-                    ayudar con este problema
-                    lo mas pronto posible</td>
-                <td> <a name="" id=""  class="btn btn-warning"href="#" role="button">Completar</a></td>
-            </tr>
-            <tr>
-                <td scope="row" class="text-white">Claudio</td>
-                <td class="text-white">Gonzalez Hernandez</td>
-                <td class="text-white">email@test.com</td>
-                <td class="text-white">Bases de datos</td>
-                <td class="text-white">Quiero generar una base de datos en sql pero no se como hacerla, me podrias
-                    ayudar con este problema
-                    lo mas pronto posible</td>
-                <td> <a name="" id=""  class="btn btn-warning" href="#" role="button">Completar</a></td>
-            </tr>
-            <tr>
-                <td scope="row" class="text-white">Claudio</td>
-                <td class="text-white">Gonzalez Hernandez</td>
-                <td class="text-white">email@test.com</td>
-                <td class="text-white">Bases de datos</td>
-                <td class="text-white">Quiero generar una base de datos en sql pero no se como hacerla, me podrias
-                    ayudar con este problema
-                    lo mas pronto posible</td>
-                <td> <a name="" id="" class="btn btn-warning" href="#" role="button">Completar</a></td>
+                <td class="text-white"><strong>{{item.ticketNumber}}</strong></td>
+                <td class="text-white"><strong>{{item.name}}</strong></td>
+                <td class="text-white"><strong>{{item.lastName}}</strong></td>
+                <td class="text-white"><strong>{{item.email}}</strong></td>
+                <td class="text-white"><strong>{{item.typeRequest}}</strong></td>
+                <td class="text-white text-justify"><h5>{{item.details}}</h5></td>
+                <td> <a class="btn btn-warning" role="button">Completar</a></td>
             </tr>
           
-
+    
         </tbody>
     </table>
-
+    
 </div>

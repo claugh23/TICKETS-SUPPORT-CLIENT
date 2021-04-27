@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { ResourceLoader } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TicketRequesModel } from "src/app/Interfaces/ITickets";
@@ -13,10 +14,6 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   //Formulario para generar el ticket
   FormTicket: FormGroup;
-  FormTicketName = new FormControl('')
-  FormTicketLastName = new FormControl('');
-  FormTicketEmail = new FormControl('');
-  FormTicketPhone = new FormControl('');
   FormTicketCategory = new FormControl('');
   FormTicketDetails = new FormControl('');
 
@@ -25,15 +22,16 @@ export class GenerateTicketsRequestComponent implements OnInit {
   CurrentLastName:string;
   CurrentEmail:string;
   CurrentRole:string;
+  CurrentPhone:string;
+
+  //Lista de tickets
+  CurrentTicketsList:TicketRequesModel;
 
   constructor(private FormTicketBuilder: FormBuilder, private TicketAPI: TicketsService) {
 
     this.FormTicket = this.FormTicketBuilder.group({
 
-      FormTicketName: ['', Validators.required],
-      FormTicketLastName: ['', Validators.required],
-      FormTicketEmail: ['', Validators.required],
-      FormTicketPhone: ['', Validators.required],
+    
       FormTicketCategory: ['', Validators.required],
       FormTicketDetails: ['', Validators.required]
     });
@@ -43,10 +41,10 @@ export class GenerateTicketsRequestComponent implements OnInit {
   CreateTicket() {
 
     const Ticket: TicketRequesModel = {
-      Name: this.FormTicket.get('FormTicketName').value,
-      LastName: this.FormTicket.get('FormTicketLastName').value,
-      Email: this.FormTicket.get('FormTicketEmail').value,
-      Phone: Number.parseInt(this.FormTicket.get('FormTicketPhone').value),
+      Name: localStorage.getItem("Name"),
+      LastName: localStorage.getItem("LastName"),
+      Email: localStorage.getItem("Email"),
+      Phone: Number.parseInt(localStorage.getItem("Phone")),
       TypeRequest: this.FormTicket.get('FormTicketCategory').value,
       Details: this.FormTicket.get('FormTicketDetails').value,
       TicketNumber: Math.floor(Math.random() * 15000)
@@ -63,6 +61,18 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   }
 
+  SearchTicketsFromCurrentUser(){
+
+  
+    this.TicketAPI.GetUserTickets(localStorage.getItem("Name")).subscribe((result:any) => {
+
+      this.CurrentTicketsList = result;
+    
+    },(error:HttpErrorResponse) => {
+      alert(JSON.stringify(error.error));
+    })
+  }
+
   CleanCache(){
     localStorage.clear();
   }
@@ -72,6 +82,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
     this.CurrentLastName = localStorage.getItem("LastName");
     this.CurrentEmail = localStorage.getItem("Email");
     this.CurrentRole = localStorage.getItem("Role");
+    this.CurrentPhone = localStorage.getItem("Phone");
   }
 
 }
