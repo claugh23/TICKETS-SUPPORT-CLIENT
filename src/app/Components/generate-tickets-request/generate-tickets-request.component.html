@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: orange">
-    <a class="navbar-brand" href="#">TICKETS SUPPORT APP </a>
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <a class="navbar-brand">TICKETS SUPPORT APP </a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active mr-2">
-                <a class="nav-link btn btn-outline-danger text-dark" data-toggle="modal" data-target="#ModalTickets"
-                    (click)="SearchTicketsFromCurrentUser()">CURRENT TICKETS</a>
+                <a class="nav-link btn btn-outline-danger text-white" data-toggle="modal" data-target="#ModalTickets"
+                    (click)="SearchTicketsFromCurrentUser()"><i class="fa fa-address-book" aria-hidden="true"></i> CURRENT TICKETS</a>
 
                 <!-- Modal -->
                 <div class="modal fade" id="ModalTickets" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
@@ -47,7 +47,7 @@
             </li>
 
             <li class="nav-item active mr-2">
-                <a class="nav-link btn btn-outline-success" data-toggle="modal" data-target="#ModalProfile">USER
+                <a class="nav-link btn btn-outline-warning" data-toggle="modal" data-target="#ModalProfile"><i class="fa fa-user" aria-hidden="true"></i> USER
                     PROFILE</a>
 
                 <!-- Modal -->
@@ -113,7 +113,7 @@
                 </div>
             </li>
             <li class="nav-item active" style="margin-right: 1cm;">
-                <a class="nav-link btn btn-danger" href="/" (click)="CleanCache()">LOG OUT</a>
+                <a class="nav-link btn btn-outline-danger" href="/" (click)="CleanCache()">LOG OUT <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
             </li>
 
 
@@ -124,7 +124,7 @@
 <div class="container-fluid">
     <div style="padding: 0.5cm;"></div>
 
-    <div class="card border-warning" style="background-color: transparent;">
+    <div class="card border-info" style="background-color: transparent;">
 
         <div class="card-body">
             <h4 class="card-title text-center text-white">MARIAN BAKER SCHOOL IT TICKETS</h4>
@@ -139,12 +139,12 @@
                     <input class="form-control" type="text" required disabled value="{{CurrentLastName}}">
                     <br>
                     <label for="" class="text-white">EMAIL ADDRESS</label>
-                    <input class="form-control" type="email" required placeholder="email@domain.com"
-                        disabled value="{{CurrentEmail}}">
+                    <input class="form-control" type="email" required placeholder="email@domain.com" disabled
+                        value="{{CurrentEmail}}">
                     <br>
                     <label for="" class="text-white">PHONE</label>
-                    <input class="form-control" type="text" required placeholder="12345678"
-                        disabled value="{{CurrentPhone}}">
+                    <input class="form-control" type="text" required placeholder="12345678" disabled
+                        value="{{CurrentPhone}}">
                     <br>
                     <label for="" class="text-white">PLEASE SELECT THE CATEGORY OF YOUR TICKETS</label>
                     <select class="form-control" required formControlName="FormTicketCategory">

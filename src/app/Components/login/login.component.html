@@ -1,27 +1,31 @@
-
 <div class="container-fluid">
 
-    <div class="card border-warning" style="margin-top: 10%;">
-        <div class="card-header bg-warning">
-            <h3 class="text-center">Tickets de Soporte Tecnico</h3>
+    <div class="card border-info col-md-6 mx-auto" style="margin-top: 5%; background-color: transparent;">
+        <div class="card-header ">
+            <h3 class="text-center text-white">Tickets de Soporte Tecnico MBS</h3>
+            <hr class="bg-light">
         </div>
         <div class="card-body ">
 
             <div class="form-group">
 
                 <form [formGroup]="FormLogin" (ngSubmit)="ServiceAutentication()">
-                    <label>Correo Electronico</label>
+                    <label class="text-white">Correo Electronico</label>
                     <input class="form-control " type="email" placeholder="username@domain.com" required role="textbox"
                         formControlName="FormUserEmail">
-                    <label>Password</label>
+                    <label class="text-white">Password</label>
                     <input class="form-control" type="password" placeholder="xxxxxxxx" required role="textbox"
                         formControlName="FormUserPass">
                     <br>
 
-                    <hr>
-                    <button class="btn btn-outline-danger" type="submit" [disabled]="FormLogin.invalid">INICIAR
+
+                    <button class="btn btn-outline-danger" type="submit" [disabled]="FormLogin.invalid"><i
+                            class="fa fa-check" aria-hidden="true"></i> INICIAR
                         SESION</button>
-                    <hr>
+                    <hr class="bg-light">
+                    <span class="text-white">Si no tienes cuenta, presiona en crear usuario</span>
+                    <br>
+
 
                     <div class="alert alert-danger" role="alert" *ngIf="statusLoginIncorrecto">
                         <strong>{{ErrorMessageLogin}}</strong>
@@ -29,7 +33,7 @@
                 </form>
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    CREAR USUARIO
+                    <i class="fa fa-plus" aria-hidden="true"></i> CREAR USUARIO
                 </button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -92,6 +96,24 @@
 
         </div>
     </div>
+
+
+</div>
+<hr class="bg-light">
+<h3 class="text-center text-white">TODOS DEBEMOS APRENDER UN POCO DE TECNOLOGIA</h3>
+
+<div class="container-fluid">
+
+    <iframe width="100%" height="680" src="https://www.youtube.com/embed/C3Dxx44Us1s" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    <br>
+    <br>
+    <h3 class="text-center text-white">LA IMPORTANCIA DEL MUNDO DE LA PROGRAMACION Y EN NUESTRA VIDA COTIDIANA</h3>
+    <iframe width="100%" height="680" src="https://www.youtube.com/embed/sDk1pTDPROI" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+
 
 
 </div>

@@ -3,16 +3,22 @@
 
 <div class="container-fluid">
     <div class="card-deck">
-        <div class="card">
-            <div class="card-header text-center"><strong>SEND EMAIL</strong></div>
+        <div class="card border-info" style="background-color: transparent;">
+            <div class="card-header text-center text-white"><strong>SEND EMAIL</strong></div>
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="">SUBJECT</label>
+                        <label class="text-white" for="">SUBJECT</label>
                         <input class="form-control" type="text" required role="text">
-                        <label for="">EMAIL ADDRESS</label>
-                        <input class="form-control" type="email" required role="textbox">
-                        <label for="">MESSAGE</label>
+                        <label class="text-white" for="">EMAIL ADDRESS</label>
+
+                        <select class="form-control" >
+                            <option>Correo1@gmail.com</option>
+                            <option>Correo2@gmail.com</option>
+                            <option>Correo3@gmail.com</option>
+                        </select>
+
+                        <label class="text-white" for="">MESSAGE</label>
                         <textarea class="form-control" cols="30" rows="5" required role="text"></textarea>
                         <br>
                         <button type="button" class="btn btn-primary">SEND EMAIL </button>
@@ -21,66 +27,25 @@
 
             </div>
         </div>
-        <div class="card">
-            <div class="card-header text-center"><strong>EMAILS HISTORY</strong></div>
+        <div class="card border-info" style="background-color: transparent;">
+            <div class="card-header text-center text-white"><strong>EMAILS HISTORY</strong></div>
             <div class="card-body">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>SUBJECT</th>
-                                <th>EMAIL ADDRESS</th>
-                                <th>MESSAGE</th>
+                                <th class="text-white">SUBJECT</th>
+                                <th class="text-white">EMAIL ADDRESS</th>
+                                <th class="text-white">MESSAGE</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular 11 </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular 11 </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular 11 </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular </td>
+                                <td class="text-white">Claudio Gonzalez</td>
+                                <td class="text-white">claudio@gmail.com</td>
+                                <td class="text-white">hello world from Angular 11 </td>
                             </tr>
 
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular 11 </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular </td>
-                            </tr>
-
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular 11 </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">Claudio Gonzalez</td>
-                                <td>claudio@gmail.com</td>
-                                <td>hello world from Angular </td>
-                            </tr>
 
 
                         </tbody>

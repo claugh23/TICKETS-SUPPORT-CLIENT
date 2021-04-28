@@ -10,6 +10,7 @@ export class LoginService {
 
   ServerRegistroUsuario = 'https://localhost:5001/api/Register/';
   ServerAutenticacion = 'https://localhost:5001/api/Autentication/';
+  ServerUsers = 'https://localhost:5001/api/Users/';
   statusSetLoginUser:any;
 
   constructor(private httpRequest:HttpClient) { }
@@ -31,6 +32,11 @@ export class LoginService {
 
     return this.httpRequest.post<UsersModel>(this.ServerRegistroUsuario,user);
     
+  }
+
+  GetUsers(){
+
+    return this.httpRequest.get<UsersModel>(this.ServerUsers);
   }
 
   IsUser_AdminLoggingIn():Observable<string>{
