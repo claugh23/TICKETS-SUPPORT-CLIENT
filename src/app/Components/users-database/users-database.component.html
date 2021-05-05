@@ -3,6 +3,10 @@
 <br>
 <button class="btn btn-outline-info" data-toggle="modal" data-target="#ModalAddUser">ADD NEW USER <i
         class="fa fa-plus-square" aria-hidden="true"></i></button>
+<br>
+<br>
+<button class="btn btn-outline-info" (click)="RefreshUsers()">REFRESH DATABASE <i class="fa fa-cloud-download"
+        aria-hidden="true"></i></button>
 <!-- Modal -->
 <div class="modal fade" id="ModalAddUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -42,17 +46,18 @@
                                 <div class="form-row">
                                     <div class=" col-md-6">
                                         <label class="text-dark"><strong>PASSWORD FOR THE ACCOUNT</strong></label>
-                                        <input class="form-control" type="password" required formControlName="Formpass" />
+                                        <input class="form-control" type="password" required
+                                            formControlName="Formpass" />
                                     </div>
                                     <div class=" col-md-6">
                                         <label for="date" class="text-dark"><strong>ROLE TYPE </strong></label>
-                                        <select formControlName="Formrole" class="form-control" require >
-                                            <option value="">User</option>
-                                            <option value="">Admin</option>
+                                        <select class="form-control" require formControlName="Formrole">
+                                            <option>User</option>
+                                            <option>Admin</option>
                                         </select>
                                     </div>
                                 </div>
-                                
+                                <br>
                                 <button type="submit" class="btn btn-primary">Registrarse al sistema</button>
                             </form>
 
@@ -61,7 +66,7 @@
 
                         <br>
                         <div class="alert alert-success" role="alert" *ngIf="statusRegistroUser">
-                            <strong>success</strong>
+                            <strong>USUARIO AGREGADO!</strong>
                         </div>
 
                     </div>
@@ -94,90 +99,122 @@
         </thead>
         <tbody *ngFor="let items of ListaUsers">
             <tr>
-                <td scope="row" class="text-white"><i class="fa fa-database" aria-hidden="true"></i> {{items.name}}</td>
+                <td scope="row" class="text-white"><i class="fa fa-database" aria-hidden="true"></i> {{items?.name}}
+                </td>
                 <td class="text-white">{{items.lastName}}</td>
                 <td class="text-white">{{items.phone}}</td>
-                <td scope="row" class="text-white">{{items.email}}</td>
+                <td class="text-white">{{items.email}}</td>
                 <td class="text-white">{{items.pass}}</td>
                 <td class="text-white">{{items.role}}</td>
                 <td>
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#ModalEditUser">EDIT</button>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#ModalEditUser"
+                        (click)="GetSelectedUser(items)">EDIT</button>
+                    <div class="modal fade" id="ModalEditUser" tabindex="-1" role="dialog"
+                        aria-labelledby="modelTitleId" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="form">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">LET'S UPDATE THIS USER: {{UserInfo?.Name}}</h5>
+                                    
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="col-lg-12">
+
+                                            <form [formGroup]="FormUpdateUser" (ngSubmit)="UpdateUser()">
+
+                                                <div class="form-group">
+
+                                                    <div class="form-row">
+                                                       
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">ID</label>
+                                                            <input id="InputShowId" class="form-control" type="text" readonly value=" {{UserInfo?.id
+                                                            }}" >
+                                                            <label class="text-dark"><strong>NAME</strong></label>
+                                                            <input id="InputName" class="form-control" type="text" required
+                                                                value="{{UserInfo?.Name}}"
+                                                                formControlName="FormUpdateName" />
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="date" class="text-dark"><strong>
+                                                                    LASTNAME</strong></label>
+                                                            <input id="InputLastname" class="form-control" type="text"
+                                                                required value="{{UserInfo?.LastName}}"
+                                                                formControlName="FormUpdateLastName" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+
+                                                        <div class="form-group col-md-6">
+                                                            <label class="text-dark"><strong>PHONE
+                                                                    NUMBER</strong></label>
+                                                            <input id="InputPhone" class="form-control" type="text"
+                                                                required value="{{UserInfo?.Phone}}"
+                                                                formControlName="FormUpdatePhone" />
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="date" class="text-dark"><strong>EMAIL
+                                                                    ADRESS</strong></label>
+                                                            <input id="InputEmail" type="email" class="form-control"
+                                                                required value="{{UserInfo?.Email}}"
+                                                                formControlName="FormUpdateEmail" />
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="date"
+                                                                class="text-dark"><strong>PASSWORD</strong></label>
+                                                            <input id="InputPass" type="password" class="form-control"
+                                                                required value="{{UserInfo?.Pass}}"
+                                                                formControlName="FormUpdatePass" />
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="date"
+                                                                class="text-dark"><strong>ROLE</strong></label>
+                                                            <select formControlName="FormUpdateRole" id="InputRole"
+                                                                class="form-control" value="{{UserInfo?.Role}}">
+                                                                <option>User</option>
+                                                                <option>Admin</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <button type="submit" class="btn btn-outline-primary">
+                                                    UPDATE CONTACT</button>
+
+                                            </form>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="DeleteUser(items)">DELETE</button>
+
 
                 </td>
-                <td> <button class="btn btn-danger">DELETE</button></td>
+
             </tr>
-
-
 
         </tbody>
         <!-- Modal -->
-
-
     </table>
-    <div class="modal fade" id="ModalEditUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">LET'S CREATE A NEW CONTACT</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="col-lg-12">
 
-                            <form>
-
-                                <div class="form-group">
-
-                                    <div class="form-row">
-
-                                        <div class="form-group col-md-6">
-                                            <label class="text-dark"><strong>Nombre del Contacto</strong></label>
-                                            <input class="form-control" type="text" required />
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="date" class="text-dark"><strong>Correo
-                                                    Electronico</strong></label>
-                                            <input class="form-control" type="email" required />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-
-                                        <div class="form-group col-md-6">
-                                            <label class="text-dark"><strong>Telefono</strong></label>
-                                            <input class="form-control" type="number" required />
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="date" class="text-dark"><strong>Direccion de
-                                                    Vivienda</strong></label>
-                                            <input type="text" class="form-control" required />
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <button type="submit" class="btn btn-outline-primary">Agregar
-                                    Contacto</button>
-
-                            </form>
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

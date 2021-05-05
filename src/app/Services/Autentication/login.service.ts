@@ -39,6 +39,18 @@ export class LoginService {
     return this.httpRequest.get<UsersModel>(this.ServerUsers);
   }
 
+  DeleteSelectedUser(CurrentId:string){
+
+    return this.httpRequest.delete<string>(this.ServerUsers+CurrentId);
+
+  }
+
+  UpdateSelectedUser(NewUserInfo:UsersModel):Observable<UsersModel>{
+
+    return this.httpRequest.put<UsersModel>(this.ServerUsers,NewUserInfo)
+
+  }
+
   IsUser_AdminLoggingIn():Observable<string>{
 
     return this.statusSetLoginUser;

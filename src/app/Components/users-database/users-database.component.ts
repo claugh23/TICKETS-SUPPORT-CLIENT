@@ -12,10 +12,11 @@ import { LoginService } from 'src/app/Services/Autentication/login.service';
 export class UsersDatabaseComponent implements OnInit {
 
   //variables dinamicas
-  statusRegistroUser:any;
-
+  statusRegistroUser: any;
+  RoleSelected: any;
   //listados
   ListaUsers: UsersModel[];
+  UserInfo: UsersModel;
 
   //Formulario Agregar User
   FormAddUser: FormGroup;
@@ -26,7 +27,16 @@ export class UsersDatabaseComponent implements OnInit {
   Formpass = new FormControl('');
   Formrole = new FormControl('');
 
-  constructor(private FormAddUserBuilder: FormBuilder, private UserServiceAPI: LoginService) {
+  //Formulario Actualizar User
+  FormUpdateUser: FormGroup;
+  FormUpdateName = new FormControl('');
+  FormUpdateLastName = new FormControl('');
+  FormUpdatePhone = new FormControl('');
+  FormUpdateEmail = new FormControl('');
+  FormUpdatePass = new FormControl('');
+  FormUpdateRole = new FormControl('');
+
+  constructor(private FormAddUserBuilder: FormBuilder, private FormUpdateUserBuilder: FormBuilder, private UserServiceAPI: LoginService) {
 
     this.FormAddUser = this.FormAddUserBuilder.group({
       Formname: ['', Validators.required],
@@ -36,22 +46,28 @@ export class UsersDatabaseComponent implements OnInit {
       Formpass: ['', Validators.required],
       Formrole: ['', Validators.required]
     })
-
+    this.FormUpdateUser = this.FormUpdateUserBuilder.group({
+      FormUpdateName: ['', Validators.required],
+      FormUpdateLastName: ['', Validators.required],
+      FormUpdatePhone: ['', Validators.required],
+      FormUpdateEmail: ['', Validators.required],
+      FormUpdatePass: ['', Validators.required],
+      FormUpdateRole: ['', Validators.required]
+    })
   }
 
   ObtenerUsers() {
 
     this.UserServiceAPI.GetUsers().subscribe((result: any) => {
 
-      this.ListaUsers = result
+      this.ListaUsers = result;
     }, (error: HttpErrorResponse) => {
 
-      alert("Ocurrio un problema al cargar los usuarios: " + JSON.stringify(error.error))
+      alert("Ocurrio un problema al cargar los usuarios: " + JSON.stringify(error.error));
     })
-
   }
 
-  RegisterNewUser(){
+  RegisterNewUser() {
 
     const registro: UsersModel = {
       Name: this.FormAddUser.get('Formname').value,
@@ -62,8 +78,9 @@ export class UsersDatabaseComponent implements OnInit {
       Role: this.FormAddUser.get('Formrole').value
     };
 
+    console.log(this.RoleSelected)
     this.UserServiceAPI.PostUserRegister(registro).subscribe(
-      (result) => { 
+      (result) => {
 
       },
       (RegistroCompleto: any) => {
@@ -73,9 +90,61 @@ export class UsersDatabaseComponent implements OnInit {
     );
   }
 
+  GetSelectedUser(CurrentUser: any) {
+    this.UserInfo = {
+      id: CurrentUser._id,
+      Name: CurrentUser.name,
+      LastName: CurrentUser.lastName,
+      Phone: CurrentUser.phone,
+      Email: CurrentUser.email,
+      Pass: CurrentUser.pass,
+      Role: CurrentUser.role
+    }
+  
+   CurrentUser = this.UserInfo
+  }
+  
+  UpdateUser() {
+
+    const UserInfoUpdate: UsersModel = {
+      id: this.UserInfo.id,
+      Name: this.FormUpdateUser.get('FormUpdateName').value,
+      LastName: this.FormUpdateUser.get('FormUpdateLastName').value,
+      Phone: this.FormUpdateUser.get('FormUpdatePhone').value,
+      Email: this.FormUpdateUser.get('FormUpdateEmail').value,
+      Pass: this.FormUpdateUser.get('FormUpdatePass').value,
+      Role: this.FormUpdateUser.get('FormUpdateRole').value
+    }
+
+
+    alert(JSON.stringify(UserInfoUpdate))
+
+    this.UserServiceAPI.UpdateSelectedUser(UserInfoUpdate).subscribe((result: any) => {
+      alert("El usuario: " + UserInfoUpdate.Name + " fue actualizado!!");
+
+    }, (error: HttpErrorResponse) => {
+      alert("Algo paso: " + JSON.stringify(error.error));
+
+
+    })
+  }
+
+  DeleteUser(CurrentId: any) {
+
+    this.UserServiceAPI.DeleteSelectedUser(CurrentId._id).subscribe((result: any) => {
+      alert("Usuario Borrado!");
+    }, (error: HttpErrorResponse) => {
+      alert(JSON.stringify(error.error));
+      this.ObtenerUsers();
+    })
+  }
+  RefreshUsers() {
+    this.ObtenerUsers();
+  }
   ngOnInit() {
 
     this.ObtenerUsers();
-  }
 
+  }
 }
+
