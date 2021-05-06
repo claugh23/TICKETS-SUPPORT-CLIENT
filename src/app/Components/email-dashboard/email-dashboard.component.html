@@ -1,27 +1,24 @@
 <app-navigation></app-navigation>
 <br>
-
 <div class="container-fluid">
     <div class="card-deck">
         <div class="card border-info" style="background-color: transparent;">
             <div class="card-header text-center text-white"><strong>SEND EMAIL</strong></div>
             <div class="card-body">
-                <form>
+                <form [formGroup]="FormEmail" (ngSubmit)="SendEmail()">
                     <div class="form-group">
                         <label class="text-white" for="">SUBJECT</label>
-                        <input class="form-control" type="text" required role="text">
+                        <input class="form-control" type="text" required role="text" formControlName="FormSubject">
                         <label class="text-white" for="">EMAIL ADDRESS</label>
-
-                        <select class="form-control" >
-                            <option>Correo1@gmail.com</option>
-                            <option>Correo2@gmail.com</option>
-                            <option>Correo3@gmail.com</option>
+                        <select class="form-control" required formControlName="FormEmailTo">
+                            <option *ngFor="let correos of ListaUsersEmails">{{correos.email}}</option>
                         </select>
-
                         <label class="text-white" for="">MESSAGE</label>
-                        <textarea class="form-control" cols="30" rows="5" required role="text"></textarea>
+                        <textarea class="form-control" cols="30" rows="5" required role="text"
+                            formControlName="FormMessage"></textarea>
                         <br>
-                        <button type="button" class="btn btn-primary">SEND EMAIL </button>
+                        <button type="submit" class="btn btn-primary" [disabled]="FormEmail.invalid">SEND EMAIL
+                        </button>
                     </div>
                 </form>
 
@@ -37,23 +34,19 @@
                                 <th class="text-white">SUBJECT</th>
                                 <th class="text-white">EMAIL ADDRESS</th>
                                 <th class="text-white">MESSAGE</th>
+                                <th class="text-white">WHEN IT WAS SENDED</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let items of ListaHistorialCorreo">
                             <tr>
-                                <td class="text-white">Claudio Gonzalez</td>
-                                <td class="text-white">claudio@gmail.com</td>
-                                <td class="text-white">hello world from Angular 11 </td>
+                                <td class="text-white">{{items.subject}}</td>
+                                <td class="text-white">{{items.emailAddress}}</td>
+                                <td class="text-white">{{items.message}} </td>
+                                <td class="text-white">{{items.dateSended | date}} </td>
                             </tr>
-
-
-
                         </tbody>
                     </table>
-
                 </div>
-
-
             </div>
         </div>
     </div>

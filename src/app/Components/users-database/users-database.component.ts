@@ -92,7 +92,7 @@ export class UsersDatabaseComponent implements OnInit {
 
   GetSelectedUser(CurrentUser: any) {
     this.UserInfo = {
-      id: CurrentUser._id,
+      _id: CurrentUser._id,
       Name: CurrentUser.name,
       LastName: CurrentUser.lastName,
       Phone: CurrentUser.phone,
@@ -107,7 +107,7 @@ export class UsersDatabaseComponent implements OnInit {
   UpdateUser() {
 
     const UserInfoUpdate: UsersModel = {
-      id: this.UserInfo.id,
+      _id: this.UserInfo._id,
       Name: this.FormUpdateUser.get('FormUpdateName').value,
       LastName: this.FormUpdateUser.get('FormUpdateLastName').value,
       Phone: this.FormUpdateUser.get('FormUpdatePhone').value,
@@ -117,7 +117,7 @@ export class UsersDatabaseComponent implements OnInit {
     }
 
 
-    alert(JSON.stringify(UserInfoUpdate))
+    alert(JSON.stringify(this.UserInfo._id))
 
     this.UserServiceAPI.UpdateSelectedUser(UserInfoUpdate).subscribe((result: any) => {
       alert("El usuario: " + UserInfoUpdate.Name + " fue actualizado!!");
