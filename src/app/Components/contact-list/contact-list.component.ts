@@ -61,9 +61,11 @@ export class ContactListComponent implements OnInit {
 
     this.contactAPI.GetContacts().subscribe((result:any) => {
 
-      console.log(result)
+     
 
       this.ListaContactos = result;
+
+      this.ObtenerContactos();
 
     },(error:HttpErrorResponse) => {
 
