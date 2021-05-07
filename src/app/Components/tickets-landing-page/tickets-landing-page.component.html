@@ -7,7 +7,7 @@
 
     <br>
     
-    <table class="table table-stripped">
+    <table id="dtBasicExample" class="table table-stripped table-bordered">
         <thead class="thead-dark">
             <tr>
                 <th class="text-white text-center">TICKET NUMBER</th>
@@ -21,17 +21,21 @@
         </thead>
         <tbody *ngFor="let item of ListaCurrentTickets">
             <tr>
-                <td class="text-white"><strong><i class="fa fa-ticket" aria-hidden="true"></i> {{item.ticketNumber}}</strong></td>
+                <td class="text-white"><strong><i class="fa fa-ticket" aria-hidden="true"></i>
+                        {{item.ticketNumber}}</strong></td>
                 <td class="text-white"><strong>{{item.name}}</strong></td>
                 <td class="text-white"><strong>{{item.lastName}}</strong></td>
                 <td class="text-white"><strong>{{item.email}}</strong></td>
                 <td class="text-white"><strong>{{item.typeRequest}}</strong></td>
-                <td class="text-white text-justify"><h5>{{item.details}}</h5></td>
+                <td class="text-white text-justify">
+                    <h5>{{item.details}}</h5>
+                </td>
                 <td> <a class="btn btn-warning" role="button">Completar</a></td>
             </tr>
-          
-    
+
+
         </tbody>
     </table>
-    
+
+   
 </div>

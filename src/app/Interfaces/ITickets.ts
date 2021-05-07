@@ -1,4 +1,4 @@
-export class TicketRequesModel {
+export interface TicketRequesModel {
 
     id?:string;
     Name:string;

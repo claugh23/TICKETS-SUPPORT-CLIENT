@@ -1,4 +1,4 @@
-export class EmailMessageModel {
+export interface EmailMessageModel {
 
     _id?:string;
     subject:string;

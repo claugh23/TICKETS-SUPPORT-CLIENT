@@ -4,20 +4,28 @@
 <div class="container-fluid">
     <div class="card-deck">
         <div class="card border-info" style="background-color: transparent;">
-            <div class="card-header text-center text-white"><strong><i class="fa fa-plus-circle" aria-hidden="true"></i> ADD NEW CONTACT</strong></div>
+            <div class="card-header text-center text-white"><strong><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    ADD NEW CONTACT</strong></div>
             <div class="card-body">
-                <form>
+                <form [formGroup]="FormContacts" (ngSubmit)="CreateContact()">
                     <div class="form-group">
                         <label class="text-white" for="">NAME</label>
-                        <input class="form-control" type="text" required role="text">
+                        <input class="form-control" type="text" required role="text" formControlName="FormContactName">
                         <label class="text-white" for="">LASTNAME</label>
-                        <input class="form-control" type="email" required role="textbox">
+                        <input class="form-control" type="text" required role="textbox"
+                            formControlName="FormContactLastName">
                         <label class="text-white" for="">EMAIL</label>
-                        <input class="form-control" type="email" required role="textbox">
+                        <input class="form-control" type="email" required role="textbox"
+                            formControlName="FormContactEmail">
                         <label class="text-white" for="">PHONE</label>
-                        <input class="form-control" type="email" required role="textbox">
+                        <input class="form-control" type="text" required role="textbox"
+                            formControlName="FormContactPhone">
+                        <label class="text-white" for="">SMALL DESCRIPTION</label>
+                        <input class="form-control" type="text" required role="textbox"
+                            formControlName="FormContactDescripcion">
                         <br>
-                        <button type="button" class="btn btn-outline-primary">CREATE NEW CONTACT</button>
+                        <button type="submit" class="btn btn-outline-primary" [disabled]="FormContacts.invalid">CREATE
+                            NEW CONTACT</button>
                     </div>
                 </form>
 
@@ -28,22 +36,23 @@
                     CONTACTS DATABASE</strong></div>
             <div class="card-body">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                    <table class="table table-bordered">
+                    <table class="table table-responsive table-bordered ">
                         <thead>
                             <tr>
                                 <th class="text-white">NAME</th>
                                 <th class="text-white">LASTNAME</th>
                                 <th class="text-white">EMAIL</th>
                                 <th class="text-white">PHONE</th>
-
+                                <th class="text-white">DESCRIPTION</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let contact in ListaContactos">
                             <tr>
-                                <td class="text-white">Claudio Gonzalez</td>
-                                <td class="text-white">claudio@gmail.com</td>
-                                <td class="text-white">hello world from Angular 11 </td>
-                                <td class="text-white">hello world from Angular 11 </td>
+                                <td class="text-white">{{contact.name}}</td>
+                                <td class="text-white">{{contact.lastName}}</td>
+                                <td class="text-white">{{contact.email}}</td>
+                                <td class="text-white">{{contact.phone}} </td>
+                                <td class="text-white">{{contact.description}} </td>
                             </tr>
 
 
