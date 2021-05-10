@@ -6,7 +6,7 @@
 <div class="table-wrapper-scroll-y my-custom-scrollbar container-fluid">
 
     <br>
-    
+
     <table id="dtBasicExample" class="table table-stripped table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -30,12 +30,14 @@
                 <td class="text-white text-justify">
                     <h5>{{item.details}}</h5>
                 </td>
-                <td> <a class="btn btn-warning" role="button">Completar</a></td>
+                <td> 
+                    <button class="btn btn-warning" type="button" (click)="GetSelectedTicket(item)">Completar</button>
+                </td>
             </tr>
 
 
         </tbody>
     </table>
 
-   
+
 </div>

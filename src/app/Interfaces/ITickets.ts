@@ -1,6 +1,6 @@
 export interface TicketRequesModel {
 
-    id?:string;
+    _id?:string;
     Name:string;
     LastName:string;
     Email:string;

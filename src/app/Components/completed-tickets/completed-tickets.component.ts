@@ -1,4 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { LogsTicketsModel } from 'src/app/Interfaces/IlogsTickets';
+import { LogsTicketsService } from 'src/app/Services/LogsTickets/logs-tickets.service';
 
 @Component({
   selector: 'app-completed-tickets',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompletedTicketsComponent implements OnInit {
 
-  constructor() { }
+  //variables dinamicas
+  listLogsTickets: LogsTicketsModel;
 
-  ngOnInit(): void {
+  constructor(private LogsTicketsAPI: LogsTicketsService) { }
+
+  getTicketCompleted() {
+
+    this.LogsTicketsAPI.GetTicketsCompleted().subscribe((result: any) => {
+
+      this.listLogsTickets = result
+    }, (error: HttpErrorResponse) => {
+
+      alert("OCURRIO UN PROBLEMA AL CARGAR EL HISTORIAL DE TICKETS: " + "\n" + JSON.stringify(error.error))
+    })
+
+
+  }
+
+  ngOnInit() {
+
+    this.getTicketCompleted()
   }
 
 }

@@ -10,8 +10,8 @@ export class TicketsService {
 
   constructor(private httpRequest:HttpClient) { }
 
-  ServerTicketsAPI = "https://192.168.3.5/api/Tickets/";
-  ServerTicketsAPITickets = "https://192.168.3.5/api/Tickets/GetClientTickets/";
+  ServerTicketsAPI = "https://localhost:5001/api/Tickets/";
+  ServerTicketsAPITickets = "https://localhost:5001/api/Tickets/GetClientTickets/";
 
   PostTicket(NewTicket:TicketRequesModel):Observable<TicketRequesModel>{
 
@@ -25,6 +25,10 @@ export class TicketsService {
   GetUserTickets(SearchTickets:string){
 
     return this.httpRequest.get<TicketRequesModel[]>(this.ServerTicketsAPI+SearchTickets);
+  }
+
+  CompleteTicketAndDelete(CurrentTicketId:string){
+    return this.httpRequest.delete<string>(this.ServerTicketsAPI+CurrentTicketId);
   }
 
 }

@@ -8,27 +8,21 @@ import { AuthModel } from 'src/app/Interfaces/IAuth';
 })
 export class LoginService {
 
-  ServerRegistroUsuario = 'https://192.168.3.5/api/Register/';
-  ServerAutenticacion = 'https://192.168.3.5/api/Autentication/';
-  ServerUsers = 'https://192.168.3.5/api/Users/';
+  ServerRegistroUsuario = 'https://localhost:5001/api/Register/';
+  ServerAutenticacion = 'https://localhost:5001/api/Autentication/';
+  ServerUsers = 'https://localhost:5001/api/Users/';
   statusSetLoginUser:any;
 
   constructor(private httpRequest:HttpClient) { }
-
-  
 
   PostUserAutentication(credential:UsersModel):Observable<UsersModel>{
 
     this.statusSetLoginUser = this.httpRequest.post<UsersModel>(this.ServerAutenticacion,credential);
 
-    
-    
     return this.httpRequest.post<UsersModel>(this.ServerAutenticacion,credential);
 
   }
   PostUserRegister(user:UsersModel):Observable<UsersModel>{
-
-    //this.statusSetLoginUnable = this.httpRequest.post<UsersModel>(this.ServerRegistroUsuario,user)
 
     return this.httpRequest.post<UsersModel>(this.ServerRegistroUsuario,user);
     

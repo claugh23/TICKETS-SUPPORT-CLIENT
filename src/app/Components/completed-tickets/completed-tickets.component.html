@@ -7,23 +7,21 @@
         <thead>
             <tr>
                 <th class="text-white">NAME</th>
-                <th class="text-white">LASTNAME</th>
-                <th class="text-white">EMAIL ADDRESS</th>
-                <th class="text-white">TYPE OF REQUEST</th>
-                <th class="text-white">REQUEST DETAILS</th>
-                <th class="text-white">STATUS</th>
+                <th class="text-white">TICKET NUMBER</th>
+                <th class="text-white">TYPE REQUEST</th>
+                <th class="text-white">DETAILS</th>
+                <th class="text-white">SOLUTION DETAILS</th>
+              
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let item of listLogsTickets">
             <tr>
-                <td scope="row" class="text-white">Claudio</td>
-                <td class="text-white">Gonzalez Hernandez</td>
-                <td class="text-white">email@test.com</td>
-                <td class="text-white">Bases de datos</td>
-                <td class="text-white">Quiero generar una base de datos en sql pero no se como hacerla, me podrias
-                    ayudar con este problema
-                    lo mas pronto posible</td>
-               <td>Completed</td>
+                <td scope="row" class="text-white">{{item.name}}</td>
+                <td class="text-white">{{item.ticketNumber}}</td>
+                <td class="text-white">{{item.typeRequest}}</td>
+                <td class="text-white">{{item.details}}</td>
+                <td class="text-white">{{item.solutionDetails}}</td>
+               
             </tr>
           
         </tbody>
