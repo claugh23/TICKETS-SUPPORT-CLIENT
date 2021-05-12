@@ -7,6 +7,7 @@ import { CompletedTicketsComponent } from './Components/completed-tickets/comple
 import { ContactListComponent } from './Components/contact-list/contact-list.component';
 import { EmailDashboardComponent } from './Components/email-dashboard/email-dashboard.component';
 import { GenerateTicketsRequestComponent } from './Components/generate-tickets-request/generate-tickets-request.component';
+import { InventoryComponent } from './Components/inventory/inventory.component';
 import { LoginComponent } from './Components/login/login.component';
 import { TicketsLandingPageComponent } from './Components/tickets-landing-page/tickets-landing-page.component';
 import { UsersDatabaseComponent } from './Components/users-database/users-database.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'EmailDashboard', component: EmailDashboardComponent, canActivate: [AdminsGuard] },
   { path: 'ContactList', component: ContactListComponent, canActivate: [AdminsGuard] },
   { path: 'GenerateTicketsRequest', component: GenerateTicketsRequestComponent, canActivate: [UsersAutenticationGuard] },
+  { path: 'Inventory', component: InventoryComponent, canActivate: [UsersAutenticationGuard] },
   { path: 'TicketsAppLogin', component: LoginComponent },
   { path: '**', redirectTo: '/TicketsAppLogin' },
 

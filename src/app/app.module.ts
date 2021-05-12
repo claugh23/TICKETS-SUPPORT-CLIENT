@@ -14,6 +14,7 @@ import { CompletedTicketsComponent } from './Components/completed-tickets/comple
 import { UsersDatabaseComponent } from './Components/users-database/users-database.component';
 import { EmailDashboardComponent } from './Components/email-dashboard/email-dashboard.component';
 import { ContactListComponent } from './Components/contact-list/contact-list.component';
+import { InventoryComponent } from './Components/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ContactListComponent } from './Components/contact-list/contact-list.com
     CompletedTicketsComponent,
     UsersDatabaseComponent,
     EmailDashboardComponent,
-    ContactListComponent
+    ContactListComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,

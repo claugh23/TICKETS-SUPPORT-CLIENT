@@ -10,8 +10,8 @@ export class TicketsService {
 
   constructor(private httpRequest:HttpClient) { }
 
-  ServerTicketsAPI = "https://192.168.3.5/ServerMBS/api/Tickets/";
-  ServerTicketsAPITickets = "https://192.168.3.5/ServerMBS/Tickets/GetClientTickets/";
+  ServerTicketsAPI = "https://localhost:5001/api/Tickets/";
+  ServerTicketsAPITickets = "https://localhost:5001/Tickets/GetClientTickets/";
 
   PostTicket(NewTicket:TicketRequesModel):Observable<TicketRequesModel>{
 

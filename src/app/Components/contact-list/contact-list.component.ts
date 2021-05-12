@@ -16,7 +16,7 @@ import { ContactsService } from 'src/app/Services/Contacts/contacts.service';
 export class ContactListComponent implements OnInit {
 
   //Variables dinamicas
-  ListaContactos:ContactModel;
+  ListaContactos: ContactModel;
 
   //Formulario de contactos
   FormContacts: FormGroup;
@@ -53,21 +53,18 @@ export class ContactListComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         alert(JSON.stringify(error.error));
+        this.ObtenerContactos();
       }
     );
   }
 
-  ObtenerContactos(){
+  ObtenerContactos() {
 
-    this.contactAPI.GetContacts().subscribe((result:any) => {
-
-     
+    this.contactAPI.GetContacts().subscribe((result: any) => {
 
       this.ListaContactos = result;
 
-      this.ObtenerContactos();
-
-    },(error:HttpErrorResponse) => {
+    }, (error: HttpErrorResponse) => {
 
       this.ObtenerContactos();
     })

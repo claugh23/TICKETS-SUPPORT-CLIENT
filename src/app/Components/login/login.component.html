@@ -20,10 +20,9 @@
 
 
                     <button class="btn btn-outline-danger" type="submit" [disabled]="FormLogin.invalid"><i
-                            class="fa fa-check" aria-hidden="true"></i> INICIAR
-                        SESION</button>
+                            class="fa fa-check" aria-hidden="true"></i> LOGIN IN</button>
                     <hr class="bg-light">
-                    <span class="text-white">Si no tienes cuenta, presiona en crear usuario</span>
+                    <span class="text-white">IF YOU DON'T HAVE AN ACCOUNT, GET REGISTER!</span>
                     <br>
 
 
@@ -33,7 +32,7 @@
                 </form>
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-plus" aria-hidden="true"></i> CREAR USUARIO
+                    <i class="fa fa-plus" aria-hidden="true"></i> CREATE ACCOUNT
                 </button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -53,38 +52,37 @@
                                         <label>ID</label>
                                         <input class="form-control" type="text" disabled readonly
                                             placeholder="Auto Generado">
-                                        <label>Nombre</label>
+                                        <label>NAME</label>
                                         <input class="form-control" type="text" required role="textbox"
                                             formControlName="FormName">
-                                        <label>Apellidos</label>
+                                        <label>LASTNAME</label>
                                         <input class="form-control" type="text" required role="textbox"
                                             formControlName="FormLastName">
-                                        <label>Telefono</label>
+                                        <label>PHONE</label>
                                         <input class="form-control " type="text" placeholder="1234-5678" required
                                             role="textbox" formControlName="FormPhone">
-                                        <label>Correo Electronico</label>
+                                        <label>EMAIL ADDRESS</label>
                                         <input class="form-control" type="email" placeholder="username@domain.com"
                                             required role="textbox" formControlName="FormEmail">
-                                        <label>Password</label>
+                                        <label>PASSWORD</label>
                                         <input class="form-control" type="password"
                                             placeholder="incluir letras y simbolos" required role="textbox"
                                             formControlName="FormPass">
-                                        <label>Rol de Usuario</label>
+                                        <label>USER ROL</label>
                                         <select class="form-control" required disabled>
-                                            <option>Usuario Corriente</option>
+                                            <option>NORMAL USER</option>
                                         </select>
 
                                     </div>
                                     <div class="alert alert-success" role="alert" *ngIf="statusRegistro">
-                                        <strong>REGISTRO COMPLETO! PUEDES INICIAR SESION EN EL SISTEMA</strong>
+                                        <strong>YOU REGISTRATION ARE COMPLETE, PLEASE VERIFY YOU CREDENTIALS INTO THE LOGIN</strong>
                                     </div>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
-                                        Formulario</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE FORM</button>
                                     <button type="submit" class="btn btn-primary"
-                                        [disabled]="FormRegistroUser.invalid">Registrarse al sistema</button>
+                                        [disabled]="FormRegistroUser.invalid">CREATE MY IT ACCOUNT</button>
                                 </div>
                             </form>
 
@@ -100,20 +98,4 @@
 
 </div>
 <hr class="bg-light">
-<h3 class="text-center text-white">TODOS DEBEMOS APRENDER UN POCO DE TECNOLOGIA</h3>
-
-<div class="container">
-
-    <iframe width="100%" height="680" src="https://www.youtube.com/embed/C3Dxx44Us1s" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    <br>
-    <br>
-    <h3 class="text-center text-white">LA IMPORTANCIA DEL MUNDO DE LA PROGRAMACION Y EN NUESTRA VIDA COTIDIANA</h3>
-    <iframe width="100%" height="680" src="https://www.youtube.com/embed/sDk1pTDPROI" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-
-
-
-</div>
+ 

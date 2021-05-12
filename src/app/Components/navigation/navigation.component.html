@@ -31,6 +31,19 @@
                 <a class="nav-link btn btn-success" routerLink="/ContactList" routerLinkActive="router-link-active"><i
                         class="fa fa-address-book-o" aria-hidden="true"></i> CONTACT LIST</a>
             </li>
+            <li class="nav-item dropdown mr-2">
+                <a class="nav-link dropdown-toggle btn btn-success text-white" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cloud" aria-hidden="true"></i> ACTIVE MODULES
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/Inventory">INVENTORY</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">LICENSE DATES</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">REMOTE CONNECTIONS</a>
+                </div>
+            </li>
             <li class="nav-item active" style="margin-right: 1cm;">
                 <a class="nav-link btn btn-danger" href="/" (click)="CleanCache()"> LOG OUT <i
                         class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>

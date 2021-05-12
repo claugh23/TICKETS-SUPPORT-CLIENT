@@ -7,7 +7,7 @@ import { ContactModel } from "src/app/Interfaces/IContact";
 })
 export class ContactsService {
 
-  serverContacts = 'https://192.168.3.5/ServerMBS/api/Contacts/'
+  serverContacts = 'https://localhost:5001/api/Contacts/'
 
   constructor(private httpRequest:HttpClient) { }
 
@@ -20,4 +20,5 @@ export class ContactsService {
     return this.httpRequest.post<ContactModel>(this.serverContacts,contactInfo);
   }
 
+ 
 }

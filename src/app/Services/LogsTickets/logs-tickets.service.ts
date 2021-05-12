@@ -7,7 +7,7 @@ import { LogsTicketsModel } from "src/app/Interfaces/IlogsTickets";
 })
 export class LogsTicketsService {
 
-  serverLogsTicket = 'https://192.168.3.5/ServerMBS/api/LogTickets/'
+  serverLogsTicket = 'https://localhost:5001/api/LogTickets/'
 
 
   constructor(private httpRequest:HttpClient) { }
