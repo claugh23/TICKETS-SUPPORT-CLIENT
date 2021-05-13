@@ -6,29 +6,29 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
             <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                <a class="nav-link dropdown-toggle active" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">CATEGORIES</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
 
-                    <a class="dropdown-item">COMPUTERS</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventoryComputers()">COMPUTERS</a>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item">PROYECTION AND MULTIMEDIA DEVICES</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventoryMultimedia()">PROYECTION AND MULTIMEDIA DEVICES</a>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item">NETWORK DEVICES</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventoryNetworks()">NETWORK DEVICES</a>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item">SECURITY CAMERAS</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventoryCameras()">SECURITY CAMERAS</a>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item">SOUND EQUIPMENTS</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventorySound()">SOUND EQUIPMENTS</a>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item">TABLETS OR IPADS</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventoryTablets()">TABLETS OR IPADS</a>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item">UTILITIES SOFTWARE</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventorySoftware()">UTILITIES SOFTWARE</a>
                     <div class="dropdown-divider"></div>
 
                 </div>
@@ -53,8 +53,7 @@
                             <div class="modal-body">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-
-                                        <form>
+                                        <form [formGroup]="FormItemInventory" (ngSubmit)="InsertItem()">
                                             <div class="form-row">
                                                 <div class="col-md-1">
                                                     <label class="text-dark"><strong>CODE PREFIX</strong></label>
@@ -62,54 +61,81 @@
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-dark"><strong>CODE NUMBER</strong></label>
-                                                    <input class="form-control" type="text" required>
+                                                    <input class="form-control" type="text" required
+                                                        formControlName="FormItemCode">
                                                 </div>
-                                              
                                             </div>
                                             <hr>
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <label class="text-dark"><strong>PHONE</strong></label>
-                                                    <input class="form-control" type="text" required>
+                                                    <label class="text-dark"><strong>QUANTITY</strong></label>
+                                                    <input class="form-control" type="number" required
+                                                        formControlName="FormItemQuantity">
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label for="date" class="text-dark"><strong>EMAIL ADDRESS
+                                                    <label for="date" class="text-dark"><strong>EQUIPMENT TAG
                                                         </strong></label>
-                                                    <input type="email" class="form-control" required />
+                                                    <input type="text" class="form-control" required
+                                                        formControlName="FormItemTag" />
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class=" col-md-6">
-                                                    <label class="text-dark"><strong>PASSWORD FOR THE
-                                                            ACCOUNT</strong></label>
-                                                    <input class="form-control" type="password" required />
+                                                    <label class="text-dark"><strong>BRAND
+                                                        </strong></label>
+                                                    <input class="form-control" type="text" required
+                                                        formControlName="FormItemBrand" />
                                                 </div>
                                                 <div class=" col-md-6">
-                                                    <label for="date" class="text-dark"><strong>ROLE TYPE
+                                                    <label for="date" class="text-dark"><strong>ROOM LOCATION
                                                         </strong></label>
-                                                    <select class="form-control" require>
-                                                        <option>User</option>
-                                                        <option>Admin</option>
+                                                    <input class="form-control" type="text" required
+                                                        formControlName="FormItemRoomLocation">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class=" col-md-6">
+                                                    <label for="date" class="text-dark"><strong>CATEGORY
+                                                        </strong></label>
+                                                    <select formControlName="FormItemCategory" class="form-control"
+                                                        require>
+                                                        <option>COMPUTERS</option>
+                                                        <option>NETWORK DEVICES</option>
+                                                        <option>SECURITY CAMERAS</option>
+                                                        <option>SOUND EQUIPMENT</option>
+                                                        <option>PROYECTION AND MULTIMEDIA DEVICES</option>
+                                                        <option>TABLETS OR IPADS</option>
+                                                        <option>SOFTWARE UTILITIES</option>
+                                                    </select>
+                                                </div>
+                                                <div class=" col-md-6">
+                                                    <label for="date" class="text-dark"><strong>CURRENT STATUS
+                                                        </strong></label>
+                                                    <select formControlName="FormItemStatus" class="form-control"
+                                                        require>
+                                                        <option>GOOD</option>
+                                                        <option>BAD</option>
+                                                        <option>ON REVISION</option>
+
                                                     </select>
                                                 </div>
                                             </div>
-                                        <hr>
-                                            <button type="submit" class="btn btn-primary">Registrarse al
-                                                sistema</button>
+                                            <hr>
+                                            <button type="submit" class="btn btn-primary"
+                                                [disabled]="FormItemInventory.invalid">COMPLETE ITEM
+                                                REGISTRATION</button>
                                         </form>
 
                                     </div>
 
-
-                                    <br>
                                     <div class="alert alert-success" role="alert">
-                                        <strong>USUARIO AGREGADO!</strong>
+                                        <strong>EQUIPMENT REGISTERED ON DATABASE</strong>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Form</button>
                                 <button type="button" class="btn btn-primary">Save</button>
                             </div>
                         </div>
@@ -122,118 +148,44 @@
 </nav>
 <br>
 <div class="container-fluid">
-    <table class="table table-striped bg-light">
+    <table class="table table-striped table-bordered bg-light ">
         <thead class="thead-dark">
             <tr>
-                <th>
+                <th >
                     <h4>CODE</h4>
                 </th>
-                <th>
-                    <h4>QT</h4>
+                <th class="text-center">
+                    <h4>QUANTITY</h4>
                 </th>
-                <th>
+                <th class="text-center">
                     <h4>EQUIPMENT TAG</h4>
                 </th>
-                <th>
+                <th class="text-center">
                     <h4>BRAND</h4>
                 </th>
-                <th>
+                <th class="text-center">
                     <h4>ROOM LOCATION</h4>
                 </th>
-                <th>
+                <th class="text-center">
+                    <h4>CATEGORY</h4>
+                </th>
+                <th class="text-center">
                     <h4>CURRENT STATUS</h4>
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let item of ListInventory">
             <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
+                <td class="text-center">{{item.code}}</td>
+                <td class="text-center">{{item.quantity}}</td>
+                <td class="text-center">{{item.tag}}</td>
+                <td class="text-center">{{item.brand}}</td>
+                <td class="text-center">{{item.roomLocation}}</td>
+                <td class="text-center">{{item.category}}</td>
+                <td class="text-center">{{item.currentStatus}}</td>
+
             </tr>
 
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
-
-            <tr>
-                <td>MBS-PC031</td>
-                <td>1</td>
-                <td>Dell Desktop</td>
-                <td>DELL WINDOWS 8</td>
-                <td>BUSINESS OFFICE</td>
-                <td>WORKING</td>
-            </tr>
 
         </tbody>
     </table>
