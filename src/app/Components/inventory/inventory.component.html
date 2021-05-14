@@ -172,6 +172,9 @@
                 <th class="text-center">
                     <h4>CURRENT STATUS</h4>
                 </th>
+                <th class="text-center">
+                    <h4>OPERATIONS</h4>
+                </th>
             </tr>
         </thead>
         <tbody *ngFor="let item of ListInventory">
@@ -183,7 +186,9 @@
                 <td class="text-center">{{item.roomLocation}}</td>
                 <td class="text-center">{{item.category}}</td>
                 <td class="text-center">{{item.currentStatus}}</td>
-
+                <td class="text-center">
+                    <button class="btn btn-warning">EDIT {{item.code}}</button>
+                </td>
             </tr>
 
 

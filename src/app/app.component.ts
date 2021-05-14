@@ -14,5 +14,6 @@ export class AppComponent {
   }
   ngOnInit() {
     this.router.navigateByUrl('/')
+    window.open("https://localhost:5001/")
   }
 }
