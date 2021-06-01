@@ -3,7 +3,10 @@ import { ResourceLoader } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TicketRequesModel } from "src/app/Interfaces/ITickets";
+import { InventoryItemModel } from "src/app/Interfaces/IInventory";
 import { TicketsService } from "src/app/Services/Tickets/tickets.service";
+import { InventoryService } from "src/app/Services/Inventory/inventory.service";
+
 
 @Component({
   selector: 'app-generate-tickets-request',
@@ -17,24 +20,33 @@ export class GenerateTicketsRequestComponent implements OnInit {
   FormTicketCategory = new FormControl('');
   FormTicketDetails = new FormControl('');
 
+  //Form para seleccionar Categoria
+  FormCategoryDatabase: FormGroup;
+  FormCategorySelected = new FormControl('');
+
   //Variables Dinamicas
-  CurrentName:string;
-  CurrentLastName:string;
-  CurrentEmail:string;
-  CurrentRole:string;
-  CurrentPhone:string;
+  CurrentName: string;
+  CurrentLastName: string;
+  CurrentEmail: string;
+  CurrentRole: string;
+  CurrentPhone: string;
+  CurrentCategory:string;
 
   //Lista de tickets
-  CurrentTicketsList:TicketRequesModel;
+  CurrentTicketsList: TicketRequesModel;
+  ListInventory: InventoryItemModel;
 
-  constructor(private FormTicketBuilder: FormBuilder, private TicketAPI: TicketsService) {
+  constructor(private FormCategoriaBuilder: FormBuilder, private FormTicketBuilder: FormBuilder, private TicketAPI: TicketsService, private InventoryAPI: InventoryService) {
 
     this.FormTicket = this.FormTicketBuilder.group({
 
-    
       FormTicketCategory: ['', Validators.required],
       FormTicketDetails: ['', Validators.required]
     });
+
+    this.FormCategoryDatabase = this.FormCategoriaBuilder.group({
+      FormCategorySelected: ['', Validators.required],
+    })
 
   }
 
@@ -50,39 +62,95 @@ export class GenerateTicketsRequestComponent implements OnInit {
       TicketNumber: Math.floor(Math.random() * 15000)
     }
 
-    this.TicketAPI.PostTicket(Ticket).subscribe((result:any) => {
+    this.TicketAPI.PostTicket(Ticket).subscribe((result: any) => {
 
-      alert("SE HA GENERADO EL TICKET NUMERO: "+ Ticket.TicketNumber);
+      alert("SE HA GENERADO EL TICKET NUMERO: " + Ticket.TicketNumber);
 
-    },(error:HttpErrorResponse) =>{
+    }, (error: HttpErrorResponse) => {
 
-      alert("Ocurrio un problema al generar el ticket: "+JSON.stringify(error.error))
+      alert("Ocurrio un problema al generar el ticket: " + JSON.stringify(error.error))
     })
 
   }
 
-  SearchTicketsFromCurrentUser(){
+  SearchTicketsFromCurrentUser() {
 
-  
-    this.TicketAPI.GetUserTickets(localStorage.getItem("Name")).subscribe((result:any) => {
+    this.TicketAPI.GetUserTickets(localStorage.getItem("Name")).subscribe((result: any) => {
 
       this.CurrentTicketsList = result;
-    
-    },(error:HttpErrorResponse) => {
+
+    }, (error: HttpErrorResponse) => {
       alert(JSON.stringify(error.error));
     })
   }
 
-  CleanCache(){
+  GetInventoryComputers() {
+    const categoryComputer = "COMPUTERS";
+    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+
+      this.ListInventory = result;
+    })
+  }
+  GetInventoryNetworks() {
+    const categoryComputer = "NETWORK DEVICES";
+    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+
+      this.ListInventory = result;
+    })
+  }
+  GetInventoryCameras() {
+    const categoryComputer = "SECURITY CAMERAS";
+    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+
+      this.ListInventory = result;
+    })
+  }
+  GetInventorySound() {
+    const categoryComputer = "SOUND EQUIPMENT";
+    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+
+      this.ListInventory = result;
+    })
+  }
+  GetInventoryMultimedia() {
+    const categoryComputer = "PROYECTION AND MULTIMEDIA DEVICES";
+    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+
+      this.ListInventory = result;
+    })
+  }
+  GetInventoryTablets() {
+    const categoryComputer = "TABLETS OR IPADS";
+    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+
+      this.ListInventory = result;
+    })
+  }
+  GetInventorySoftware() {
+    const categoryComputer = "SOFTWARE UTILITIES";
+    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+
+      this.ListInventory = result;
+    })
+  }
+
+  CheckCurrentDatabase() {
+
+    this.CurrentCategory = this.FormCategoryDatabase.get('FormCategorySelected').value
+
+  }
+
+  CleanCache() {
     localStorage.clear();
   }
   ngOnInit() {
 
-    this.CurrentName= localStorage.getItem("Name");
+    this.CurrentName = localStorage.getItem("Name");
     this.CurrentLastName = localStorage.getItem("LastName");
     this.CurrentEmail = localStorage.getItem("Email");
     this.CurrentRole = localStorage.getItem("Role");
     this.CurrentPhone = localStorage.getItem("Phone");
+    this.GetInventoryComputers();
   }
 
 }

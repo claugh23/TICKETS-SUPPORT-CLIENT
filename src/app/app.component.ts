@@ -1,5 +1,8 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
+import { first } from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +12,17 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'ClienteMBS';
 
-  constructor(private router:Router) {
-    
+  private source = interval(1000);
+
+  constructor(private router: Router, private requestServer: HttpClient) {
+
+   
+
+
   }
   ngOnInit() {
-    this.router.navigateByUrl('/')
-    window.open("https://localhost:5001/")
+    this.router.navigateByUrl('/');
+
+
   }
 }

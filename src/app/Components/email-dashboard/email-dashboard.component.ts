@@ -28,7 +28,7 @@ export class EmailDashboardComponent implements OnInit {
 
     this.FormEmail = this.FormEmailBuilder.group({
       FormSubject: ['', Validators.required],
-      FormEmailTo: ['', Validators.email],
+      FormEmailTo: ['', Validators.required],
       FormMessage: ['', Validators.required],
 
     })

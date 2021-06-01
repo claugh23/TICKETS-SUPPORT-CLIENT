@@ -41,25 +41,25 @@
     <br>
     <div class="container">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
-            <table class="table table-responsive table-stripped">
+            <table class="table table-bordered table-stripped">
                 <thead>
                     <tr>
                    
-                        <th class="text-white">NAME</th>
-                        <th class="text-white">LASTNAME</th>
-                        <th class="text-white">EMAIL</th>
-                        <th class="text-white">PHONE</th>
-                        <th class="text-white">DESCRIPTION</th>
+                        <th class="text-white"><h3>NAME</h3></th>
+                        <th class="text-white"><h3>LASTNAME</h3></th>
+                        <th class="text-white"><h3>EMAIL</h3></th>
+                        <th class="text-white"><h3>PHONE</h3></th>
+                        <th class="text-white"><h3>DESCRIPTION</h3></th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let contact of ListaContactos">
                     <tr>
                        
-                        <td class="text-white">{{contact.name}}</td>
-                        <td class="text-white">{{contact.lastName}}</td>
-                        <td class="text-white">{{contact.email}}</td>
-                        <td class="text-white">{{contact.phone}} </td>
-                        <td class="text-white">{{contact.description}} </td>
+                        <td class="text-white"><h4>{{contact.name}}</h4></td>
+                        <td class="text-white"><h4>{{contact.lastName}}</h4></td>
+                        <td class="text-white"><h4>{{contact.email}}</h4></td>
+                        <td class="text-white"><h4>{{contact.phone}}</h4> </td>
+                        <td class="text-white"><h4>{{contact.description}}</h4> </td>
                     </tr>
                 </tbody>
             </table>
