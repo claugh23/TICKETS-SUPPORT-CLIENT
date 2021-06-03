@@ -133,19 +133,21 @@
                                 <hr class="bg-dark">
                                 <div class="col-lg-6">
 
-                                    <form [formGroup]="FormCategoryDatabase" (ngSubmit)="CheckCurrentDatabase()">
+                                    <form [formGroup]="FormCategoryDatabase" (ngSubmit)="LoadDatabaseInfo()">
                                         <label for="">SELECT THE CATEGORY</label>
-                                        <select class="form-control" require formControlName="FormCategorySelected">
+                                        <select class="form-control" require formControlName="FormCategorySelected"  (click)="CheckCurrentDatabase()">
                                             <option>COMPUTERS</option>
-                                            <option>NETWORK DEVICES</option>
-                                            <option>SECURITY CAMERAS</option>
                                             <option>SOUND EQUIPMENT</option>
                                             <option>PROYECTION AND MULTIMEDIA DEVICES</option>
                                             <option>TABLETS OR IPADS</option>
-                                        </select>
+                                        </select>   
+                                        <hr>
+                                        <strong>Database Selected: {{CurrentCategory}}</strong>
                                         <br>
-                                        <button type="submit" class="btn btn-success">Load Database:
-                                            {{CurrentCategory}}</button>
+                                        <button type="submit" class="btn btn-success">Load Database
+                                           </button>
+
+
                                     </form>
 
 

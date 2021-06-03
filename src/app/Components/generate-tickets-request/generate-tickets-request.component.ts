@@ -140,6 +140,28 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   }
 
+  LoadDatabaseInfo(){
+
+    if(this.CurrentCategory === "COMPUTERS"){
+
+      this.GetInventoryComputers();
+
+    }else if(this.CurrentCategory === "PROYECTION AND MULTIMEDIA DEVICES"){
+
+      this.GetInventoryMultimedia();
+    }
+    else if(this.CurrentCategory === "TABLETS OR IPADS"){
+
+      this.GetInventoryTablets();
+    }
+    else if(this.CurrentCategory === "SOUND EQUIPMENT"){
+
+      this.GetInventorySound();
+    }
+   
+
+  }
+
   CleanCache() {
     localStorage.clear();
   }
@@ -150,7 +172,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
     this.CurrentEmail = localStorage.getItem("Email");
     this.CurrentRole = localStorage.getItem("Role");
     this.CurrentPhone = localStorage.getItem("Phone");
-    this.GetInventoryComputers();
+   
   }
 
 }
