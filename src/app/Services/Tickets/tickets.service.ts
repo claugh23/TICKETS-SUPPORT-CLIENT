@@ -10,8 +10,8 @@ export class TicketsService {
 
   constructor(private httpRequest:HttpClient) { }
 
-  ServerTicketsAPI = "https://localhost:5001/api/Tickets/";
-  ServerTicketsAPITickets = "https://localhost:5001/Tickets/GetClientTickets/";
+  ServerTicketsAPI = "https://webapiticketssupport20210607091925.azurewebsites.net/api/Tickets/";
+  ServerTicketsAPITickets = "https://webapiticketssupport20210607091925.azurewebsites.net/Tickets/GetClientTickets/";
 
   PostTicket(NewTicket:TicketRequesModel):Observable<TicketRequesModel>{
 

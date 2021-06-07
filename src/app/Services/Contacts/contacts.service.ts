@@ -7,7 +7,7 @@ import { ContactModel } from "src/app/Interfaces/IContact";
 })
 export class ContactsService {
 
-  serverContacts = 'https://localhost:5001/api/Contacts/'
+  serverContacts = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Contacts/'
 
   constructor(private httpRequest:HttpClient) { }
 

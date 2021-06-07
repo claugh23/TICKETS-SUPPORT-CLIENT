@@ -7,8 +7,8 @@ import { InventoryItemModel } from "src/app/Interfaces/IInventory";
 })
 export class InventoryService {
 
-  ServerInventory = 'https://localhost:5001/api/Inventory/';
-  ServerLoadSelectedInventory = 'https://localhost:5001/api/Inventory/GetInventorySelected/'
+  ServerInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/';
+  ServerLoadSelectedInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/GetInventorySelected/'
   constructor(private httpRequest:HttpClient) { }
 
   PostInventario(item:InventoryItemModel):Observable<InventoryItemModel>{
