@@ -11,6 +11,7 @@ export class LoginService {
   ServerRegistroUsuario = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Register/';
   ServerAutenticacion = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Autentication/';
   ServerUsers = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Users/';
+ 
   statusSetLoginUser:any;
 
   constructor(private httpRequest:HttpClient) { }
@@ -31,6 +32,9 @@ export class LoginService {
   GetUsers(){
 
     return this.httpRequest.get<UsersModel>(this.ServerUsers);
+  }
+  GetRegistrationsUsers(){
+    return this.httpRequest.get<UsersModel>(this.ServerRegistroUsuario);
   }
 
   DeleteSelectedUser(CurrentId:string){

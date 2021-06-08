@@ -16,6 +16,7 @@ export class UsersDatabaseComponent implements OnInit {
   RoleSelected: any;
   //listados
   ListaUsers: UsersModel[];
+  ListaUsersRegistrations: UsersModel[];
   UserInfo: UsersModel;
 
   //Formulario Agregar User
@@ -58,6 +59,17 @@ export class UsersDatabaseComponent implements OnInit {
 
   ObtenerUsers() {
 
+    this.UserServiceAPI.GetUsers().subscribe((result: any) => {
+
+      this.ListaUsers = result;
+    }, (error: HttpErrorResponse) => {
+
+      alert("Ocurrio un problema al cargar los usuarios: " + JSON.stringify(error.error));
+    })
+  }
+
+  ObtenerInscripciones(){
+    
     this.UserServiceAPI.GetUsers().subscribe((result: any) => {
 
       this.ListaUsers = result;
