@@ -7,7 +7,7 @@ import { EmailMessageModel } from "src/app/Interfaces/IEmailMessage";
 })
 export class EmailsService {
 
-  serverEmails = 'https://localhost:5001/api/Emails/';
+  serverEmails = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Emails/';
 
   constructor(private httpRequest:HttpClient) { }
 
