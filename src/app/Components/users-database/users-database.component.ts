@@ -68,15 +68,53 @@ export class UsersDatabaseComponent implements OnInit {
     })
   }
 
-  ObtenerInscripciones(){
-    
-    this.UserServiceAPI.GetUsers().subscribe((result: any) => {
+  ObtenerInscripciones() {
 
-      this.ListaUsers = result;
+    this.UserServiceAPI.GetSuscriptions().subscribe((result: any) => {
+
+      this.ListaUsersRegistrations = result;
     }, (error: HttpErrorResponse) => {
 
       alert("Ocurrio un problema al cargar los usuarios: " + JSON.stringify(error.error));
     })
+  }
+
+  ApproveSuscription(CurrentUser: any) {
+    this.GetSelectedUser(CurrentUser);
+
+    const registro: UsersModel = {
+      Name: this.UserInfo.Name,
+      LastName: this.UserInfo.LastName,
+      Phone: this.UserInfo.Phone,
+      Email: this.UserInfo.Email,
+      Pass: this.UserInfo.Pass,
+      Role: "Approve"
+    };
+
+
+    this.UserServiceAPI.PostUserRegister(registro).subscribe(
+      (result) => {
+
+      },
+      (RegistroCompleto: any) => {
+        alert("EL USUARIO: " + this.UserInfo.Name + " HA SIDO APROBADO!")
+        this.ObtenerInscripciones();
+      }
+    );
+  }
+
+  RejectSuscription(CurrentUser: any) {
+    this.GetSelectedUser(CurrentUser);
+
+    this.UserServiceAPI.DeleteSuscription(CurrentUser._id).subscribe(
+      (result) => {
+
+      },
+      (RegistroCompleto: any) => {
+        alert("EL USUARIO: " + this.UserInfo.Name + "HA SIDO RECHAZADO Y ELIMINADO!");
+        this.ObtenerInscripciones();
+      }
+    );
   }
 
   RegisterNewUser() {
@@ -90,7 +128,7 @@ export class UsersDatabaseComponent implements OnInit {
       Role: this.FormAddUser.get('Formrole').value
     };
 
-    console.log(this.RoleSelected)
+
     this.UserServiceAPI.PostUserRegister(registro).subscribe(
       (result) => {
 
@@ -112,10 +150,10 @@ export class UsersDatabaseComponent implements OnInit {
       Pass: CurrentUser.pass,
       Role: CurrentUser.role
     }
-  
-   CurrentUser = this.UserInfo
+
+    CurrentUser = this.UserInfo
   }
-  
+
   UpdateUser() {
 
     const UserInfoUpdate: UsersModel = {
@@ -156,7 +194,7 @@ export class UsersDatabaseComponent implements OnInit {
   ngOnInit() {
 
     this.ObtenerUsers();
-
+    this.ObtenerInscripciones();
   }
 }
 
