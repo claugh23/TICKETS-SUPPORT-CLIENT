@@ -1,39 +1,43 @@
 <div class="container-fluid">
 
-    <div class="card border-info col-md-6 mx-auto" style="margin-top: 5%; background-color: transparent;">
+    <div class="card border-danger col-md-6 mx-auto" style="margin-top: 5%; ">
         <div class="card-header ">
-            <h3 class="text-center text-white">MBS IT DEPARTMENT SYSTEM</h3>
-            <hr class="bg-light">
+            <h2 class="text-center text-dark">MBS IT DEPARTMENT SYSTEM</h2>
+            <hr class="bg-dark">
         </div>
         <div class="card-body ">
 
             <div class="form-group">
 
                 <form [formGroup]="FormLogin" (ngSubmit)="ServiceAutentication()">
-                    <label class="text-white">Correo Electronico</label>
-                    <input class="form-control " type="email" placeholder="username@domain.com" required role="textbox"
-                        formControlName="FormUserEmail">
-                    <label class="text-white">Password</label>
-                    <input class="form-control" type="password" placeholder="xxxxxxxx" required role="textbox"
-                        formControlName="FormUserPass">
-                    <br>
+
+                    <div class="col-md-12">
+                        <mat-form-field class="col-lg-12">
+                            <input matInput type="email" required placeholder="USERNAME"
+                                formControlName="FormUserEmail">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="col-lg-12">
+                            <input matInput type="password" placeholder="PASSWORD" value="value"
+                                formControlName="FormUserPass">
+                        </mat-form-field>
+                        <br>
+
+                        <button mat-raised-button color="primary" [disabled]="FormLogin.invalid">INICIAR SESION</button>
+                        <br>
+                        <div class="alert alert-danger" role="alert" *ngIf="statusLoginIncorrecto">
+                            <strong>{{ErrorMessageLogin}}</strong>
+                        </div>
+                        <hr class="bg-light">
+                        <span class="text-dark">IF YOU DON'T HAVE AN ACCOUNT, GET REGISTER!</span>
 
 
-                    <button class="btn btn-outline-danger" type="submit" [disabled]="FormLogin.invalid"><i
-                            class="fa fa-check" aria-hidden="true"></i> LOGIN IN</button>
-                    <hr class="bg-light">
-                    <span class="text-white">IF YOU DON'T HAVE AN ACCOUNT, GET REGISTER!</span>
-                    <br>
 
-
-                    <div class="alert alert-danger" role="alert" *ngIf="statusLoginIncorrecto">
-                        <strong>{{ErrorMessageLogin}}</strong>
                     </div>
+
                 </form>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-plus" aria-hidden="true"></i> CREATE ACCOUNT
-                </button>
+                <button mat-raised-button data-toggle="modal" data-target="#exampleModal">CREATE ACCOUNT NOW</button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -75,12 +79,14 @@
 
                                     </div>
                                     <div class="alert alert-success" role="alert" *ngIf="statusRegistro">
-                                        <strong>YOU REGISTRATION HAS BEEN SUBMITTED! PLEASE WAIT A EMAIL FOR YOUR REGISTRATION STATUS</strong>
+                                        <strong>YOU REGISTRATION HAS BEEN SUBMITTED! PLEASE WAIT A EMAIL FOR YOUR
+                                            REGISTRATION STATUS</strong>
                                     </div>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE FORM</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE
+                                        FORM</button>
                                     <button type="submit" class="btn btn-primary"
                                         [disabled]="FormRegistroUser.invalid">CREATE MY ACCOUNT </button>
                                 </div>
@@ -98,4 +104,5 @@
 
 </div>
 <hr class="bg-light">
- 
+
+<h1 class="text-white text-center">TECH NEWS</h1>
