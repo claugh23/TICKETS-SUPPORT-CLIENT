@@ -5,25 +5,25 @@
     <div class="container">
         <div class="card-deck">
             <div class="card border-info" style="background-color: transparent;">
-                <div class="card-header text-center text-white"><strong><i class="fa fa-plus-circle"
+                <div class="card-header text-center text-dark"><strong><i class="fa fa-plus-circle"
                             aria-hidden="true"></i>
                         ADD NEW CONTACT</strong></div>
                 <div class="card-body mx-auto col-lg-6">
                     <form [formGroup]="FormContacts" (ngSubmit)="CreateContact()">
                         <div class="form-group ">
-                            <label class="text-white" for="">NAME</label>
+                            <label class="text-dark" for="">NAME</label>
                             <input class="form-control" type="text" required role="text"
                                 formControlName="FormContactName">
-                            <label class="text-white" for="">LASTNAME</label>
+                            <label class="text-dark" for="">LASTNAME</label>
                             <input class="form-control" type="text" required role="textbox"
                                 formControlName="FormContactLastName">
-                            <label class="text-white" for="">EMAIL</label>
+                            <label class="text-dark" for="">EMAIL</label>
                             <input class="form-control" type="email" required role="textbox"
                                 formControlName="FormContactEmail">
-                            <label class="text-white" for="">PHONE</label>
+                            <label class="text-dark" for="">PHONE</label>
                             <input class="form-control" type="text" required role="textbox"
                                 formControlName="FormContactPhone">
-                            <label class="text-white" for="">SMALL DESCRIPTION</label>
+                            <label class="text-dark" for="">SMALL DESCRIPTION</label>
                             <input class="form-control" type="text" required role="textbox"
                                 formControlName="FormContactDescripcion">
                             <br>
@@ -40,30 +40,52 @@
     </div>
     <br>
     <div class="container">
-        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-            <table class="table table-bordered table-stripped">
-                <thead>
-                    <tr>
-                   
-                        <th class="text-white"><h3>NAME</h3></th>
-                        <th class="text-white"><h3>LASTNAME</h3></th>
-                        <th class="text-white"><h3>EMAIL</h3></th>
-                        <th class="text-white"><h3>PHONE</h3></th>
-                        <th class="text-white"><h3>DESCRIPTION</h3></th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let contact of ListaContactos">
-                    <tr>
-                       
-                        <td class="text-white"><h4>{{contact.name}}</h4></td>
-                        <td class="text-white"><h4>{{contact.lastName}}</h4></td>
-                        <td class="text-white"><h4>{{contact.email}}</h4></td>
-                        <td class="text-white"><h4>{{contact.phone}}</h4> </td>
-                        <td class="text-white"><h4>{{contact.description}}</h4> </td>
-                    </tr>
-                </tbody>
-            </table>
+        <table mat-table [dataSource]="ListaContactos" class="mat-elevation-z8">
 
-        </div>
+      
+       
+            <!-- Position Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>
+                  <h4 > NAME </h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+           
+            <!-- Name Column -->
+            <ng-container matColumnDef="lastname">
+                <th mat-header-cell *matHeaderCellDef>
+                   <h4 > LASTNAME</h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4 > EMAIL</h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4> PHONE</h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>
+                    <h4> DESCRIPTION</h4>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+    
+         
+           
+    
+            <!-- Symbol Column -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </div>
 </div>

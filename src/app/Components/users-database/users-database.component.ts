@@ -191,6 +191,9 @@ export class UsersDatabaseComponent implements OnInit {
   RefreshUsers() {
     this.ObtenerUsers();
   }
+
+  
+  displayedColumns: string[] = ['name','lastname','phone','email','pass','role','approvals','rejects'];
   ngOnInit() {
 
     this.ObtenerUsers();

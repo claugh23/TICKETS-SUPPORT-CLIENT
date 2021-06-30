@@ -2,29 +2,50 @@
 <br>
 <div class="container-fluid">
 
+    <table mat-table [dataSource]="listLogsTickets" class="mat-elevation-z8">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="text-white">NAME</th>
-                <th class="text-white">TICKET NUMBER</th>
-                <th class="text-white">TYPE REQUEST</th>
-                <th class="text-white">DETAILS</th>
-                <th class="text-white">SOLUTION DETAILS</th>
-              
-            </tr>
-        </thead>
-        <tbody *ngFor="let item of listLogsTickets">
-            <tr>
-                <td scope="row" class="text-white">{{item.name}}</td>
-                <td class="text-white">{{item.ticketNumber}}</td>
-                <td class="text-white">{{item.typeRequest}}</td>
-                <td class="text-white">{{item.details}}</td>
-                <td class="text-white">{{item.solutionDetails}}</td>
-               
-            </tr>
-          
-        </tbody>
+      
+       
+        <!-- Position Column -->
+        <ng-container matColumnDef="ClientName">
+            <th mat-header-cell *matHeaderCellDef>
+              <h4 > CLIENT </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+       
+        <!-- Name Column -->
+        <ng-container matColumnDef="TicketNumber">
+            <th mat-header-cell *matHeaderCellDef>
+               <h4 > TICKET </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.ticketNumber}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="typeRequest">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4 > TYPE</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.typeRequest}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="Details">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4 > DETAILS</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.details}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="SolutionDetails">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4 > SOLUTION </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.solutionDetails}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
 </div>

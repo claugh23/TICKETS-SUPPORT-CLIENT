@@ -27,7 +27,7 @@ export class CompletedTicketsComponent implements OnInit {
 
 
   }
-
+  displayedColumns: string[] = ['ClientName','TicketNumber','typeRequest','Details','SolutionDetails'];
   ngOnInit() {
 
     this.getTicketCompleted()

@@ -74,7 +74,7 @@ export class EmailDashboardComponent implements OnInit {
 
   }
 
-
+  displayedColumns: string[] = ['Subject','EmailAddress','Message','Date'];
   ngOnInit() {
     this.GetAllEmailsSended();
     this.ObtenerUsersEmails();

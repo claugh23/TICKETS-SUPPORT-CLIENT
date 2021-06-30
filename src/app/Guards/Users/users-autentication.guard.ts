@@ -10,9 +10,9 @@ export class UsersAutenticationGuard implements CanActivate {
 
   statusLogin: any;
 
-
+  
   constructor(private autenticationAdmin: LoginService) { }
-
+  
   canActivate():boolean{
 
    

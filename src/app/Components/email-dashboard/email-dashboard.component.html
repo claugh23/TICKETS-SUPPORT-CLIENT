@@ -2,22 +2,22 @@
 <br>
 <div class="container-fluid">
     <div class="card-deck">
-        <div class="card border-info" style="background-color: transparent;">
-            <div class="card-header text-center text-white"><strong>SEND EMAIL</strong></div>
+        <div class="card border-info" style="background-color: transparent; max-width: 40rem;">
+            <div class="card-header text-center text-dark"><strong>SEND EMAIL</strong></div>
             <div class="card-body">
                 <form [formGroup]="FormEmail" (ngSubmit)="SendEmail()">
                     <div class="form-group">
-                        <label class="text-white" for="">SUBJECT</label>
+                        <label class="text-dark" for="">SUBJECT</label>
                         <input class="form-control" type="text" required role="text" formControlName="FormSubject">
-                        <label class="text-white" for="">EMAIL ADDRESS</label>
+                        <label class="text-dark" for="">EMAIL ADDRESS</label>
                         <select class="form-control" required formControlName="FormEmailTo">
                             <option *ngFor="let correos of ListaUsersEmails">{{correos.email}}</option>
                         </select>
-                        <label class="text-white" for="">MESSAGE</label>
+                        <label class="text-dark" for="">MESSAGE</label>
                         <textarea class="form-control" cols="30" rows="5" required role="text"
                             formControlName="FormMessage"></textarea>
                         <br>
-                        <button type="submit" class="btn btn-primary" [disabled]="FormEmail.invalid">SEND EMAIL
+                        <button type="submit" class="btn btn-primary" >SEND EMAIL
                         </button>
                     </div>
                 </form>
@@ -25,28 +25,49 @@
             </div>
         </div>
         <div class="card border-info" style="background-color: transparent;">
-            <div class="card-header text-center text-white"><strong>EMAILS HISTORY</strong></div>
+            <div class="card-header text-center text-dark"><strong>EMAILS HISTORY</strong></div>
             <div class="card-body">
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="text-white">SUBJECT</th>
-                                <th class="text-white">EMAIL ADDRESS</th>
-                                <th class="text-white">MESSAGE</th>
-                                <th class="text-white">WHEN IT WAS SENDED</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngFor="let items of ListaHistorialCorreo">
-                            <tr>
-                                <td class="text-white">{{items.subject}}</td>
-                                <td class="text-white">{{items.emailAddress}}</td>
-                                <td class="text-white">{{items.message}} </td>
-                                <td class="text-white">{{items.dateSended | date}} </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table mat-table [dataSource]="ListaHistorialCorreo" class="mat-elevation-z8">
+
+      
+       
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="Subject">
+                        <th mat-header-cell *matHeaderCellDef>
+                          <h4 > SUBJECT </h4>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+                    </ng-container>
+                   
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="EmailAddress">
+                        <th mat-header-cell *matHeaderCellDef>
+                           <h4 > DESTINATION EMAIL </h4>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.emailAddress}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Message">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <h4 > MESSAGE</h4>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Date">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <h4> WHEN IT WAS SENDED</h4>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateSended  | date}} </td>
+                    </ng-container>
+            
+                 
+                   
+            
+                    <!-- Symbol Column -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
             </div>
         </div>
     </div>

@@ -17,8 +17,6 @@ export class AdminsGuard implements CanActivate {
 
   
 
-   
-
     if( this.autenticationAdmin.IsUser_AdminLoggingIn()){
       
       return true;

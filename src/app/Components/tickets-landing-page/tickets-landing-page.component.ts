@@ -81,7 +81,7 @@ export class TicketsLandingPageComponent implements OnInit {
 
 
 
-
+  displayedColumns: string[] = ['ticketNumber','name','lastName','email','phone','details','dispatchDelete'];
 
   ngOnInit() {
 

@@ -1,43 +1,73 @@
 <app-navigation></app-navigation>
-<h2 class="text-center text-white">CURRENT TICKETS IN THE SYSTEM</h2>
-<hr class="bg-light">
-<button class="btn btn-outline-warning d-block mx-auto" (click)=" GetTicketsAll()">REFRESH DATABASE</button>
-<hr class="bg-light">
-<div class="table-wrapper-scroll-y my-custom-scrollbar container-fluid">
+<h2 class="text-center text-dark">CURRENT TICKETS IN THE SYSTEM</h2>
+<hr class="bg-dark">
+<button class="d-block mx-auto" mat-raised-button (click)=" GetTicketsAll()">REFRESH DATABASE</button>
+<hr class="bg-dark">
+<div class="container-fluid">
 
     <br>
-
-    <table id="dtBasicExample" class="table table-stripped table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th class="text-white text-center">TICKET NUMBER</th>
-                <th class="text-white text-center">NAME</th>
-                <th class="text-white text-center">LASTNAME</th>
-                <th class="text-white text-center">EMAIL ADDRESS</th>
-                <th class="text-white text-center">TYPE OF REQUEST</th>
-                <th class="text-white text-center">REQUEST DETAILS</th>
-                <th class="text-white text-center">ACTIONS</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let item of ListaCurrentTickets">
-            <tr>
-                <td class="text-white"><strong><i class="fa fa-ticket" aria-hidden="true"></i>
-                        {{item.ticketNumber}}</strong></td>
-                <td class="text-white"><strong>{{item.name}}</strong></td>
-                <td class="text-white"><strong>{{item.lastName}}</strong></td>
-                <td class="text-white"><strong>{{item.email}}</strong></td>
-                <td class="text-white"><strong>{{item.typeRequest}}</strong></td>
-                <td class="text-white text-justify">
-                    <h5>{{item.details}}</h5>
-                </td>
-                <td> 
-                    <button class="btn btn-warning" type="button" (click)="GetSelectedTicket(item)">Completar</button>
-                </td>
-            </tr>
+    <table mat-table [dataSource]="ListaCurrentTickets" class="mat-elevation-z8">
 
 
-        </tbody>
+        <!-- Position Column -->
+        <ng-container matColumnDef="ticketNumber">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4> # Ticket</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.ticketNumber}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Client Name</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Lastname</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Email Address</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Phone Number</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="details">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Details</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.details}} </td>
+        </ng-container>
+        <ng-container matColumnDef="dispatchDelete">
+            <th mat-header-cell *matHeaderCellDef>
+                <h4>Dispatch Options</h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary"
+                    (click)="GetSelectedTicket(element)">Complete Ticket</button>
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+
 
 
 </div>

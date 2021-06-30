@@ -3,7 +3,7 @@
     height: 370px;
     overflow: auto;
   }
-  .table-wrapper-scroll-y {
-    display: block;
-  }
+table{
+  width: 100%;
+}
   

@@ -70,7 +70,7 @@ export class ContactListComponent implements OnInit {
     })
 
   }
-
+  displayedColumns: string[] = ['name','lastname','email','phone','description'];
   ngOnInit() {
 
     this.ObtenerContactos();
