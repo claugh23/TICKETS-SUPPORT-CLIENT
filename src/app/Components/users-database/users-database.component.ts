@@ -21,7 +21,7 @@ export class UsersDatabaseComponent implements OnInit {
 
   //Formulario Agregar User
   FormAddUser: FormGroup;
-  Formname = new FormControl('');
+  Formname = new FormControl();
   Formlastname = new FormControl('');
   Formphone = new FormControl('');
   Formemail = new FormControl('');
@@ -90,8 +90,6 @@ export class UsersDatabaseComponent implements OnInit {
       Pass: this.UserInfo.Pass,
       Role: "Approve"
     };
-
-
     this.UserServiceAPI.PostUserRegister(registro).subscribe(
       (result) => {
 
@@ -99,8 +97,21 @@ export class UsersDatabaseComponent implements OnInit {
       (RegistroCompleto: any) => {
         alert("EL USUARIO: " + this.UserInfo.Name + " HA SIDO APROBADO!")
         this.ObtenerInscripciones();
+
+        this.GetSelectedUser(CurrentUser);
+
+        this.UserServiceAPI.DeleteSuscription(CurrentUser._id).subscribe(
+          (result) => {
+
+          },
+          (RegistroCompleto: any) => {
+            this.ObtenerUsers();
+            this.ObtenerInscripciones();
+          }
+        );
       }
     );
+
   }
 
   RejectSuscription(CurrentUser: any) {
@@ -136,6 +147,7 @@ export class UsersDatabaseComponent implements OnInit {
       (RegistroCompleto: any) => {
         this.statusRegistroUser = true;
         this.ObtenerUsers();
+        this.ObtenerInscripciones();
       }
     );
   }
@@ -192,8 +204,8 @@ export class UsersDatabaseComponent implements OnInit {
     this.ObtenerUsers();
   }
 
-  
-  displayedColumns: string[] = ['name','lastname','phone','email','pass','role','approvals','rejects'];
+
+  displayedColumns: string[] = ['name', 'lastname', 'phone', 'email', 'pass', 'role', 'approvals', 'rejects'];
   ngOnInit() {
 
     this.ObtenerUsers();

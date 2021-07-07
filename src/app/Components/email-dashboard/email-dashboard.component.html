@@ -9,15 +9,19 @@
                     <div class="form-group">
                         <label class="text-dark" for="">SUBJECT</label>
                         <input class="form-control" type="text" required role="text" formControlName="FormSubject">
-                        <label class="text-dark" for="">EMAIL ADDRESS</label>
-                        <select class="form-control" required formControlName="FormEmailTo">
-                            <option *ngFor="let correos of ListaUsersEmails">{{correos.email}}</option>
+                        <label class="text-dark" for="">EMAIL ADDRESS FROM REGISTERED USER</label>
+                        <select class="form-control" required  formControlName="FormEmailTo">
+                            <option selected >Select Email Destination</option>
+                            
+                            <option *ngFor="let correos of ListaUsersEmails" >{{correos.email}}</option>
                         </select>
+                        <br>
+                       
                         <label class="text-dark" for="">MESSAGE</label>
                         <textarea class="form-control" cols="30" rows="5" required role="text"
                             formControlName="FormMessage"></textarea>
                         <br>
-                        <button type="submit" class="btn btn-primary" >SEND EMAIL
+                        <button type="submit" class="btn btn-primary" [disabled]="FormEmail.invalid">SEND EMAIL
                         </button>
                     </div>
                 </form>

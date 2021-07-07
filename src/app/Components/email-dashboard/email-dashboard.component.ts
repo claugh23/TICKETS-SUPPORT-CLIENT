@@ -65,16 +65,17 @@ export class EmailDashboardComponent implements OnInit {
     this.EmailAPI.PostEmail(MessageBody).subscribe((result: any) => {
 
       alert("EL MENSAJE FUE ENVIADO CON EXITO")
-
+      
     }, (error: HttpErrorResponse) => {
 
-      alert(JSON.stringify(error.error))
-      this.GetAllEmailsSended()
+      alert(JSON.stringify(error.error));
+      this.GetAllEmailsSended();
     })
 
   }
 
   displayedColumns: string[] = ['Subject','EmailAddress','Message','Date'];
+
   ngOnInit() {
     this.GetAllEmailsSended();
     this.ObtenerUsersEmails();

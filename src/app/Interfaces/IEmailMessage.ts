@@ -2,7 +2,7 @@ export interface EmailMessageModel {
 
     _id?:string;
     subject:string;
-    emailAddress
+    emailAddress:string;
     message:string;
     datesended?:Date;
 }
