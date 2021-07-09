@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { interval, Observable } from 'rxjs';
+import { interval } from 'rxjs';
 import { TicketRequesModel } from 'src/app/Interfaces/ITickets';
 import { TicketsService } from 'src/app/Services/Tickets/tickets.service';
 import { LogsTicketsService } from 'src/app/Services/LogsTickets/logs-tickets.service';
 import { LogsTicketsModel } from 'src/app/Interfaces/IlogsTickets';
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-tickets-landing-page',
   templateUrl: './tickets-landing-page.component.html',
@@ -17,7 +19,7 @@ export class TicketsLandingPageComponent implements OnInit {
   ListaCurrentTickets: TicketRequesModel[];
   TicketSeleccionado: TicketRequesModel;
   
-  constructor(private TicketsServiceAPI: TicketsService, private LogsTicketsAPI: LogsTicketsService) { }
+  constructor(private TicketsServiceAPI: TicketsService, private LogsTicketsAPI: LogsTicketsService,public dialog: MatDialog) { }
 
   GetTicketsAll() {
 
@@ -77,14 +79,12 @@ export class TicketsLandingPageComponent implements OnInit {
 
   }
 
-
-
-
   displayedColumns: string[] = ['ticketNumber','name','lastName','email','phone','details','dispatchDelete'];
+  
 
   ngOnInit() {
     this.GetTicketsAll();
-    const RealTicketsLoader = interval(10000);
+    const RealTicketsLoader = interval(60000);
 
     RealTicketsLoader.subscribe((countRequest) => {
 

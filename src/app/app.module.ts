@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AngularUI } from 'src/app/Modules/AngularMaterialUI';
@@ -41,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AngularUI
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

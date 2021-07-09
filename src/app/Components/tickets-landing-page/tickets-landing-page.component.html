@@ -60,6 +60,50 @@
             <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary"
                     (click)="GetSelectedTicket(element)">Complete Ticket</button>
 
+                <!-- Button trigger modal -->
+                <button mat-raised-button color="primary" data-toggle="modal" data-target="#modelId">
+                    model
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">TICKET DETAILS</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="form-group mx-auto">
+                                        <label for=""># TICKET</label>
+                                        <input class="form-control" type="text" readonly value={{TicketSeleccionado.ticketNumber}}>
+                                        <label for="">CLIENT</label>
+                                        <input class="form-control" type="text" readonly>
+                                        <label for="">DETAILS</label>
+                                        <input class="form-control" type="text" readonly>
+                                        <hr>
+                                        <label for="">DESCRIBE THE SOLUTION FOR THIS TICKET</label>
+                                        <textarea class="form-control" cols="30" rows="5"></textarea>
+                                    </div>
+                                    <br>
+                                    
+                                   
+                                
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button mat-raised-button color="primary" (click)="GetSelectedTicket(element)">Close
+                                    this ticket</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </td>
         </ng-container>
 
