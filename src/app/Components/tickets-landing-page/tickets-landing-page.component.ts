@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { TicketRequesModel } from 'src/app/Interfaces/ITickets';
 import { TicketsService } from 'src/app/Services/Tickets/tickets.service';
 import { LogsTicketsService } from 'src/app/Services/LogsTickets/logs-tickets.service';
@@ -16,7 +16,7 @@ export class TicketsLandingPageComponent implements OnInit {
   //variables dinamicas
   ListaCurrentTickets: TicketRequesModel[];
   TicketSeleccionado: TicketRequesModel;
-
+  
   constructor(private TicketsServiceAPI: TicketsService, private LogsTicketsAPI: LogsTicketsService) { }
 
   GetTicketsAll() {
@@ -75,7 +75,6 @@ export class TicketsLandingPageComponent implements OnInit {
       alert("OCURRIO UN DESCONOCIDO EN LA APLICACION O LA INFORMACION NO PUEDE SER PROCESADA")
     }
 
-
   }
 
 
@@ -84,8 +83,18 @@ export class TicketsLandingPageComponent implements OnInit {
   displayedColumns: string[] = ['ticketNumber','name','lastName','email','phone','details','dispatchDelete'];
 
   ngOnInit() {
-
     this.GetTicketsAll();
+    const RealTicketsLoader = interval(10000);
+
+    RealTicketsLoader.subscribe((countRequest) => {
+
+      
+      this.GetTicketsAll();
+      
+    })
+
+
+   
   }
 
 }
