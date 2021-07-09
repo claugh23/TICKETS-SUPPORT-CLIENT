@@ -1,4 +1,5 @@
 export interface LogsTicketsModel {
+    
     _id:string;
     name:string;
     ticketNumber:number;

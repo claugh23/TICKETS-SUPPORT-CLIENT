@@ -1,51 +1,50 @@
 <app-navigation></app-navigation>
 <br>
-<div class="container-fluid">
-
+<h5 class="text-center text-white">TICKETS LOG HISTORY</h5>
+<div>
     <table mat-table [dataSource]="listLogsTickets" class="mat-elevation-z8">
 
-      
-       
         <!-- Position Column -->
         <ng-container matColumnDef="ClientName">
-            <th mat-header-cell *matHeaderCellDef>
-              <h4 > CLIENT </h4>
+            <th mat-header-cell *matHeaderCellDef color="primary">
+              <h5 > CLIENT </h5>
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element"> <p>{{element.name}}</p> </td>
         </ng-container>
        
         <!-- Name Column -->
         <ng-container matColumnDef="TicketNumber">
             <th mat-header-cell *matHeaderCellDef>
-               <h4 > TICKET </h4>
+               <h5 > TICKET </h5>
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.ticketNumber}} </td>
+            <td mat-cell *matCellDef="let element"> <p>{{element.ticketNumber}}</p> </td>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="typeRequest">
             <th mat-header-cell *matHeaderCellDef>
-                <h4 > TYPE</h4>
+                <h5 > TYPE</h5>
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.typeRequest}} </td>
+            <td mat-cell *matCellDef="let element"><p> {{element.typeRequest}}</p> </td>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="Details">
             <th mat-header-cell *matHeaderCellDef>
-                <h4 > DETAILS</h4>
+                <h5 > DETAILS</h5>
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.details}} </td>
+            <td mat-cell *matCellDef="let element"> <p>{{element.details}}</p> </td>
         </ng-container>
-
+    
         <!-- Weight Column -->
         <ng-container matColumnDef="SolutionDetails">
             <th mat-header-cell *matHeaderCellDef>
-                <h4 > SOLUTION </h4>
+                <h5 > SOLUTION </h5>
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.solutionDetails}} </td>
+            <td mat-cell *matCellDef="let element"> <p class="text-justify">{{element.solutionDetails}}</p> </td>
         </ng-container>
-
+    
         <!-- Symbol Column -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    
 </div>
