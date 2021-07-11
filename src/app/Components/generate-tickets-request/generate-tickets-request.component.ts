@@ -68,7 +68,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
     }, (error: HttpErrorResponse) => {
 
-      alert("Ocurrio un problema al generar el ticket: " + JSON.stringify(error.error))
+      alert(JSON.stringify(error.error))
     })
 
   }

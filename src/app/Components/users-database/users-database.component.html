@@ -1,6 +1,8 @@
 <app-navigation></app-navigation>
 
-<hr class="bg-dark">
+<h3 class="text-center text-white">USERS ADMIN CENTER</h3>
+
+<hr class="bg-light">
 <div class="row">
     <div class="col-sm-2">
         <button mat-raised-button color="primary" data-toggle="modal" data-target="#ModalCheckSystemRegistration">CHECK
@@ -99,18 +101,15 @@
             </div>
         </div>
     </div>
-    <br>
-   
-    
-</div>
-<br>
-<button mat-raised-button color="primary" (click)="RefreshUsers()">REFRESH DATABASE</button>
-<br>
-<br>
-<button mat-raised-button color="primary" data-toggle="modal" data-target="#ModalAddUser">ADD NEW USER</button>
+    <div class="col-sm-1"><button mat-raised-button color="green" (click)="RefreshUsers()">REFRESH DATABASE</button>
+    </div>
 
+</div>
+<hr class="bg-light">
+<div><button mat-raised-button color="primary" data-toggle="modal" data-target="#ModalAddUser">ADD
+        NEW USER</button></div>
 <div class="col-sm-2">
-   
+
     <div class="modal fade" id="ModalAddUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -130,8 +129,7 @@
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <label class="text-dark"><strong>USER NAME</strong></label>
-                                            <input class="form-control" type="text" required
-                                                formControlName="Formname">
+                                            <input class="form-control" type="text" required formControlName="Formname">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="date" class="text-dark"><strong>LASTNAME </strong></label>
@@ -168,7 +166,7 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <button type="submit" class="btn btn-primary">Registrarse al sistema</button>
+                                    <button type="submit" class="btn btn-primary" [disabled]="FormAddUser.invalid">Registrarse al sistema</button>
                                 </form>
 
                             </div>
@@ -189,9 +187,6 @@
     </div>
 </div>
 <!-- Button trigger modal -->
-
-
-
 
 <!-- Modal -->
 

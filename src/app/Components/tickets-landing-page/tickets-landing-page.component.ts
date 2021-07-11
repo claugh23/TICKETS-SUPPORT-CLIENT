@@ -6,6 +6,8 @@ import { TicketsService } from 'src/app/Services/Tickets/tickets.service';
 import { LogsTicketsService } from 'src/app/Services/LogsTickets/logs-tickets.service';
 import { LogsTicketsModel } from 'src/app/Interfaces/IlogsTickets';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { window } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tickets-landing-page',
@@ -14,12 +16,29 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class TicketsLandingPageComponent implements OnInit {
 
+  FormSolution: FormGroup;
+  FormDetailsSolutions = new FormControl('');
 
   //variables dinamicas
   ListaCurrentTickets: TicketRequesModel[];
   TicketSeleccionado: TicketRequesModel;
-  
-  constructor(private TicketsServiceAPI: TicketsService, private LogsTicketsAPI: LogsTicketsService,public dialog: MatDialog) { }
+
+  //variables de formulario
+  Getclient: string;
+  Getticket: number;
+  Getdetails: string;
+  GetId:string;
+
+  //States para html
+  SetAlert:boolean;
+
+  constructor(private TicketsServiceAPI: TicketsService, private LogsTicketsAPI: LogsTicketsService, private FormSolutionBuilder: FormBuilder) {
+
+    this.FormSolution = this.FormSolutionBuilder.group({
+      FormDetailsSolutions: ['',Validators.required]
+    })
+
+  }
 
   GetTicketsAll() {
 
@@ -33,44 +52,45 @@ export class TicketsLandingPageComponent implements OnInit {
     })
   }
 
+  SetTicketToForm(name: string, ticketNumber: number, detailsPhrase: string,idTicket:string) {
+
+    this.Getclient = name;
+    this.Getticket = ticketNumber;
+    this.Getdetails = detailsPhrase;
+    this.GetId = idTicket;
+
+  }
+
   GetSelectedTicket(ticket: any) {
 
-    const comprobacion = confirm("YA COMPLETASTE EL TICKET: " + ticket.ticketNumber + " A NOMBRE DE: " + ticket.name);
-
-    const detalles = prompt("DIGITE LOS DETALLES DE LA SOLUCION PARA EL TICKET: " + ticket.ticketNumber);
+    const comprobacion = confirm("ESTAS SEGURO DE COMPLETAR EL TICKET: "+this.Getticket);
 
     if (comprobacion) {
 
-      if (detalles === '') {
-        alert("DEBE DIGITAR LOS DETALLES DE SOLUCION PARA EL TICKET: " + ticket.ticketNumber);
-      } else {
-        const Ticket: LogsTicketsModel = {
-          _id: ticket._id,
-          ticketNumber: Number.parseInt(ticket.ticketNumber),
-          name: ticket.name,
-          typeRequest: ticket.typeRequest,
-          details: ticket.details,
-          solutionDetails: detalles
+      const Ticket: LogsTicketsModel = {
+        _id: this.GetId,
+        ticketNumber: this.Getticket,
+        name: this.Getclient,
+        typeRequest: ticket.typeRequest,
+        details: this.Getdetails,
+        solutionDetails: this.FormSolution.get('FormDetailsSolutions').value
 
-        }
-
-        if (detalles === '') {
-          alert("NO SE DIGITO LA SOLUCION PARA EL TICKET, ES REQUERIDA!");
-
-        }
-
-        this.LogsTicketsAPI.PostLogUser(Ticket).subscribe((result: any) => {
-
-          alert("SE COMPLETO EL TICKET: " + Ticket.ticketNumber);
-
-          this.GetTicketsAll();
-
-        }, (error: HttpErrorResponse) => {
-
-          alert("OCURRIO ALGO EN EL SERVIDOR: " + JSON.stringify(error.error));
-          this.GetTicketsAll();
-        })
       }
+
+     
+      //aca inicia el servicio para mandar al log:
+      this.LogsTicketsAPI.PostLogUser(Ticket).subscribe((result: any) => {
+
+        alert("SE COMPLETO EL TICKET: " + Ticket.ticketNumber);
+
+        this.GetTicketsAll();
+
+      }, (error: HttpErrorResponse) => {
+        
+        this.SetAlert = true;
+      
+      })
+
 
 
     } else {
@@ -79,22 +99,22 @@ export class TicketsLandingPageComponent implements OnInit {
 
   }
 
-  displayedColumns: string[] = ['ticketNumber','name','lastName','email','phone','details','dispatchDelete'];
-  
+  displayedColumns: string[] = ['ticketNumber', 'name', 'lastName', 'email', 'phone', 'details', 'dispatchDelete'];
+
 
   ngOnInit() {
     this.GetTicketsAll();
-    const RealTicketsLoader = interval(60000);
+    // const RealTicketsLoader = interval(60000);
 
-    RealTicketsLoader.subscribe((countRequest) => {
-
-      
-      this.GetTicketsAll();
-      
-    })
+    // RealTicketsLoader.subscribe((countRequest) => {
 
 
-   
+    //   this.GetTicketsAll();
+
+    // })
+
+
+
   }
 
 }
