@@ -3,13 +3,13 @@
 <div class="container-fluid">
     <div class="card-deck">
         <div class="card border-info" style="background-color: transparent; max-width: 40rem;">
-            <div class="card-header text-center text-dark"><strong>SEND EMAIL</strong></div>
+            <div class="card-header text-center text-white"><strong>SEND EMAIL</strong></div>
             <div class="card-body">
                 <form [formGroup]="FormEmail" (ngSubmit)="SendEmail()">
                     <div class="form-group">
-                        <label class="text-dark" for="">SUBJECT</label>
+                        <label class="text-white" for="">SUBJECT</label>
                         <input class="form-control" type="text" required role="text" formControlName="FormSubject">
-                        <label class="text-dark" for="">EMAIL ADDRESS FROM REGISTERED USER</label>
+                        <label class="text-white" for="">EMAIL ADDRESS FROM REGISTERED USER</label>
                         <select class="form-control" required  formControlName="FormEmailTo">
                             <option selected >Select Email Destination</option>
                             
@@ -17,7 +17,7 @@
                         </select>
                         <br>
                        
-                        <label class="text-dark" for="">MESSAGE</label>
+                        <label class="text-white" for="">MESSAGE</label>
                         <textarea class="form-control" cols="30" rows="5" required role="text"
                             formControlName="FormMessage"></textarea>
                         <br>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="card border-info" style="background-color: transparent;">
-            <div class="card-header text-center text-dark"><strong>EMAILS HISTORY</strong></div>
+            <div class="card-header text-center text-white"><strong>EMAILS HISTORY</strong></div>
             <div class="card-body">
                 <table mat-table [dataSource]="ListaHistorialCorreo" class="mat-elevation-z8">
 

@@ -23,7 +23,14 @@ export class InventoryComponent implements OnInit {
   //dynamic variables
   confirmInsert: boolean;
   ListInventory: InventoryItemModel;
-
+  //Static variable for select
+  GetItemCode:string;
+  GetItemQuantity:Number;
+  GetItemTag:string;
+  GetItemBrand:string;
+  GetItemRoomLocation:string;
+  GetItemCategory:string;
+  GetItemStatus:string;
 
   constructor(private InventoryAPI: InventoryService, private FormBuilderInventory: FormBuilder) {
 
@@ -62,7 +69,22 @@ export class InventoryComponent implements OnInit {
     }
 
   }
+  /////////////////////////////////////////////
+  UpdateItemInventory(Code: string, Quantity: Number, Tag: string, Brand: string, RoomLocation: string, Category: string, CurrentStatus: string) {
 
+    const SelectionItem = {Code,Quantity,Tag,Brand,RoomLocation,Category,CurrentStatus}
+
+    this.GetItemCode = SelectionItem.Code;
+    this.GetItemQuantity = SelectionItem.Quantity;
+    this.GetItemTag = SelectionItem.Tag;
+    this.GetItemBrand = SelectionItem.Brand;
+    this.GetItemRoomLocation = SelectionItem.RoomLocation;
+    this.GetItemCategory = SelectionItem.Category;
+    this.GetItemStatus = SelectionItem.CurrentStatus;
+
+   }
+
+  ////////////////////////////////////////////
   GetInventoryComputers() {
     const categoryComputer = "COMPUTERS";
     this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
@@ -114,7 +136,7 @@ export class InventoryComponent implements OnInit {
   }
 
   ngOnInit() {
-
+this.confirmInsert = false;
     this.GetInventoryComputers();
   }
 

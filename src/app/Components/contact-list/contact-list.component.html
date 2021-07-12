@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="container">
         <div class="card-deck">
-            <div class="card border-info" style="background-color: transparent;">
+            <div class="card border-info" style="background-color: white;">
                 <div class="card-header text-center text-dark"><strong><i class="fa fa-plus-circle"
                             aria-hidden="true"></i>
                         ADD NEW CONTACT</strong></div>
@@ -27,9 +27,8 @@
                             <input class="form-control" type="text" required role="textbox"
                                 formControlName="FormContactDescripcion">
                             <br>
-                            <button type="submit" class="btn btn-outline-primary"
-                                [disabled]="FormContacts.invalid">CREATE
-                                NEW CONTACT</button>
+                         <button mat-raised-button color="primary" type="submit" 
+                         [disabled]="FormContacts.invalid">CREATE NEW CONTACT</button>
                         </div>
                     </form>
 
@@ -39,11 +38,8 @@
         </div>
     </div>
     <br>
-    <div class="container">
+    <div class="container-fluid">
         <table mat-table [dataSource]="ListaContactos" class="mat-elevation-z8">
-
-      
-       
             <!-- Position Column -->
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>
@@ -89,3 +85,4 @@
         </table>
     </div>
 </div>
+<hr>
