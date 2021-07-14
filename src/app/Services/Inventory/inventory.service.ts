@@ -7,20 +7,10 @@ import { InventoryItemModel } from "src/app/Interfaces/IInventory";
 })
 export class InventoryService {
 
-  ServerInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/';
+  ServerInventory = 'https://localhost:5001/api/Inventory/';
   ServerLoadSelectedInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/GetInventorySelected/';
-  ServerMaintainceInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/DeleteItemInventory/';
+  ServerMaintainceInventory = 'https://localhost:5001/api/Inventory/DeleteItemInventory/';
   constructor(private httpRequest:HttpClient) { }
-
-  PostInventario(item:InventoryItemModel):Observable<InventoryItemModel>{
-
-    return this.httpRequest.post<InventoryItemModel>(this.ServerInventory,item);
-
-  }
-
-  PostDeleteItem(item:InventoryItemModel){
-    return this.httpRequest.post<InventoryItemModel>(this.ServerMaintainceInventory,item);
-  }
 
   GetCurrentInventory(category:string){
    
@@ -28,6 +18,17 @@ export class InventoryService {
 
   }
 
+  PostInventario(item:InventoryItemModel):Observable<InventoryItemModel>{
+
+    return this.httpRequest.post<InventoryItemModel>(this.ServerInventory,item);
+
+  }
+  //this delete
+  PostDeleteItem(item:InventoryItemModel){
+    return this.httpRequest.post<InventoryItemModel>(this.ServerMaintainceInventory,item);
+  }
+
+  //this update
   PutItemInventory(item:InventoryItemModel){
 
     return this.httpRequest.put<InventoryItemModel[]>(this.ServerInventory,item);

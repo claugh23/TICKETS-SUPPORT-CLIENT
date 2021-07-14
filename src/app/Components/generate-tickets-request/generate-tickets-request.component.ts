@@ -67,7 +67,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
       alert("SE HA GENERADO EL TICKET NUMERO: " + Ticket.TicketNumber);
 
     }, (error: HttpErrorResponse) => {
-
+      
       alert(JSON.stringify(error.error))
     })
 
