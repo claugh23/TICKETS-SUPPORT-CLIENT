@@ -12,18 +12,11 @@ export class InventoryComponent implements OnInit {
 
   //Form
   FormItemInventory: FormGroup;
-  FormItemCode = new FormControl();
-  FormItemQuantity = new FormControl();
-  FormItemTag = new FormControl();
-  FormItemBrand = new FormControl();
-  FormItemRoomLocation = new FormControl();
-  FormItemCategory = new FormControl();
-  FormItemStatus = new FormControl();
-
   //dynamic variables
   confirmInsert: boolean;
   ListInventory: InventoryItemModel;
   //Static variable for select
+  GetIdItem:string;
   GetItemCode: string;
   GetItemQuantity: Number;
   GetItemTag: string;
@@ -35,13 +28,13 @@ export class InventoryComponent implements OnInit {
   constructor(private InventoryAPI: InventoryService, private FormBuilderInventory: FormBuilder) {
 
     this.FormItemInventory = this.FormBuilderInventory.group({
-      FormItemCode: ['',Validators.required],
-      FormItemQuantity: ['', Validators.required],
-      FormItemTag: ['', Validators.required],
-      FormItemBrand: ['', Validators.required],
-      FormItemRoomLocation: ['', Validators.required],
-      FormItemCategory: ['', Validators.required],
-      FormItemStatus: ['', Validators.required]
+      FormItemCode:  new FormControl(),
+      FormItemQuantity:  new FormControl(),
+      FormItemTag:  new FormControl(),
+      FormItemBrand:  new FormControl(),
+      FormItemRoomLocation: new FormControl(),
+      FormItemCategory: new FormControl(),
+      FormItemStatus:  new FormControl()
     })
 
   }
@@ -70,9 +63,11 @@ export class InventoryComponent implements OnInit {
 
   }
   /////////////////////////////////////////////
-  async CaptureItemSelected(Code: string, Quantity: Number, Tag: string, Brand: string, RoomLocation: string, Category: string, CurrentStatus: string){
-    const SelectionItem = { Code, Quantity, Tag, Brand, RoomLocation, Category, CurrentStatus }
+  async CaptureItemSelected(IdSelected:string,Code: string, Quantity: Number, Tag: string, Brand: string, RoomLocation: string, Category: string, CurrentStatus: string){
 
+    const SelectionItem = { IdSelected,Code, Quantity, Tag, Brand, RoomLocation, Category, CurrentStatus }
+
+    this.GetIdItem = SelectionItem.IdSelected;
     this.GetItemCode = SelectionItem.Code;
     this.GetItemQuantity = SelectionItem.Quantity;
     this.GetItemTag = SelectionItem.Tag;
@@ -80,21 +75,72 @@ export class InventoryComponent implements OnInit {
     this.GetItemRoomLocation = SelectionItem.RoomLocation;
     this.GetItemCategory = SelectionItem.Category;
     this.GetItemStatus = SelectionItem.CurrentStatus;
+    
+    this.FormItemInventory.patchValue(
+      { FormItemCode: this.GetItemCode},
+    )
+    this.FormItemInventory.patchValue(
+      { FormItemQuantity: this.GetItemQuantity },
+    )
+    this.FormItemInventory.patchValue(
+      { FormItemTag: this.GetItemTag },
+    )
+    this.FormItemInventory.patchValue(
+      { FormItemBrand: this.GetItemBrand },
+    )
+    this.FormItemInventory.patchValue(
+      { FormItemRoomLocation: this.GetItemRoomLocation},
+    )
+    this.FormItemInventory.patchValue(
+      { FormItemCategory: this.GetItemCategory },
+    )
+    this.FormItemInventory.patchValue(
+      { FormItemStatus: this.GetItemStatus },
+    )
+
+    this.confirmInsert = false;
   }
 
   async UpdateItemInventory() {
 
     const UpdatedItem: InventoryItemModel = {
-      code: 'MBS-' + this.FormItemCode.setValue(this.GetItemCode),
+      _id:this.GetIdItem,
+      code: this.FormItemInventory.get('FormItemCode').value,
       quantity: Number.parseInt(this.FormItemInventory.get('FormItemQuantity').value),
-      tag: '' + this.FormItemInventory.get('FormItemTag').setValue(this.GetItemTag),
-      brand: '' + this.FormItemInventory.get('FormItemBrand').setValue(this.GetItemBrand),
-      roomLocation: '' + this.FormItemInventory.get('FormItemRoomLocation').setValue(this.GetItemRoomLocation),
-      category: '' + this.FormItemInventory.get('FormItemCategory').setValue(this.GetItemCategory),
-      currentStatus:''+ this.FormItemInventory.get('FormItemStatus').setValue(this.GetItemStatus)
+      tag: this.FormItemInventory.get('FormItemTag').value,
+      brand: this.FormItemInventory.get('FormItemBrand').value,
+      roomLocation: this.FormItemInventory.get('FormItemRoomLocation').value,
+      category:  this.FormItemInventory.get('FormItemCategory').value,
+      currentStatus: this.FormItemInventory.get('FormItemStatus').value
     };
-   console.log(this.FormItemInventory);
+    this.InventoryAPI.PutItemInventory(UpdatedItem).subscribe(() => {
+      alert("SE ACTUALIZO EL ITEM: "+UpdatedItem.code)
+    },(error:HttpErrorResponse) => {
+      this.confirmInsert = true;
+     
+    })
   
+  }
+
+  async DeleteItemInventory(){
+
+    const DeleteItem: InventoryItemModel = {
+      _id: this.GetIdItem,
+      code: '',
+      quantity: 0,
+      tag: '',
+      brand:'',
+      roomLocation: '',
+      category: this.FormItemInventory.get('FormItemCategory').value,
+      currentStatus: ''
+    };
+
+    this.InventoryAPI.PostDeleteItem(DeleteItem).subscribe(() =>{
+      console.log("ALGO OCURRIO EN EL APP");
+      
+    },(error:HttpErrorResponse) => {
+      alert("ITEM: "+DeleteItem._id+" HA SIDO ELIMINADO")
+    })
   }
   ////////////////////////////////////////////
   GetInventoryComputers() {
@@ -152,33 +198,9 @@ export class InventoryComponent implements OnInit {
     this.confirmInsert = false;
     this.GetInventoryComputers();
 
-    this.FormItemInventory.get('FormItemCode',).valueChanges.subscribe(CurrentValue => {
+    this.FormItemInventory.get('FormItemCode').valueChanges.subscribe(CurrentValue => {
       this.GetItemCode = CurrentValue;
-      this.FormItemCode.setValue(this.GetItemCode);
-    })
-    this.FormItemInventory.get('FormItemQuantity',).valueChanges.subscribe(CurrentValue => {
-      this.GetItemQuantity = CurrentValue;
-      this.FormItemQuantity.setValue(this.GetItemQuantity);
-    })
-    this.FormItemInventory.get('FormItemTag',).valueChanges.subscribe(CurrentValue => {
-      this.GetItemTag = CurrentValue;
-      this.FormItemQuantity.setValue(this.GetItemTag);
-    })
-    this.FormItemInventory.get('FormItemBrand',).valueChanges.subscribe(CurrentValue => {
-      this.GetItemBrand = CurrentValue;
-      this.FormItemQuantity.setValue(this.GetItemBrand);
-    })
-    this.FormItemInventory.get('FormItemRoomLocation',).valueChanges.subscribe(CurrentValue => {
-      this.GetItemRoomLocation = CurrentValue;
-      this.FormItemQuantity.setValue(this.GetItemRoomLocation);
-    })
-    this.FormItemInventory.get('FormItemCategory').valueChanges.subscribe(CurrentValue => {
-      this.GetItemCategory = CurrentValue;
-      this.FormItemCategory.setValue(this.GetItemCategory);
-    })
-    this.FormItemInventory.get('FormItemStatus').valueChanges.subscribe(CurrentValue => {
-      this.GetItemStatus = CurrentValue;
-      this.FormItemStatus.setValue(this.GetItemStatus);
+      
     })
    
   }

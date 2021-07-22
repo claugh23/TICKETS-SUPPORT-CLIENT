@@ -190,7 +190,7 @@
                 <td class="text-center">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalUpdateItem"
-                        (click)="CaptureItemSelected(item.code,item.quantity,item.tag,item.brand,item.roomLocation,item.category,item.currentStatus)">
+                        (click)="CaptureItemSelected(item._id,item.code,item.quantity,item.tag,item.brand,item.roomLocation,item.category,item.currentStatus)">
                         EDIT {{item.code}}
                     </button>
 
@@ -265,8 +265,8 @@
                                                     <div class=" col-md-6">
                                                         <label for="date" class="text-dark"><strong>CATEGORY
                                                             </strong></label>
-                                                        <select formControlName="FormItemCategory" class="form-control" disabled
-                                                            disabled require>
+                                                        <select formControlName="FormItemCategory" class="form-control"
+                                                            disabled disabled require>
                                                             <option selected>{{GetItemCategory}}</option>
 
                                                         </select>
@@ -274,11 +274,11 @@
                                                     <div class=" col-md-6">
                                                         <label for="date" class="text-dark"><strong>CURRENT STATUS
                                                             </strong></label>
-                                                            <br>
-                                                            <span>Selected Option: {{GetItemStatus}}</span>
+                                                        <br>
+                                                        <span>Selected Option: {{GetItemStatus}}</span>
                                                         <select formControlName="FormItemStatus" class="form-control"
                                                             require>
-                                                          
+
                                                             <option>GOOD</option>
                                                             <option>BAD</option>
                                                             <option>ON REVISION</option>
@@ -295,7 +295,7 @@
                                         </div>
 
                                         <div class="alert alert-success" role="alert" *ngIf="confirmInsert">
-                                            <strong>EQUIPMENT REGISTERED ON DATABASE</strong>
+                                            <strong>THE ITEM: {{GetItemCode}} HAS BEEN UPDATED</strong>
                                         </div>
 
                                     </div>
@@ -303,8 +303,10 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        (click)="GetInventoryComputers()">Close Form</button>
+                                    <button type="button" class="btn btn-danger" (click)="DeleteItemInventory()">DELETE
+                                        THIS ITEM: {{GetItemCode}}</button>
                                 </div>
                             </div>
                         </div>

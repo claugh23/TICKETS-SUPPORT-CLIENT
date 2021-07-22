@@ -21,39 +21,27 @@ export class UsersDatabaseComponent implements OnInit {
 
   //Formulario Agregar User
   FormAddUser: FormGroup;
-  Formname = new FormControl();
-  Formlastname = new FormControl('');
-  Formphone = new FormControl('');
-  Formemail = new FormControl('');
-  Formpass = new FormControl('');
-  Formrole = new FormControl('');
-
   //Formulario Actualizar User
   FormUpdateUser: FormGroup;
-  FormUpdateName = new FormControl('');
-  FormUpdateLastName = new FormControl('');
-  FormUpdatePhone = new FormControl('');
-  FormUpdateEmail = new FormControl('');
-  FormUpdatePass = new FormControl('');
-  FormUpdateRole = new FormControl('');
+
 
   constructor(private FormAddUserBuilder: FormBuilder, private FormUpdateUserBuilder: FormBuilder, private UserServiceAPI: LoginService) {
 
     this.FormAddUser = this.FormAddUserBuilder.group({
-      Formname: ['', Validators.required],
-      Formlastname: ['', Validators.required],
-      Formphone: ['', Validators.required],
-      Formemail: ['', Validators.required],
-      Formpass: ['', Validators.required],
-      Formrole: ['', Validators.required]
+      Formname: new FormControl(''),
+      Formlastname: new FormControl(''),
+      Formphone: new FormControl(''),
+      Formemail: new FormControl(''),
+      Formpass: new FormControl(''),
+      Formrole: new FormControl(''),
     })
     this.FormUpdateUser = this.FormUpdateUserBuilder.group({
-      FormUpdateName: ['', Validators.required],
-      FormUpdateLastName: ['', Validators.required],
-      FormUpdatePhone: ['', Validators.required],
-      FormUpdateEmail: ['', Validators.required],
-      FormUpdatePass: ['', Validators.required],
-      FormUpdateRole: ['', Validators.required]
+      FormUpdateName: new FormControl(''),
+      FormUpdateLastName: new FormControl(''),
+      FormUpdatePhone: new FormControl(''),
+      FormUpdateEmail: new FormControl(''),
+      FormUpdatePass: new FormControl(''),
+      FormUpdateRole: new FormControl(''),
     })
   }
 
@@ -164,6 +152,27 @@ export class UsersDatabaseComponent implements OnInit {
     }
 
     CurrentUser = this.UserInfo
+    this.FormUpdateUser.patchValue(
+      { FormUpdateName: this.UserInfo.Name},
+    )
+    this.FormUpdateUser.patchValue(
+      { FormUpdateLastName: this.UserInfo.LastName },
+    )
+    this.FormUpdateUser.patchValue(
+      { FormUpdatePhone: this.UserInfo.Phone },
+    )
+    this.FormUpdateUser.patchValue(
+      { FormUpdateEmail: this.UserInfo.Email },
+    )
+    this.FormUpdateUser.patchValue(
+      { FormUpdatePass: this.UserInfo.Pass },
+    )
+    this.FormUpdateUser.patchValue(
+      { FormUpdateRole: this.UserInfo.Role },
+    )
+
+   console.log(this.FormUpdateUser);
+   
   }
 
   UpdateUser() {
@@ -210,6 +219,9 @@ export class UsersDatabaseComponent implements OnInit {
 
     this.ObtenerUsers();
     this.ObtenerInscripciones();
+
+    console.log(this.FormUpdateUser);
+
   }
 }
 
