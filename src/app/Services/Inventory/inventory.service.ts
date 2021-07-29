@@ -10,7 +10,7 @@ export class InventoryService {
   ServerInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/';
   
   ServerLoadSelectedInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/GetInventorySelected/';
-  ServerMaintainceInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/Inventory/DeleteItemInventory';
+  ServerMaintainceInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/DeleteItemInventory/';
   ServerMaintainceInventoryUpdated = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/DeleteItemInventory/';
   constructor(private httpRequest:HttpClient) { }
 

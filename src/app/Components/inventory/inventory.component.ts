@@ -58,6 +58,7 @@ export class InventoryComponent implements OnInit {
         alert("YOU HAVE ENTER A NEW ITEM TO THE INVENTORY!!")
       }, (error: HttpErrorResponse) => {
         alert("SOMETHING HAPPEN IN THE SERVER: " + JSON.stringify(error.error));
+        this.confirmInsert = true;
       })
     }
 

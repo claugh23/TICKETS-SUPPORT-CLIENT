@@ -17,12 +17,10 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   //Formulario para generar el ticket
   FormTicket: FormGroup;
-  FormTicketCategory = new FormControl('');
-  FormTicketDetails = new FormControl('');
 
   //Form para seleccionar Categoria
   FormCategoryDatabase: FormGroup;
-  FormCategorySelected = new FormControl('');
+ 
 
   //Variables Dinamicas
   CurrentName: string;
@@ -35,6 +33,9 @@ export class GenerateTicketsRequestComponent implements OnInit {
   //Lista de tickets
   CurrentTicketsList: TicketRequesModel;
   ListInventory: InventoryItemModel;
+
+  //States
+  IsTicketGenerate:boolean;
 
   constructor(private FormCategoriaBuilder: FormBuilder, private FormTicketBuilder: FormBuilder, private TicketAPI: TicketsService, private InventoryAPI: InventoryService) {
 
@@ -68,7 +69,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
     }, (error: HttpErrorResponse) => {
       
-      alert(JSON.stringify(error.error))
+      this.IsTicketGenerate = true;
     })
 
   }
@@ -173,6 +174,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
     this.CurrentRole = localStorage.getItem("Role");
     this.CurrentPhone = localStorage.getItem("Phone");
    
+    this.IsTicketGenerate = false;
   }
 
 }

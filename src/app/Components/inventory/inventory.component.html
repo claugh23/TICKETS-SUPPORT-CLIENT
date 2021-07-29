@@ -129,7 +129,7 @@
 
                                     </div>
 
-                                    <div class="alert alert-success" role="alert">
+                                    <div class="alert alert-success" role="alert" *ngIf="confirmInsert">
                                         <strong>EQUIPMENT REGISTERED ON DATABASE</strong>
                                     </div>
 
@@ -275,7 +275,7 @@
                                                         <label for="date" class="text-dark"><strong>CURRENT STATUS
                                                             </strong></label>
                                                         <br>
-                                                        <span>Selected Option: {{GetItemStatus}}</span>
+                                                       
                                                         <select formControlName="FormItemStatus" class="form-control"
                                                             require>
 
@@ -287,9 +287,22 @@
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                <button type="submit" class="btn btn-primary"
-                                                    [disabled]="FormItemInventory.invalid">UPDATED ITEM:
-                                                    {{GetItemCode}}</button>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-primary"
+                                                        [disabled]="FormItemInventory.invalid">UPDATED ITEM:
+                                                        {{GetItemCode}}</button>
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                        (click)="GetInventoryComputers()">Close Form</button>
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="button" class="btn btn-danger" (click)="DeleteItemInventory()">DELETE
+                                                            THIS ITEM: {{GetItemCode}}</button>
+                                                    </div>
+                                                  </div>
+                                                
                                             </form>
 
                                         </div>
@@ -303,10 +316,8 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                        (click)="GetInventoryComputers()">Close Form</button>
-                                    <button type="button" class="btn btn-danger" (click)="DeleteItemInventory()">DELETE
-                                        THIS ITEM: {{GetItemCode}}</button>
+                                   
+                                   
                                 </div>
                             </div>
                         </div>
