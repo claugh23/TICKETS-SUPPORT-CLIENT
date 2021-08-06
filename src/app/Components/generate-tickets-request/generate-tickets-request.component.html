@@ -252,9 +252,13 @@
                     <br>
                     <button type="submit" class="btn btn-warning" [disabled]="FormTicket.invalid">CREATE
                         REQUEST</button>
-                        <hr>
+                    <hr>
+                    <div class="alert alert-success" role="alert" *ngIf="GeneratingTicket">
+                        <strong class="text-center">GENERATING TICKET....PLEASE WAIT</strong>
+                    </div>
                     <div class="alert alert-success" role="alert" *ngIf="IsTicketGenerate">
-                        <strong class="text-center">THE TICKET WAS GENERATED!! IT WILL BE ATTENDED AS SOON AS POSSIBLE!</strong>
+                        <strong class="text-center">THE TICKET WAS GENERATED!! IT WILL BE ATTENDED AS SOON AS
+                            POSSIBLE!</strong>
                     </div>
                 </form>
             </div>

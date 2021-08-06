@@ -36,6 +36,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   //States
   IsTicketGenerate:boolean;
+  GeneratingTicket:boolean;
 
   constructor(private FormCategoriaBuilder: FormBuilder, private FormTicketBuilder: FormBuilder, private TicketAPI: TicketsService, private InventoryAPI: InventoryService) {
 
@@ -52,6 +53,8 @@ export class GenerateTicketsRequestComponent implements OnInit {
   }
 
   CreateTicket() {
+
+    this.GeneratingTicket = true;
 
     const Ticket: TicketRequesModel = {
       Name: localStorage.getItem("Name"),
@@ -70,6 +73,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
     }, (error: HttpErrorResponse) => {
       
       this.IsTicketGenerate = true;
+      this.GeneratingTicket = false;
     })
 
   }

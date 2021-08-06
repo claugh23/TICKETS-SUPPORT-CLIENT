@@ -1,0 +1,28 @@
+<app-navigation></app-navigation>
+<br>
+<div class="row">
+    <div class="col-md-6 border border-light" >
+        <br>
+        <button class="col-lg-12" mat-raised-button>CURRENT TICKETS</button>
+        <hr>
+        <button class="col-lg-12" mat-raised-button>CLOSED TICKETS</button>
+        <hr>
+        <button class="col-lg-12" mat-raised-button>EXPORT TICKETS LOG</button>
+        <br>
+        <br>
+
+    </div>
+    <br>
+    <div class="col" style="columns: 200px 9; " *ngFor="let items of ListaCurrentTickets">
+        <div class="card-deck">
+            <div class="card">
+                <img class="card-img-top" src="holder.js/100x180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">{{items.ticketNumber}}</h4>
+                    <p class="card-text">Text</p>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>

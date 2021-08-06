@@ -17,6 +17,8 @@ import { EmailDashboardComponent } from './Components/email-dashboard/email-dash
 import { ContactListComponent } from './Components/contact-list/contact-list.component';
 import { InventoryComponent } from './Components/inventory/inventory.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TicketsMenuTestComponent } from './Components/tickets-menu-test/tickets-menu-test.component';
+import { TicketDashTestComponent } from './Components/ticket-dash-test/ticket-dash-test.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsersDatabaseComponent,
     EmailDashboardComponent,
     ContactListComponent,
-    InventoryComponent
+    InventoryComponent,
+    TicketsMenuTestComponent,
+    TicketDashTestComponent
   ],
   imports: [
     BrowserModule,

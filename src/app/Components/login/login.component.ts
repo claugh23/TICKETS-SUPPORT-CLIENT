@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("Email", result[2]);
           localStorage.setItem("Role", result[3]);
           localStorage.setItem("Phone", result[4]);
-          this.enrutamiento.navigate(['/TicketsLandingPage']);
+          this.enrutamiento.navigate(['/TicketsAppBoard']);
         }
       },
       (error: HttpErrorResponse) => {
