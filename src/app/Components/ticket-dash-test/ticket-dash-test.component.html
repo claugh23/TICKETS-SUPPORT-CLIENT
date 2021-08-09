@@ -5,18 +5,47 @@
     <div class="form-row">
 
         <div class="col">
-            <button class="d-block mx-auto" mat-raised-button>Current Tickets</button>
+            <button class="d-block mx-auto" mat-raised-button (click)="GetTicketsAll()">Current Tickets</button>
         </div>
         <div class="col">
-            <button class="d-block mx-auto" mat-raised-button>Refresh Tickets</button>
+            <button class="d-block mx-auto" mat-raised-button (click)="GetTicketsAll()">Refresh Tickets</button>
         </div>
         <div class="col">
-            <button class="d-block mx-auto" mat-raised-button>Completed Tickets</button>
+            <button class="d-block mx-auto" mat-raised-button (click)="getTicketCompleted()">Completed Tickets</button>
         </div>
 
     </div>
     <br>
-    <div class="container-fluid">
+
+    <div class="container-fluid"  *ngIf="SetHistoryTickets">
+
+        <h2 class="text-center text-white">COMPLETED TICKET HISTORY</h2>
+        <div class="row align-items-center">
+
+            <div class="col-md-3" *ngFor="let item of ListaLogsTickets">
+
+                <br>
+                <mat-card>
+                    <h3 class="text-center">
+                        Numero de Ticket: {{ item.ticketNumber }} | Cliente:
+                        <strong>{{item.name}} </strong> 
+                    </h3>
+                    <hr class="bg-dark">
+                    <mat-card>
+                        <h4>Type of support: {{item.typeRequest}}</h4>
+                        <hr>
+                        Solution Details:
+                        <br>
+                        <textarea class="form-control" cols="10" rows="6" readonly>{{item.solutionDetails}}</textarea>
+                    </mat-card>
+                </mat-card>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container-fluid" *ngIf="SetCurrentTicketTrue">
 
         <div class="row align-items-center">
 
@@ -24,7 +53,8 @@
                 <br>
                 <mat-card>
                     <h3 class="text-center">Numero de Ticket: {{item.ticketNumber }} | Cliente:
-                        <strong>{{item.name}}</strong></h3>
+                        <strong>{{item.name}} {{item.lastName}}</strong>
+                    </h3>
                     <hr class="bg-dark">
                     <mat-card>
                         <h4>Tipo de Soporte: {{item.typeRequest}}</h4>
@@ -61,8 +91,7 @@
 
                                             <div class="form-group col-md-7 mx-auto">
 
-                                                <form [formGroup]="FormSolution"
-                                                    (ngSubmit)="GetSelectedTicket(item)">
+                                                <form [formGroup]="FormSolution" (ngSubmit)="GetSelectedTicket(item)">
                                                     <label for="">ID TICKET</label>
                                                     <input class="form-control" type="text" value={{GetId}} readonly>
                                                     <br>

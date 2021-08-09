@@ -17,6 +17,7 @@ export class TicketDashTestComponent implements OnInit {
 
   //variables dinamicas
   ListaCurrentTickets: TicketRequesModel[];
+  ListaLogsTickets: LogsTicketsModel[];
   TicketSeleccionado: TicketRequesModel;
 
   //variables de formulario
@@ -27,6 +28,8 @@ export class TicketDashTestComponent implements OnInit {
 
   //States para html
   SetAlert:boolean;
+  SetCurrentTicketTrue:boolean;
+  SetHistoryTickets:boolean;
 
   constructor(private TicketsServiceAPI: TicketsService, private LogsTicketsAPI: LogsTicketsService, private FormSolutionBuilder: FormBuilder) {
 
@@ -41,11 +44,28 @@ export class TicketDashTestComponent implements OnInit {
     this.TicketsServiceAPI.GetCurrentTickets().subscribe((result: any) => {
 
       this.ListaCurrentTickets = result;
+      this.SetHistoryTickets = false;
+      this.SetCurrentTicketTrue = true;
     }, (error: HttpErrorResponse) => {
 
       alert(JSON.stringify(error.error))
 
     })
+  }
+  getTicketCompleted() {
+
+    this.LogsTicketsAPI.GetTicketsCompleted().subscribe((result: any) => {
+
+      this.ListaLogsTickets = result;
+      this.SetCurrentTicketTrue = false;
+      this.SetHistoryTickets = true;
+
+    }, (error: HttpErrorResponse) => {
+
+      alert("OCURRIO UN PROBLEMA AL CARGAR EL HISTORIAL DE TICKETS: " + "\n" + JSON.stringify(error.error))
+    })
+
+
   }
 
   SetTicketToForm(name: string, ticketNumber: number, detailsPhrase: string,idTicket:string) {
@@ -99,6 +119,8 @@ export class TicketDashTestComponent implements OnInit {
 
 
   ngOnInit() {
+    this.SetCurrentTicketTrue = true;
+    this.SetHistoryTickets = false;
     this.GetTicketsAll();
     // const RealTicketsLoader = interval(60000);
 
