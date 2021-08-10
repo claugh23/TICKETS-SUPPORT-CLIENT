@@ -9,7 +9,6 @@ import { AngularUI } from 'src/app/Modules/AngularMaterialUI';
 import { AppComponent } from './app.component';
 import { LoginComponent } from 'src/app/Components/login/login.component';
 import { GenerateTicketsRequestComponent } from "src/app/Components/generate-tickets-request/generate-tickets-request.component";
-import { TicketsLandingPageComponent } from "src/app/Components/tickets-landing-page/tickets-landing-page.component";
 import { NavigationComponent } from './Components/navigation/navigation.component';
 import { CompletedTicketsComponent } from './Components/completed-tickets/completed-tickets.component';
 import { UsersDatabaseComponent } from './Components/users-database/users-database.component';
@@ -17,23 +16,22 @@ import { EmailDashboardComponent } from './Components/email-dashboard/email-dash
 import { ContactListComponent } from './Components/contact-list/contact-list.component';
 import { InventoryComponent } from './Components/inventory/inventory.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TicketsMenuTestComponent } from './Components/tickets-menu-test/tickets-menu-test.component';
-import { TicketDashTestComponent } from './Components/ticket-dash-test/ticket-dash-test.component';
+import { TicketsAppHomePageComponent } from './Components/tickets-app-home-page/tickets-app-home-page.component';
+import { TicketsModuleComponent } from './Components/tickets-module/tickets-module.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     GenerateTicketsRequestComponent,
-    TicketsLandingPageComponent,
     NavigationComponent,
     CompletedTicketsComponent,
     UsersDatabaseComponent,
     EmailDashboardComponent,
     ContactListComponent,
     InventoryComponent,
-    TicketsMenuTestComponent,
-    TicketDashTestComponent
+    TicketsAppHomePageComponent,
+    TicketsModuleComponent
   ],
   imports: [
     BrowserModule,

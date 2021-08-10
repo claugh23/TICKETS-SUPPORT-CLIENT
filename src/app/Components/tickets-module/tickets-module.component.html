@@ -17,18 +17,32 @@
     </div>
     <br>
 
-    <div class="container-fluid"  *ngIf="SetHistoryTickets">
+    <div class="container-fluid" *ngIf="SetHistoryTickets">
 
         <h2 class="text-center text-white">COMPLETED TICKET HISTORY</h2>
+
+        <mat-card class="col-sm-2">
+            <mat-form-field>
+                <input class="col-sm-2" type="search" matInput placeholder="Search Ticket">
+                <br>
+
+            </mat-form-field>
+            <button class="col-lg-12" type="submit" mat-raised-button color="primary">Search Tickets</button>
+        </mat-card>
+
         <div class="row align-items-center">
 
+
+
             <div class="col-md-3" *ngFor="let item of ListaLogsTickets">
+
+
 
                 <br>
                 <mat-card>
                     <h3 class="text-center">
                         Numero de Ticket: {{ item.ticketNumber }} | Cliente:
-                        <strong>{{item.name}} </strong> 
+                        <strong>{{item.name}} </strong>
                     </h3>
                     <hr class="bg-dark">
                     <mat-card>
@@ -64,10 +78,14 @@
                         <textarea class="form-control" cols="10" rows="5" readonly>{{item.details}}</textarea>
                     </mat-card>
                     <br>
-                    <button mat-raised-button color="primary" data-toggle="modal" data-target="#modelId"
+                    <button class="d-block mx-auto" mat-raised-button color="primary" data-toggle="modal"
+                        data-target="#modelId"
                         (click)="SetTicketToForm(item.name,item.ticketNumber,item.details,item._id)">
                         Complete Ticket
                     </button>
+                    <hr>
+                    <button class="d-block mx-auto ml-3" mat-raised-button color="warn"
+                        (click)="DeleteSelectedTicket(item._id)">Reject Ticket</button>
 
                     <!-- Button trigger modal -->
 
@@ -147,6 +165,6 @@
         </div>
 
     </div>
-
+    <br>
 
 </div>

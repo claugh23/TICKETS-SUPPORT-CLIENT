@@ -12,7 +12,7 @@ export class TicketsService {
 
   ServerTicketsAPI = "https://webapiticketssupport20210607091925.azurewebsites.net/api/Tickets/";
   ServerTicketsAPITickets = "https://webapiticketssupport20210607091925.azurewebsites.net/Tickets/GetClientTickets/";
-
+  
   PostTicket(NewTicket:TicketRequesModel):Observable<TicketRequesModel>{
 
     return this.httpRequest.post<TicketRequesModel>(this.ServerTicketsAPI,NewTicket);
@@ -28,6 +28,10 @@ export class TicketsService {
   }
 
   CompleteTicketAndDelete(CurrentTicketId:string){
+    return this.httpRequest.delete<string>(this.ServerTicketsAPI+CurrentTicketId);
+  }
+
+  DeleteTicket(CurrentTicketId:string){
     return this.httpRequest.delete<string>(this.ServerTicketsAPI+CurrentTicketId);
   }
 

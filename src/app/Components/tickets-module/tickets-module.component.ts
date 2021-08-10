@@ -2,16 +2,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LogsTicketsModel } from 'src/app/Interfaces/IlogsTickets';
-import {TicketRequesModel} from 'src/app/Interfaces/ITickets'
+import { TicketRequesModel } from 'src/app/Interfaces/ITickets';
 import { LogsTicketsService } from 'src/app/Services/LogsTickets/logs-tickets.service';
 import { TicketsService } from 'src/app/Services/Tickets/tickets.service';
-@Component({
-  selector: 'app-ticket-dash-test',
-  templateUrl: './ticket-dash-test.component.html',
-  styleUrls: ['./ticket-dash-test.component.css']
-})
-export class TicketDashTestComponent implements OnInit {
 
+@Component({
+  selector: 'app-tickets-module',
+  templateUrl: './tickets-module.component.html',
+  styleUrls: ['./tickets-module.component.css']
+})
+export class TicketsModuleComponent implements OnInit {
+  
   FormSolution: FormGroup;
   FormDetailsSolutions = new FormControl('');
 
@@ -112,6 +113,36 @@ export class TicketDashTestComponent implements OnInit {
     } else {
       alert("OCURRIO UN DESCONOCIDO EN LA APLICACION O LA INFORMACION NO PUEDE SER PROCESADA")
     }
+
+  }
+
+  DeleteSelectedTicket(IdTicket:string){
+
+    const DeleteTicketModel: TicketRequesModel = {
+      _id: IdTicket,
+      Details:"",
+      Email:"",
+      LastName:"",
+      Name:"",
+      Phone:0,
+      TicketNumber:0,
+      TypeRequest:""
+      
+
+    }
+
+    this.TicketsServiceAPI.DeleteTicket(DeleteTicketModel._id).subscribe(() => {
+
+      alert("Se elimino el ticket: "+IdTicket);
+
+     
+
+    },(error:HttpErrorResponse) =>{
+    
+      this.GetTicketsAll();
+    })
+
+
 
   }
 
