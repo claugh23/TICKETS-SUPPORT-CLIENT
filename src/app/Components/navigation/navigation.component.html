@@ -7,23 +7,29 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
             <li class="nav-item active mr-2">
-                <a class="nav-link btn btn-success" routerLink="/TicketDashBoard" routerLinkActive="router-link-active"> <i class="fa fa-home" aria-hidden="true"></i> HOME</a>
+                <a class="nav-link btn btn-success" routerLink="/TicketDashBoard" routerLinkActive="router-link-active">
+                    <i class="fa fa-home" aria-hidden="true"></i> HOME</a>
             </li>
-            
-          
-            <li class="nav-item dropdown mr-2">
-                <a class="nav-link dropdown-toggle btn btn-success text-white" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-cloud" aria-hidden="true"></i> ACTIVE MODULES
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" routerLink="/Inventory">INVENTORY</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">LICENSE DATES</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">REMOTE CONNECTIONS</a>
-                </div>
+
+            <li class="nav-item active mr-2">
+                <a class="nav-link btn btn-success" target="blank" href="http://192.168.3.200">CISCO CONTROLLER APP</a>
             </li>
+
+            <li class="nav-item active mr-2">
+                <a class="nav-link btn btn-success" target="blank" href="https://192.168.3.253">
+                    FORTIGATE FIREWALL APP</a>
+            </li>
+
+            <li class="nav-item active mr-2">
+                <a class="nav-link btn btn-success" target="blank" href="https://192.168.3.5/era">
+                    ANTIVIRUS CONTROLLER APP</a>
+            </li>
+
+            <li class="nav-item active mr-2">
+                <a class="nav-link btn btn-success" target="blank" href="https://mbs.ed.cr/wp-admin">
+                    MBS WORDPRESS ADMIN DASH</a>
+            </li>
+
             <li class="nav-item active" style="margin-right: 1cm;">
                 <a class="nav-link btn btn-danger" href="/" (click)="CleanCache()"> LOG OUT <i
                         class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
