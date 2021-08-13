@@ -12,7 +12,7 @@ import { TicketsService } from 'src/app/Services/Tickets/tickets.service';
   styleUrls: ['./tickets-module.component.css']
 })
 export class TicketsModuleComponent implements OnInit {
-  
+
   FormSolution: FormGroup;
   FormDetailsSolutions = new FormControl('');
 
@@ -25,17 +25,17 @@ export class TicketsModuleComponent implements OnInit {
   Getclient: string;
   Getticket: number;
   Getdetails: string;
-  GetId:string;
+  GetId: string;
 
   //States para html
-  SetAlert:boolean;
-  SetCurrentTicketTrue:boolean;
-  SetHistoryTickets:boolean;
+  SetAlert: boolean;
+  SetCurrentTicketTrue: boolean;
+  SetHistoryTickets: boolean;
 
   constructor(private TicketsServiceAPI: TicketsService, private LogsTicketsAPI: LogsTicketsService, private FormSolutionBuilder: FormBuilder) {
 
     this.FormSolution = this.FormSolutionBuilder.group({
-      FormDetailsSolutions: ['',Validators.required]
+      FormDetailsSolutions: ['', Validators.required]
     })
 
   }
@@ -69,7 +69,7 @@ export class TicketsModuleComponent implements OnInit {
 
   }
 
-  SetTicketToForm(name: string, ticketNumber: number, detailsPhrase: string,idTicket:string) {
+  SetTicketToForm(name: string, ticketNumber: number, detailsPhrase: string, idTicket: string) {
 
     this.Getclient = name;
     this.Getticket = ticketNumber;
@@ -80,7 +80,7 @@ export class TicketsModuleComponent implements OnInit {
 
   GetSelectedTicket(ticket: any) {
 
-    const comprobacion = confirm("ESTAS SEGURO DE COMPLETAR EL TICKET: "+this.Getticket);
+    const comprobacion = confirm("ESTAS SEGURO DE COMPLETAR EL TICKET: " + this.Getticket);
 
     if (comprobacion) {
 
@@ -90,11 +90,11 @@ export class TicketsModuleComponent implements OnInit {
         name: this.Getclient,
         typeRequest: ticket.typeRequest,
         details: this.Getdetails,
-        solutionDetails: this.FormSolution.get('FormDetailsSolutions').value
-
+        solutionDetails: this.FormSolution.get('FormDetailsSolutions').value,
+        emailNotification: ticket.email
       }
 
-     
+
       //aca inicia el servicio para mandar al log:
       this.LogsTicketsAPI.PostLogUser(Ticket).subscribe((result: any) => {
 
@@ -103,9 +103,9 @@ export class TicketsModuleComponent implements OnInit {
         this.GetTicketsAll();
 
       }, (error: HttpErrorResponse) => {
-        
+
         this.SetAlert = true;
-      
+
       })
 
 
@@ -116,37 +116,41 @@ export class TicketsModuleComponent implements OnInit {
 
   }
 
-  DeleteSelectedTicket(IdTicket:string){
+  DeleteSelectedTicket(IdTicket: string) {
 
-    const DeleteTicketModel: TicketRequesModel = {
-      _id: IdTicket,
-      Details:"",
-      Email:"",
-      LastName:"",
-      Name:"",
-      Phone:0,
-      TicketNumber:0,
-      TypeRequest:""
-      
+    const Confirmation = confirm("DO YOU WANT TO DELETE THE TICKET: ");
 
+    if (Confirmation) {
+
+      const DeleteTicketModel: TicketRequesModel = {
+        _id: IdTicket,
+        Details: "",
+        Email: "",
+        LastName: "",
+        Name: "",
+        Phone: 0,
+        TicketNumber: 0,
+        TypeRequest: ""
+      }
+      this.TicketsServiceAPI.DeleteTicket(DeleteTicketModel._id).subscribe(() => {
+
+        alert("Se elimino el ticket: " + IdTicket);
+
+      }, (error: HttpErrorResponse) => {
+
+        this.GetTicketsAll();
+      })
+
+    }else if(!Confirmation){
+      alert("TICKET NOT DELETED!")
     }
 
-    this.TicketsServiceAPI.DeleteTicket(DeleteTicketModel._id).subscribe(() => {
-
-      alert("Se elimino el ticket: "+IdTicket);
-
-     
-
-    },(error:HttpErrorResponse) =>{
-    
-      this.GetTicketsAll();
-    })
 
 
 
   }
 
-  displayedColumns: string[] = ['ticketNumber','RequestType', 'name','lastName', 'phone', 'details', 'dispatchDelete'];
+  displayedColumns: string[] = ['ticketNumber', 'RequestType', 'name', 'lastName', 'phone', 'details', 'dispatchDelete'];
 
 
   ngOnInit() {

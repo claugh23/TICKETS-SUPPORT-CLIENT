@@ -7,7 +7,7 @@ import { LogsTicketsModel } from "src/app/Interfaces/IlogsTickets";
 })
 export class LogsTicketsService {
 
-  serverLogsTicket = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/LogTickets/'
+  serverLogsTicket = 'https://localhost:5001/api/LogTickets/'
 
 
   constructor(private httpRequest:HttpClient) { }
