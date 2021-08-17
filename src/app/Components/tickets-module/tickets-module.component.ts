@@ -26,6 +26,7 @@ export class TicketsModuleComponent implements OnInit {
   Getticket: number;
   Getdetails: string;
   GetId: string;
+  GetEmailNotifyTo: string;
 
   //States para html
   SetAlert: boolean;
@@ -69,18 +70,23 @@ export class TicketsModuleComponent implements OnInit {
 
   }
 
-  SetTicketToForm(name: string, ticketNumber: number, detailsPhrase: string, idTicket: string) {
+  SetTicketToForm(emailToNotifitication: string, name: string, ticketNumber: number, detailsPhrase: string, idTicket: string) {
+
+    console.log(this.GetEmailNotifyTo);
 
     this.Getclient = name;
     this.Getticket = ticketNumber;
     this.Getdetails = detailsPhrase;
     this.GetId = idTicket;
+    this.GetEmailNotifyTo = emailToNotifitication;
 
   }
 
   GetSelectedTicket(ticket: any) {
 
     const comprobacion = confirm("ESTAS SEGURO DE COMPLETAR EL TICKET: " + this.Getticket);
+    console.log(this.GetEmailNotifyTo);
+
 
     if (comprobacion) {
 
@@ -91,7 +97,7 @@ export class TicketsModuleComponent implements OnInit {
         typeRequest: ticket.typeRequest,
         details: this.Getdetails,
         solutionDetails: this.FormSolution.get('FormDetailsSolutions').value,
-        emailNotification: ticket.email
+        emailToNotifitication: this.GetEmailNotifyTo
       }
 
 
@@ -141,7 +147,7 @@ export class TicketsModuleComponent implements OnInit {
         this.GetTicketsAll();
       })
 
-    }else if(!Confirmation){
+    } else if (!Confirmation) {
       alert("TICKET NOT DELETED!")
     }
 

@@ -84,7 +84,7 @@
                     <br>
                     <button class="d-block mx-auto" mat-raised-button color="primary" data-toggle="modal"
                         data-target="#modelId"
-                        (click)="SetTicketToForm(item.name,item.ticketNumber,item.details,item._id)">
+                        (click)="SetTicketToForm(item.email,item.name,item.ticketNumber,item.details,item._id)">
                         Complete Ticket
                     </button>
                     <hr>
@@ -119,6 +119,10 @@
                                                     <br>
                                                     <label for="">CLIENT</label>
                                                     <input class="form-control" type="text" value={{Getclient}}
+                                                        readonly>
+                                                    <br>
+                                                    <label for="">EMAIL ADDRESS </label>
+                                                    <input class="form-control" type="text" value={{GetEmailNotifyTo}}
                                                         readonly>
                                                     <br>
                                                     <label for="">TICKET #</label>

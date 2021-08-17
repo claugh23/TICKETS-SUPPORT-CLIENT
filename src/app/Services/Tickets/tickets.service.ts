@@ -10,6 +10,7 @@ export class TicketsService {
 
   constructor(private httpRequest:HttpClient) { }
 
+  //ServerTestLocal = "https://localhost:5001/api/Tickets/";
   ServerTicketsAPI = "https://webapiticketssupport20210607091925.azurewebsites.net/api/Tickets/";
   ServerTicketsAPITickets = "https://webapiticketssupport20210607091925.azurewebsites.net/Tickets/GetClientTickets/";
   

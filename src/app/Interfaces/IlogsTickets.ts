@@ -6,6 +6,6 @@ export interface LogsTicketsModel {
     typeRequest:string;
     details:string;
     solutionDetails:string;
-    emailNotification?:string;
+    emailToNotifitication?:string;
 
 }
