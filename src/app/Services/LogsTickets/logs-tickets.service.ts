@@ -7,20 +7,20 @@ import { LogsTicketsModel } from "src/app/Interfaces/IlogsTickets";
 })
 export class LogsTicketsService {
 
-  serverLogsTicket = 'https://localhost:5001/api/LogTickets/'
-
+  //serverLogsTicket = 'https://localhost:5001/api/LogTickets/'
+  serverLogsTickets = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/LogTickets/'
 
   constructor(private httpRequest:HttpClient) { }
 
   PostLogUser(TicketCompleted:LogsTicketsModel):Observable<LogsTicketsModel>{
 
-    return this.httpRequest.post<LogsTicketsModel>(this.serverLogsTicket,TicketCompleted);
+    return this.httpRequest.post<LogsTicketsModel>(this.serverLogsTickets,TicketCompleted);
 
   }
 
   GetTicketsCompleted(){
 
-    return this.httpRequest.get<LogsTicketsModel>(this.serverLogsTicket);
+    return this.httpRequest.get<LogsTicketsModel>(this.serverLogsTickets);
 
   }
   
