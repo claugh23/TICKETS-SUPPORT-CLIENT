@@ -5,6 +5,13 @@ import { LogsTicketsModel } from 'src/app/Interfaces/IlogsTickets';
 import { TicketRequesModel } from 'src/app/Interfaces/ITickets';
 import { LogsTicketsService } from 'src/app/Services/LogsTickets/logs-tickets.service';
 import { TicketsService } from 'src/app/Services/Tickets/tickets.service';
+import * as jspdf from 'jspdf';
+import 'jspdf-autotable';
+import { UserOptions } from 'jspdf-autotable';
+
+interface jsPDFWithPlugin extends jspdf.jsPDF {
+  autoTable: (options: UserOptions) => jspdf.jsPDF;
+}
 
 @Component({
   selector: 'app-tickets-module',
@@ -54,6 +61,7 @@ export class TicketsModuleComponent implements OnInit {
 
     })
   }
+
   getTicketCompleted() {
 
     this.LogsTicketsAPI.GetTicketsCompleted().subscribe((result: any) => {
@@ -68,6 +76,30 @@ export class TicketsModuleComponent implements OnInit {
     })
 
 
+  }
+
+  async   DownloadReportLogs() {
+    const LogsDocument = new jspdf.jsPDF('l','cm','a4') as jsPDFWithPlugin;
+    LogsDocument.text("REPORTE DE TICKETS RESUELTOS",1,1);
+    this.ListaLogsTickets.forEach(LogsElements => {
+
+     
+      LogsDocument.autoTable({
+        
+        theme:'striped',
+        head: [['Ticket Number', 'Client Name', 'Type of Request', 'Request Details', 'Solution Details']],
+        body: [
+          [LogsElements.ticketNumber, LogsElements.name, LogsElements.typeRequest, LogsElements.details, LogsElements.solutionDetails],
+
+        ],
+
+
+      })
+
+    
+    });
+  
+    LogsDocument.save("Logs_Report_Tickets.pdf");
   }
 
   SetTicketToForm(emailToNotifitication: string, name: string, ticketNumber: number, detailsPhrase: string, idTicket: string) {

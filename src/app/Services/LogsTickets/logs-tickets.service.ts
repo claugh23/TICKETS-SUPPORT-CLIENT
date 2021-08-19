@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { LogsTicketsModel } from "src/app/Interfaces/IlogsTickets";
 @Injectable({
   providedIn: 'root'
