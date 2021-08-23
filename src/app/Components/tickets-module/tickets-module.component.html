@@ -1,95 +1,113 @@
 <app-navigation></app-navigation>
-<br>
+<br />
 <div class="container-fluid">
-
     <div class="form-row">
-
         <div class="col">
-            <button class="d-block mx-auto" mat-raised-button (click)="GetTicketsAll()">Current Tickets</button>
+            <button class="d-block mx-auto" mat-raised-button (click)="GetTicketsAll()">
+                Current Tickets
+            </button>
         </div>
         <div class="col">
-            <button class="d-block mx-auto" mat-raised-button (click)="GetTicketsAll()">Refresh Tickets</button>
+            <button class="d-block mx-auto" mat-raised-button (click)="GetTicketsAll()">
+                Refresh Tickets
+            </button>
         </div>
         <div class="col">
-            <button class="d-block mx-auto" mat-raised-button (click)="getTicketCompleted()">Completed Tickets</button>
+            <button class="d-block mx-auto" mat-raised-button (click)="getTicketCompleted()">
+                Completed Tickets
+            </button>
         </div>
-
     </div>
-    <br>
+    <hr>
 
     <div class="container-fluid" *ngIf="SetHistoryTickets">
-        <button mat-raised-button color="primary" (click)="DownloadReportLogs()">DOWNLOAD REPORT</button>
-        <h2 class="text-center text-white">COMPLETED TICKET HISTORY</h2>
 
-        <mat-card class="col-sm-2">
-            <mat-form-field>
-                <input class="col-sm-2" type="search" matInput placeholder="Search Ticket">
-                <br>
+        <h2 class="text-left text-white">COMPLETED TICKET HISTORY</h2>
+        <button mat-raised-button color="primary" (click)="DownloadReportLogs()">
+            DOWNLOAD REPORT
+        </button>
+        <br>
+        <br>
 
-            </mat-form-field>
-            <button class="col-lg-12" type="submit" mat-raised-button color="primary">Search Tickets</button>
-        </mat-card>
+        <form [formGroup]="FormSearchTickets" (ngSubmit)="GetFilteredTicketsCompleted()">
+            <mat-card class="col-sm-2">
+                <mat-form-field>
+                    <input class="col-sm-2" type="search" matInput placeholder="Search by name" formControlName="FormNameForSearch" />
+                    <br />
+                </mat-form-field>
+                <button class="col-lg-12" type="submit" mat-raised-button color="primary">
+                    Search Tickets
+                </button>
+            </mat-card>
+
+        </form>
 
         <div class="row align-items-center">
-
-
-
             <div class="col-md-3" *ngFor="let item of ListaLogsTickets">
-
-
-
-                <br>
+                <br />
                 <mat-card>
                     <h3 class="text-center">
                         Numero de Ticket: {{ item.ticketNumber }} | Cliente:
-                        <strong>{{item.name}} </strong>
+                        <strong>{{ item.name }} </strong>
                     </h3>
-                    <hr class="bg-dark">
+                    <hr class="bg-dark" />
                     <mat-card>
-                        <h4><strong>Type of support: {{item.typeRequest}}</strong></h4>
-                        <hr>
-                        <h4> <strong>Details of this ticket:</strong> </h4>
-                      
-                        <p class="text-justify">{{item.details}}</p>
-                        <hr>
+                        <h4>
+                            <strong>Type of support: {{ item.typeRequest }}</strong>
+                        </h4>
+                        <hr />
+                        <h4><strong>Details of this ticket:</strong></h4>
+
+                        <p class="text-justify">{{ item.details }}</p>
+                        <hr />
                         Solution Details:
-                        <br>
-                        <textarea class="form-control" cols="10" rows="6" readonly>{{item.solutionDetails}}</textarea>
+                        <br />
+                        <textarea class="form-control" cols="10" rows="6" readonly>{{
+              item.solutionDetails
+            }}</textarea>
                     </mat-card>
                 </mat-card>
             </div>
-
         </div>
-
     </div>
 
     <div class="container-fluid" *ngIf="SetCurrentTicketTrue">
-
         <div class="row align-items-center">
-
             <div class="col-md-3" *ngFor="let item of ListaCurrentTickets">
-                <br>
+                <br />
                 <mat-card>
-                    <h3 class="text-center">Numero de Ticket: {{item.ticketNumber }} | Cliente:
-                        <strong>{{item.name}} {{item.lastName}}</strong>
+                    <h3 class="text-center">
+                        Numero de Ticket: {{ item.ticketNumber }} | Cliente:
+                        <strong>{{ item.name }} {{ item.lastName }}</strong>
                     </h3>
-                    <hr class="bg-dark">
+                    <hr class="bg-dark" />
                     <mat-card>
-                        <h4>Tipo de Soporte: {{item.typeRequest}}</h4>
-                        <hr>
+                        <h4>Tipo de Soporte: {{ item.typeRequest }}</h4>
+                        <hr />
                         Detalles:
-                        <br>
-                        <textarea class="form-control" cols="10" rows="5" readonly>{{item.details}}</textarea>
+                        <br />
+                        <textarea class="form-control" cols="10" rows="5" readonly>{{
+              item.details
+            }}</textarea>
                     </mat-card>
-                    <br>
+                    <br />
                     <button class="d-block mx-auto" mat-raised-button color="primary" data-toggle="modal"
-                        data-target="#modelId"
-                        (click)="SetTicketToForm(item.email,item.name,item.ticketNumber,item.details,item._id)">
+                        data-target="#modelId" (click)="
+              SetTicketToForm(
+                item.email,
+                item.name,
+                item.ticketNumber,
+                item.details,
+                item._id
+              )
+            ">
                         Complete Ticket
                     </button>
-                    <hr>
+                    <hr />
                     <button class="d-block mx-auto ml-3" mat-raised-button color="warn"
-                        (click)="DeleteSelectedTicket(item._id)">Reject Ticket</button>
+                        (click)="DeleteSelectedTicket(item._id)">
+                        Reject Ticket
+                    </button>
 
                     <!-- Button trigger modal -->
 
@@ -106,73 +124,64 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-
                                     <mat-card>
-
                                         <div class="form-row">
-
                                             <div class="form-group col-md-7 mx-auto">
-
                                                 <form [formGroup]="FormSolution" (ngSubmit)="GetSelectedTicket(item)">
                                                     <label for="">ID TICKET</label>
-                                                    <input class="form-control" type="text" value={{GetId}} readonly>
-                                                    <br>
+                                                    <input class="form-control" type="text" value="{{ GetId }}"
+                                                        readonly />
+                                                    <br />
                                                     <label for="">CLIENT</label>
-                                                    <input class="form-control" type="text" value={{Getclient}}
-                                                        readonly>
-                                                    <br>
+                                                    <input class="form-control" type="text" value="{{ Getclient }}"
+                                                        readonly />
+                                                    <br />
                                                     <label for="">EMAIL ADDRESS </label>
-                                                    <input class="form-control" type="text" value={{GetEmailNotifyTo}}
-                                                        readonly>
-                                                    <br>
+                                                    <input class="form-control" type="text"
+                                                        value="{{ GetEmailNotifyTo }}" readonly />
+                                                    <br />
                                                     <label for="">TICKET #</label>
-                                                    <input class="form-control" type="text" value={{Getticket}}
-                                                        readonly>
-                                                    <br>
+                                                    <input class="form-control" type="text" value="{{ Getticket }}"
+                                                        readonly />
+                                                    <br />
                                                     <label for="">DETAILS</label>
-                                                    <textarea class="form-control" rows="3" value={{Getdetails}}
+                                                    <textarea class="form-control" rows="3" value="{{ Getdetails }}"
                                                         readonly>
                                                 <hr>
                                                 <h2>DETAILS ABOUT THE SOLUTION *</h2>
                                                 <textarea class="form-control" rows="3" required></textarea>
 
-                                                    <hr>
+                                                    <hr />
                                                     <label for="">WRITE THE DETAILS FOR THE SOLUTIONS OF THIS
                                                         TICKET</label>
                                                     <textarea class="form-control" rows="5" role="textbox" required
                                                         formControlName="FormDetailsSolutions"></textarea>
-                                                    <br>
+                                                    <br />
                                                     <button type="submit" [disabled]="FormSolution.invalid"
-                                                        class="btn btn-primary">Close
-                                                        Ticket</button>
-
+                                                        class="btn btn-primary">
+                                                        Close Ticket
+                                                    </button>
                                                 </form>
                                                 <div class="alert alert-success" role="alert" *ngIf="SetAlert">
-                                                    <strong>THE TICKET: {{Getticket}} HAS CLOSED!</strong>
+                                                    <strong>THE TICKET: {{ Getticket }} HAS CLOSED!</strong>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </mat-card>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                        (click)="GetTicketsAll()">Close Form</button>
-
+                                        (click)="GetTicketsAll()">
+                                        Close Form
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </mat-card>
-                <br>
-
+                <br />
             </div>
-
-
         </div>
-
     </div>
-    <br>
-
+    <br />
 </div>

@@ -24,5 +24,10 @@ export class LogsTicketsService {
     return this.httpRequest.get<LogsTicketsModel>(this.serverLogsTickets);
 
   }
+
+  GetFilteredLogs(name:string){
+
+    return this.httpRequest.get<LogsTicketsModel>(this.serverLogsTickets+name);
+  }
   
 }
