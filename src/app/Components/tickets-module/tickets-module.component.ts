@@ -83,7 +83,6 @@ export class TicketsModuleComponent implements OnInit {
     LogsDocument.text("REPORTE DE TICKETS RESUELTOS",1,1);
     this.ListaLogsTickets.forEach(LogsElements => {
 
-     
       LogsDocument.autoTable({
         
         theme:'striped',
@@ -119,7 +118,6 @@ export class TicketsModuleComponent implements OnInit {
     const comprobacion = confirm("ESTAS SEGURO DE COMPLETAR EL TICKET: " + this.Getticket);
     console.log(this.GetEmailNotifyTo);
 
-
     if (comprobacion) {
 
       const Ticket: LogsTicketsModel = {
@@ -131,7 +129,6 @@ export class TicketsModuleComponent implements OnInit {
         solutionDetails: this.FormSolution.get('FormDetailsSolutions').value,
         emailToNotifitication: this.GetEmailNotifyTo
       }
-
 
       //aca inicia el servicio para mandar al log:
       this.LogsTicketsAPI.PostLogUser(Ticket).subscribe((result: any) => {
@@ -145,8 +142,6 @@ export class TicketsModuleComponent implements OnInit {
         this.SetAlert = true;
 
       })
-
-
 
     } else {
       alert("OCURRIO UN DESCONOCIDO EN LA APLICACION O LA INFORMACION NO PUEDE SER PROCESADA")
@@ -183,28 +178,15 @@ export class TicketsModuleComponent implements OnInit {
       alert("TICKET NOT DELETED!")
     }
 
-
-
-
   }
 
   displayedColumns: string[] = ['ticketNumber', 'RequestType', 'name', 'lastName', 'phone', 'details', 'dispatchDelete'];
-
 
   ngOnInit() {
     this.SetCurrentTicketTrue = true;
     this.SetHistoryTickets = false;
     this.GetTicketsAll();
-    // const RealTicketsLoader = interval(60000);
-
-    // RealTicketsLoader.subscribe((countRequest) => {
-
-
-    //   this.GetTicketsAll();
-
-    // })
-
-
+   
 
   }
 
