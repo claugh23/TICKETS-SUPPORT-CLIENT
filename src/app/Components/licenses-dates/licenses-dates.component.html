@@ -1,0 +1,74 @@
+<app-navigation></app-navigation>
+
+<br>
+<div class="container-fluid">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+        Agregar Nueva Fecha
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">GENERATE NEW LICENSE DATE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="">NAME FOR THIS LICENSE</label>
+                            <input class="form-control" type="text" required placeholder="name">
+                            <label for="">TYPE OF TECHNOLOGY</label>
+                            <select class="form-control" required>
+                                <option>EMAIL ACCOUNTS</option>
+                                <option>NETWORK SECURITY</option>
+                                <option>SERVERS</option>
+                                <option>CLOUD SERVICES</option>
+                                <option>DEVICE SECURITY</option>
+                                <option>VIRTUAL RESOURCES</option>
+                            </select>
+                            <label for="">EXPIRATION DATE</label>
+                            <input class="form-control" type="date" required placeholder="expiration">
+                            <label for="">DESCRIPTION OF THIS LICENSE</label>
+                            <textarea class="form-control" name="" id="" cols="20" rows="5"></textarea>
+                            <label for="">COMPANY IN CHARGE</label>
+                            <input class="form-control" type="text" required placeholder="company">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row align-items-center">
+        <div class="col-md-3" *ngFor="let item of listaLicencias">
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>LICENCIA</mat-card-title>
+                   
+                    <mat-card-subtitle></mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <br>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button color="primary">EDIT</button>
+                
+                </mat-card-actions>
+            </mat-card>
+            <br>
+        </div>
+    </div>
+</div>

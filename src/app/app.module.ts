@@ -18,6 +18,7 @@ import { InventoryComponent } from './Components/inventory/inventory.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TicketsAppHomePageComponent } from './Components/tickets-app-home-page/tickets-app-home-page.component';
 import { TicketsModuleComponent } from './Components/tickets-module/tickets-module.component';
+import { LicensesDatesComponent } from './Components/licenses-dates/licenses-dates.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TicketsModuleComponent } from './Components/tickets-module/tickets-modu
     ContactListComponent,
     InventoryComponent,
     TicketsAppHomePageComponent,
-    TicketsModuleComponent
+    TicketsModuleComponent,
+    LicensesDatesComponent
   ],
   imports: [
     BrowserModule,

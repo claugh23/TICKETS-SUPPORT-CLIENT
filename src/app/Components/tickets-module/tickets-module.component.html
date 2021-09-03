@@ -32,7 +32,8 @@
         <form [formGroup]="FormSearchTickets" (ngSubmit)="GetFilteredTicketsCompleted()">
             <mat-card class="col-sm-2">
                 <mat-form-field>
-                    <input class="col-sm-2" type="search" matInput placeholder="Search by name" formControlName="FormNameForSearch" />
+                    <input class="col-sm-2" type="search" matInput placeholder="Search by name"
+                        formControlName="FormNameForSearch" />
                     <br />
                 </mat-form-field>
                 <button class="col-lg-12" type="submit" mat-raised-button color="primary">
