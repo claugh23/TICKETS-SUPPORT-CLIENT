@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LicensesModel } from "src/app/Interfaces/ILicenses";
 
 @Injectable({
@@ -7,11 +8,23 @@ import { LicensesModel } from "src/app/Interfaces/ILicenses";
 })
 export class LicensesService {
 
-  ServerUrl = 'https://localhost:5001/api/Licenses/';
+  ServerUrlTest = 'https://localhost:5001/api/Licenses/';
 
-  constructor(private httpRequest:HttpClient) { }
+  constructor(private httpRequest: HttpClient) { }
 
-  async GetLicenses(){
-    return this.httpRequest.get<LicensesModel[]>(this.ServerUrl)
+  async GetLicenses() {
+    return this.httpRequest.get<LicensesModel[]>(this.ServerUrlTest)
+  }
+
+  async PostLicense(newLicense: LicensesModel): Promise<Observable<LicensesModel>> {
+    return this.httpRequest.post<LicensesModel>(this.ServerUrlTest, newLicense)
+  }
+
+  async DeleteLicenses(CurrentLicenseId: string) {
+    return this.httpRequest.delete<string>(this.ServerUrlTest + CurrentLicenseId);
+  }
+
+  async PutLicenses(putLicense: LicensesModel) {
+    return this.httpRequest.put<LicensesModel>(this.ServerUrlTest, putLicense);
   }
 }

@@ -16,7 +16,7 @@ export class InventoryComponent implements OnInit {
   confirmInsert: boolean;
   ListInventory: InventoryItemModel;
   //Static variable for select
-  GetIdItem:string;
+  GetIdItem: string;
   GetItemCode: string;
   GetItemQuantity: Number;
   GetItemTag: string;
@@ -28,18 +28,18 @@ export class InventoryComponent implements OnInit {
   constructor(private InventoryAPI: InventoryService, private FormBuilderInventory: FormBuilder) {
 
     this.FormItemInventory = this.FormBuilderInventory.group({
-      FormItemCode:  new FormControl(),
-      FormItemQuantity:  new FormControl(),
-      FormItemTag:  new FormControl(),
-      FormItemBrand:  new FormControl(),
+      FormItemCode: new FormControl(),
+      FormItemQuantity: new FormControl(),
+      FormItemTag: new FormControl(),
+      FormItemBrand: new FormControl(),
       FormItemRoomLocation: new FormControl(),
       FormItemCategory: new FormControl(),
-      FormItemStatus:  new FormControl()
+      FormItemStatus: new FormControl()
     })
 
   }
 
-  InsertItem() {
+  async InsertItem() {
 
     const NewItem: InventoryItemModel = {
       code: 'MBS-' + this.FormItemInventory.get('FormItemCode').value,
@@ -54,7 +54,7 @@ export class InventoryComponent implements OnInit {
     this.confirmInsert = confirm("THE INFORMATION IS CORRECT?");
 
     if (this.confirmInsert) {
-      this.InventoryAPI.PostInventario(NewItem).subscribe((result: any) => {
+      (await this.InventoryAPI.PostInventario(NewItem)).subscribe((result: any) => {
         alert("YOU HAVE ENTER A NEW ITEM TO THE INVENTORY!!")
       }, (error: HttpErrorResponse) => {
         alert("SOMETHING HAPPEN IN THE SERVER: " + JSON.stringify(error.error));
@@ -64,9 +64,9 @@ export class InventoryComponent implements OnInit {
 
   }
   /////////////////////////////////////////////
-  async CaptureItemSelected(IdSelected:string,Code: string, Quantity: Number, Tag: string, Brand: string, RoomLocation: string, Category: string, CurrentStatus: string){
+  async CaptureItemSelected(IdSelected: string, Code: string, Quantity: Number, Tag: string, Brand: string, RoomLocation: string, Category: string, CurrentStatus: string) {
 
-    const SelectionItem = { IdSelected,Code, Quantity, Tag, Brand, RoomLocation, Category, CurrentStatus }
+    const SelectionItem = { IdSelected, Code, Quantity, Tag, Brand, RoomLocation, Category, CurrentStatus }
 
     this.GetIdItem = SelectionItem.IdSelected;
     this.GetItemCode = SelectionItem.Code;
@@ -76,9 +76,9 @@ export class InventoryComponent implements OnInit {
     this.GetItemRoomLocation = SelectionItem.RoomLocation;
     this.GetItemCategory = SelectionItem.Category;
     this.GetItemStatus = SelectionItem.CurrentStatus;
-    
+
     this.FormItemInventory.patchValue(
-      { FormItemCode: this.GetItemCode},
+      { FormItemCode: this.GetItemCode },
     )
     this.FormItemInventory.patchValue(
       { FormItemQuantity: this.GetItemQuantity },
@@ -90,7 +90,7 @@ export class InventoryComponent implements OnInit {
       { FormItemBrand: this.GetItemBrand },
     )
     this.FormItemInventory.patchValue(
-      { FormItemRoomLocation: this.GetItemRoomLocation},
+      { FormItemRoomLocation: this.GetItemRoomLocation },
     )
     this.FormItemInventory.patchValue(
       { FormItemCategory: this.GetItemCategory },
@@ -105,105 +105,105 @@ export class InventoryComponent implements OnInit {
   async UpdateItemInventory() {
 
     const UpdatedItem: InventoryItemModel = {
-      _id:this.GetIdItem,
+      _id: this.GetIdItem,
       code: this.FormItemInventory.get('FormItemCode').value,
       quantity: Number.parseInt(this.FormItemInventory.get('FormItemQuantity').value),
       tag: this.FormItemInventory.get('FormItemTag').value,
       brand: this.FormItemInventory.get('FormItemBrand').value,
       roomLocation: this.FormItemInventory.get('FormItemRoomLocation').value,
-      category:  this.FormItemInventory.get('FormItemCategory').value,
+      category: this.FormItemInventory.get('FormItemCategory').value,
       currentStatus: this.FormItemInventory.get('FormItemStatus').value
     };
-    this.InventoryAPI.PutItemInventory(UpdatedItem).subscribe(() => {
-      alert("SE ACTUALIZO EL ITEM: "+UpdatedItem.code)
-    },(error:HttpErrorResponse) => {
+    (await this.InventoryAPI.PutItemInventory(UpdatedItem)).subscribe(() => {
+      alert("SE ACTUALIZO EL ITEM: " + UpdatedItem.code)
+    }, (error: HttpErrorResponse) => {
       this.confirmInsert = true;
-     
+
     })
-  
+
   }
 
-  async DeleteItemInventory(){
+  async DeleteItemInventory() {
 
     const DeleteItem: InventoryItemModel = {
       _id: this.GetIdItem,
       code: '',
       quantity: 0,
       tag: '',
-      brand:'',
+      brand: '',
       roomLocation: '',
       category: this.FormItemInventory.get('FormItemCategory').value,
       currentStatus: ''
     };
 
-    this.InventoryAPI.PostDeleteItem(DeleteItem).subscribe(() =>{
+    (await this.InventoryAPI.PostDeleteItem(DeleteItem)).subscribe(() => {
       console.log("ALGO OCURRIO EN EL APP");
-      
-    },(error:HttpErrorResponse) => {
-      alert("ITEM: "+DeleteItem._id+" HA SIDO ELIMINADO")
+
+    }, (error: HttpErrorResponse) => {
+      alert("ITEM: " + DeleteItem._id + " HA SIDO ELIMINADO")
     })
   }
   ////////////////////////////////////////////
-  GetInventoryComputers() {
+  async GetInventoryComputers() {
     const categoryComputer = "COMPUTERS";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryNetworks() {
+  async GetInventoryNetworks() {
     const categoryComputer = "NETWORK DEVICES";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryCameras() {
+  async GetInventoryCameras() {
     const categoryComputer = "SECURITY CAMERAS";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventorySound() {
+  async GetInventorySound() {
     const categoryComputer = "SOUND EQUIPMENT";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryMultimedia() {
+  async GetInventoryMultimedia() {
     const categoryComputer = "PROYECTION AND MULTIMEDIA DEVICES";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryTablets() {
+  async GetInventoryTablets() {
     const categoryComputer = "TABLETS OR IPADS";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventorySoftware() {
+  async GetInventorySoftware() {
     const categoryComputer = "SOFTWARE UTILITIES";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
 
- 
+
   ngOnInit() {
     this.confirmInsert = false;
     this.GetInventoryComputers();
 
     this.FormItemInventory.get('FormItemCode').valueChanges.subscribe(CurrentValue => {
       this.GetItemCode = CurrentValue;
-      
+
     })
-   
+
   }
 
 }

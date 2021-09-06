@@ -20,7 +20,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   //Form para seleccionar Categoria
   FormCategoryDatabase: FormGroup;
- 
+
 
   //Variables Dinamicas
   CurrentName: string;
@@ -28,15 +28,15 @@ export class GenerateTicketsRequestComponent implements OnInit {
   CurrentEmail: string;
   CurrentRole: string;
   CurrentPhone: string;
-  CurrentCategory:string;
+  CurrentCategory: string;
 
   //Lista de tickets
   CurrentTicketsList: TicketRequesModel;
   ListInventory: InventoryItemModel;
 
   //States
-  IsTicketGenerate:boolean;
-  GeneratingTicket:boolean;
+  IsTicketGenerate: boolean;
+  GeneratingTicket: boolean;
 
   constructor(private FormCategoriaBuilder: FormBuilder, private FormTicketBuilder: FormBuilder, private TicketAPI: TicketsService, private InventoryAPI: InventoryService) {
 
@@ -71,7 +71,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
       alert("SE HA GENERADO EL TICKET NUMERO: " + Ticket.TicketNumber);
 
     }, (error: HttpErrorResponse) => {
-      
+
       this.IsTicketGenerate = true;
       this.GeneratingTicket = false;
     })
@@ -89,51 +89,51 @@ export class GenerateTicketsRequestComponent implements OnInit {
     })
   }
 
-  GetInventoryComputers() {
+  async GetInventoryComputers() {
     const categoryComputer = "COMPUTERS";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryNetworks() {
+  async GetInventoryNetworks() {
     const categoryComputer = "NETWORK DEVICES";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryCameras() {
+  async GetInventoryCameras() {
     const categoryComputer = "SECURITY CAMERAS";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventorySound() {
+  async GetInventorySound() {
     const categoryComputer = "SOUND EQUIPMENT";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryMultimedia() {
+  async GetInventoryMultimedia() {
     const categoryComputer = "PROYECTION AND MULTIMEDIA DEVICES";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventoryTablets() {
+  async GetInventoryTablets() {
     const categoryComputer = "TABLETS OR IPADS";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
-  GetInventorySoftware() {
+  async GetInventorySoftware() {
     const categoryComputer = "SOFTWARE UTILITIES";
-    this.InventoryAPI.GetCurrentInventory(categoryComputer).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
@@ -145,25 +145,25 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   }
 
-  LoadDatabaseInfo(){
+  LoadDatabaseInfo() {
 
-    if(this.CurrentCategory === "COMPUTERS"){
+    if (this.CurrentCategory === "COMPUTERS") {
 
       this.GetInventoryComputers();
 
-    }else if(this.CurrentCategory === "PROYECTION AND MULTIMEDIA DEVICES"){
+    } else if (this.CurrentCategory === "PROYECTION AND MULTIMEDIA DEVICES") {
 
       this.GetInventoryMultimedia();
     }
-    else if(this.CurrentCategory === "TABLETS OR IPADS"){
+    else if (this.CurrentCategory === "TABLETS OR IPADS") {
 
       this.GetInventoryTablets();
     }
-    else if(this.CurrentCategory === "SOUND EQUIPMENT"){
+    else if (this.CurrentCategory === "SOUND EQUIPMENT") {
 
       this.GetInventorySound();
     }
-   
+
 
   }
 
@@ -177,7 +177,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
     this.CurrentEmail = localStorage.getItem("Email");
     this.CurrentRole = localStorage.getItem("Role");
     this.CurrentPhone = localStorage.getItem("Phone");
-   
+
     this.IsTicketGenerate = false;
   }
 
