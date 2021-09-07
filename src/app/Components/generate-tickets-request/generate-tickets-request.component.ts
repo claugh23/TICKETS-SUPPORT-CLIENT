@@ -80,7 +80,7 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   SearchTicketsFromCurrentUser() {
 
-    this.TicketAPI.GetUserTickets(localStorage.getItem("Name")).subscribe((result: any) => {
+    this.TicketAPI.GetUserTickets(localStorage.getItem("Email")).subscribe((result: any) => {
 
       this.CurrentTicketsList = result;
 

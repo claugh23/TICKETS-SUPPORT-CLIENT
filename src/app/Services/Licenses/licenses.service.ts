@@ -8,7 +8,7 @@ import { LicensesModel } from "src/app/Interfaces/ILicenses";
 })
 export class LicensesService {
 
-  ServerUrlTest = 'https://localhost:5001/api/Licenses/';
+  ServerUrlTest = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Licenses/';
 
   constructor(private httpRequest: HttpClient) { }
 
