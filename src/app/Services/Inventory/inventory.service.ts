@@ -7,11 +7,11 @@ import { InventoryItemModel } from "src/app/Interfaces/IInventory";
 })
 export class InventoryService {
 
-  ServerInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/';
+  ServerInventory = 'http://192.168.3.5:5001/api/Inventory/';
 
-  ServerLoadSelectedInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/GetInventorySelected/';
-  ServerMaintainceInventory = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/DeleteItemInventory/';
-  ServerMaintainceInventoryUpdated = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Inventory/DeleteItemInventory/';
+  ServerLoadSelectedInventory = 'http://192.168.3.5:5001/api/Inventory/GetInventorySelected/';
+  ServerMaintainceInventory = 'http://192.168.3.5:5001/api/Inventory/DeleteItemInventory/';
+  ServerMaintainceInventoryUpdated = 'http://192.168.3.5:5001/api/Inventory/DeleteItemInventory/';
   constructor(private httpRequest: HttpClient) { }
 
   async GetCurrentInventory(category: string) {

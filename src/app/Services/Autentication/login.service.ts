@@ -8,9 +8,9 @@ import { AuthModel } from 'src/app/Interfaces/IAuth';
 })
 export class LoginService {
 
-  ServerRegistroUsuario = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Register/';
-  ServerAutenticacion = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Autentication/';
-  ServerUsers = 'https://webapiticketssupport20210607091925.azurewebsites.net/api/Users/';
+  ServerRegistroUsuario = 'http://192.168.3.5:5001/api/Register/';
+  ServerAutenticacion = 'http://192.168.3.5:5001/api/Autentication/';
+  ServerUsers = 'http://192.168.3.5:5001/api/Users/';
   statusSetLoginUser:any;
 
   constructor(private httpRequest:HttpClient) { }

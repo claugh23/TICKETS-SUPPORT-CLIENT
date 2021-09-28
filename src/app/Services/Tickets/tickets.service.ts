@@ -11,8 +11,8 @@ export class TicketsService {
   constructor(private httpRequest:HttpClient) { }
 
   //ServerTestLocal = "https://localhost:5001/api/Tickets/";
-  ServerTicketsAPI = "https://webapiticketssupport20210607091925.azurewebsites.net/api/Tickets/";
-  ServerTicketsAPITickets = "https://webapiticketssupport20210607091925.azurewebsites.net/Tickets/GetClientTickets/";
+  ServerTicketsAPI = "http://192.168.3.5:5001/api/Tickets/";
+  ServerTicketsAPITickets = "http://192.168.3.5:5001/Tickets/GetClientTickets/";
   
   PostTicket(NewTicket:TicketRequesModel):Observable<TicketRequesModel>{
 
