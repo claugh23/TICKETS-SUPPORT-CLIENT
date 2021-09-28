@@ -8,9 +8,9 @@ import { AuthModel } from 'src/app/Interfaces/IAuth';
 })
 export class LoginService {
 
-  ServerRegistroUsuario = 'http://192.168.3.5:5001/api/Register/';
-  ServerAutenticacion = 'http://192.168.3.5:5001/api/Autentication/';
-  ServerUsers = 'http://192.168.3.5:5001/api/Users/';
+  ServerRegistroUsuario = 'https://192.168.3.5:5002/api/Register/';
+  ServerAutenticacion = 'https://192.168.3.5:5002/api/Autentication/';
+  ServerUsers = 'https://192.168.3.5:5002/api/Users/';
   statusSetLoginUser:any;
 
   constructor(private httpRequest:HttpClient) { }

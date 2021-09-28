@@ -8,7 +8,7 @@ import { LicensesModel } from "src/app/Interfaces/ILicenses";
 })
 export class LicensesService {
 
-  ServerUrlTest = 'http://192.168.3.5:5001/api/Licenses/';
+  ServerUrlTest = 'https://192.168.3.5:5002/api/Licenses/';
 
   constructor(private httpRequest: HttpClient) { }
 

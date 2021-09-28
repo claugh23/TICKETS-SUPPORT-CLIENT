@@ -7,11 +7,11 @@ import { InventoryItemModel } from "src/app/Interfaces/IInventory";
 })
 export class InventoryService {
 
-  ServerInventory = 'http://192.168.3.5:5001/api/Inventory/';
+  ServerInventory = 'https://192.168.3.5:5001/api/Inventory/';
 
-  ServerLoadSelectedInventory = 'http://192.168.3.5:5001/api/Inventory/GetInventorySelected/';
-  ServerMaintainceInventory = 'http://192.168.3.5:5001/api/Inventory/DeleteItemInventory/';
-  ServerMaintainceInventoryUpdated = 'http://192.168.3.5:5001/api/Inventory/DeleteItemInventory/';
+  ServerLoadSelectedInventory = 'https://192.168.3.5:5002/api/Inventory/GetInventorySelected/';
+  ServerMaintainceInventory = 'https://192.168.3.5:5002/api/Inventory/DeleteItemInventory/';
+  ServerMaintainceInventoryUpdated = 'https://192.168.3.5:5002/api/Inventory/DeleteItemInventory/';
   constructor(private httpRequest: HttpClient) { }
 
   async GetCurrentInventory(category: string) {

@@ -7,7 +7,7 @@ import { EmailMessageModel } from "src/app/Interfaces/IEmailMessage";
 })
 export class EmailsService {
 
-  serverEmails = 'http://192.168.3.5:5001/api/Emails/';
+  serverEmails = 'https://192.168.3.5:5002/api/Emails/';
   //ServerTest = 'https://localhost:5001/api/Emails';
 
   constructor(private httpRequest:HttpClient) { }
