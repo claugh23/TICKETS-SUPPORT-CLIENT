@@ -7,7 +7,7 @@ import { InventoryItemModel } from "src/app/Interfaces/IInventory";
 })
 export class InventoryService {
 
-  ServerInventory = 'https://192.168.3.5:5001/api/Inventory/';
+  ServerInventory = 'https://192.168.3.5:5002/api/Inventory/';
 
   ServerLoadSelectedInventory = 'https://192.168.3.5:5002/api/Inventory/GetInventorySelected/';
   ServerMaintainceInventory = 'https://192.168.3.5:5002/api/Inventory/DeleteItemInventory/';
