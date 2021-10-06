@@ -71,19 +71,19 @@ export class UsersDatabaseComponent implements OnInit {
     this.GetSelectedUser(CurrentUser);
 
     const registro: UsersModel = {
-      Name: this.UserInfo.Name,
-      LastName: this.UserInfo.LastName,
-      Phone: this.UserInfo.Phone,
-      Email: this.UserInfo.Email,
-      Pass: this.UserInfo.Pass,
-      Role: "Approve"
+      name: this.UserInfo.name,
+      lastName: this.UserInfo.lastName,
+      phone: this.UserInfo.phone,
+      email: this.UserInfo.email,
+      pass: this.UserInfo.pass,
+      role: "Approve"
     };
     this.UserServiceAPI.PostUserRegister(registro).subscribe(
       (result) => {
 
       },
       (RegistroCompleto: any) => {
-        alert("EL USUARIO: " + this.UserInfo.Name + " HA SIDO APROBADO!")
+        alert("EL USUARIO: " + this.UserInfo.name + " HA SIDO APROBADO!")
         this.ObtenerInscripciones();
 
         this.GetSelectedUser(CurrentUser);
@@ -110,7 +110,7 @@ export class UsersDatabaseComponent implements OnInit {
 
       },
       (RegistroCompleto: any) => {
-        alert("EL USUARIO: " + this.UserInfo.Name + "HA SIDO RECHAZADO Y ELIMINADO!");
+        alert("EL USUARIO: " + this.UserInfo.name + "HA SIDO RECHAZADO Y ELIMINADO!");
         this.ObtenerInscripciones();
       }
     );
@@ -119,12 +119,12 @@ export class UsersDatabaseComponent implements OnInit {
   RegisterNewUser() {
 
     const registro: UsersModel = {
-      Name: this.FormAddUser.get('Formname').value,
-      LastName: this.FormAddUser.get('Formlastname').value,
-      Phone: this.FormAddUser.get('Formphone').value,
-      Email: this.FormAddUser.get('Formemail').value,
-      Pass: this.FormAddUser.get('Formpass').value,
-      Role: this.FormAddUser.get('Formrole').value
+      name: this.FormAddUser.get('Formname').value,
+      lastName: this.FormAddUser.get('Formlastname').value,
+      phone: this.FormAddUser.get('Formphone').value,
+      email: this.FormAddUser.get('Formemail').value,
+      pass: this.FormAddUser.get('Formpass').value,
+      role: this.FormAddUser.get('Formrole').value
     };
 
 
@@ -143,32 +143,32 @@ export class UsersDatabaseComponent implements OnInit {
   GetSelectedUser(CurrentUser: any) {
     this.UserInfo = {
       _id: CurrentUser._id,
-      Name: CurrentUser.name,
-      LastName: CurrentUser.lastName,
-      Phone: CurrentUser.phone,
-      Email: CurrentUser.email,
-      Pass: CurrentUser.pass,
-      Role: CurrentUser.role
+      name: CurrentUser.name,
+      lastName: CurrentUser.lastName,
+      phone: CurrentUser.phone,
+      email: CurrentUser.email,
+      pass: CurrentUser.pass,
+      role: CurrentUser.role
     }
 
     CurrentUser = this.UserInfo
     this.FormUpdateUser.patchValue(
-      { FormUpdateName: this.UserInfo.Name},
+      { FormUpdateName: this.UserInfo.name},
     )
     this.FormUpdateUser.patchValue(
-      { FormUpdateLastName: this.UserInfo.LastName },
+      { FormUpdateLastName: this.UserInfo.lastName },
     )
     this.FormUpdateUser.patchValue(
-      { FormUpdatePhone: this.UserInfo.Phone },
+      { FormUpdatePhone: this.UserInfo.phone },
     )
     this.FormUpdateUser.patchValue(
-      { FormUpdateEmail: this.UserInfo.Email },
+      { FormUpdateEmail: this.UserInfo.email },
     )
     this.FormUpdateUser.patchValue(
-      { FormUpdatePass: this.UserInfo.Pass },
+      { FormUpdatePass: this.UserInfo.pass },
     )
     this.FormUpdateUser.patchValue(
-      { FormUpdateRole: this.UserInfo.Role },
+      { FormUpdateRole: this.UserInfo.role },
     )
 
    console.log(this.FormUpdateUser);
@@ -179,19 +179,19 @@ export class UsersDatabaseComponent implements OnInit {
 
     const UserInfoUpdate: UsersModel = {
       _id: this.UserInfo._id,
-      Name: this.FormUpdateUser.get('FormUpdateName').value,
-      LastName: this.FormUpdateUser.get('FormUpdateLastName').value,
-      Phone: this.FormUpdateUser.get('FormUpdatePhone').value,
-      Email: this.FormUpdateUser.get('FormUpdateEmail').value,
-      Pass: this.FormUpdateUser.get('FormUpdatePass').value,
-      Role: this.FormUpdateUser.get('FormUpdateRole').value
+      name: this.FormUpdateUser.get('FormUpdateName').value,
+      lastName: this.FormUpdateUser.get('FormUpdateLastName').value,
+      phone: this.FormUpdateUser.get('FormUpdatePhone').value,
+      email: this.FormUpdateUser.get('FormUpdateEmail').value,
+      pass: this.FormUpdateUser.get('FormUpdatePass').value,
+      role: this.FormUpdateUser.get('FormUpdateRole').value
     }
 
 
     alert(JSON.stringify(this.UserInfo._id))
 
     this.UserServiceAPI.UpdateSelectedUser(UserInfoUpdate).subscribe((result: any) => {
-      alert("El usuario: " + UserInfoUpdate.Name + " fue actualizado!!");
+      alert("El usuario: " + UserInfoUpdate.name + " fue actualizado!!");
 
     }, (error: HttpErrorResponse) => {
       alert("Algo paso: " + JSON.stringify(error.error));

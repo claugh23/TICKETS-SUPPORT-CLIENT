@@ -1,9 +1,9 @@
 export interface UsersModel {
     _id?:string;
-    Name:string;
-    LastName:string;
-    Phone:string;
-    Email:string;
-    Pass:string;
-    Role:string;
+    name:String;
+    lastName:string;
+    phone:string;
+    email:string;
+    pass:string;
+    role:string;
 }

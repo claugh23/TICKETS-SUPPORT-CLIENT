@@ -11,7 +11,7 @@ export class TicketsService {
   constructor(private httpRequest:HttpClient) { }
 
   //ServerTestLocal = "https://localhost:5001/api/Tickets/";
-  ServerTicketsAPI = "https://192.168.3.5:5002/api/Tickets/";
+  ServerTicketsAPI = "https://locahost:8080/api/Tickets/";
   ServerTicketsAPITickets = "https://192.168.3.5:5002/Tickets/GetClientTickets/";
 
   

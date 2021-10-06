@@ -64,12 +64,13 @@ export class LoginComponent implements OnInit {
 
   async ServiceRegistroUsuario() {
     const registro: UsersModel = {
-      Name: this.FormRegistroUser.get('FormName').value,
-      LastName: this.FormRegistroUser.get('FormLastName').value,
-      Phone: this.FormRegistroUser.get('FormPhone').value,
-      Email: this.FormRegistroUser.get('FormEmail').value,
-      Pass: this.FormRegistroUser.get('FormPass').value,
-      Role: this.rolUser,
+      _id:"",
+      name: this.FormRegistroUser.get('FormName').value,
+      lastName: this.FormRegistroUser.get('FormLastName').value,
+      phone: this.FormRegistroUser.get('FormPhone').value,
+      email: this.FormRegistroUser.get('FormEmail').value,
+      pass: this.FormRegistroUser.get('FormPass').value,
+      role: this.rolUser,
     };
 
     this.WebServiceUser.PostUserRegister(registro).subscribe(
@@ -84,12 +85,12 @@ export class LoginComponent implements OnInit {
     this.statusLoginIncorrecto = false;
 
     const credentials: UsersModel = {
-      Email: this.FormLogin.get('FormUserEmail').value,
-      Pass: this.FormLogin.get('FormUserPass').value,
-      LastName: '',
-      Name: '',
-      Phone: '',
-      Role: 'Admin',
+      email: this.FormLogin.get('FormUserEmail').value,
+      pass: this.FormLogin.get('FormUserPass').value,
+      lastName: '',
+      name: '',
+      phone: '',
+      role: 'Admin',
       _id: '',
     };
 
