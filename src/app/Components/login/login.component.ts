@@ -1,4 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { JsonPipe } from '@angular/common';
+import { HttpErrorResponse, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit {
   RolActual: string;
   ErrorMessageLogin: string;
 
+
+
   constructor(
     private BuilderRegistroForm: FormBuilder,
     private BuilderLoginForm: FormBuilder,
@@ -63,8 +66,9 @@ export class LoginComponent implements OnInit {
   }
 
   async ServiceRegistroUsuario() {
+    this.statusRegistro = false;
     const registro: UsersModel = {
-      _id:"",
+      _id: "",
       name: this.FormRegistroUser.get('FormName').value,
       lastName: this.FormRegistroUser.get('FormLastName').value,
       phone: this.FormRegistroUser.get('FormPhone').value,
@@ -97,15 +101,23 @@ export class LoginComponent implements OnInit {
     this.WebServiceUser.PostUserAutentication(credentials).subscribe(
       (result: any) => {
 
+        console.log(result[0]);
+        
+     
+        var PayloadResponse =result[0];
+
+        console.log(PayloadResponse);
+        
+
         localStorage.clear();
         this.RolActual = result[3];
 
         if (this.RolActual === 'User') {
           localStorage.setItem("Name", result[0]);
-          localStorage.setItem("LastName", result[1]);
-          localStorage.setItem("Email", result[2]);
+          localStorage.setItem("LastName",result[1]);
+          localStorage.setItem("Email",result[2]);
           localStorage.setItem("Role", result[3]);
-          localStorage.setItem("Phone", result[4]);
+          localStorage.setItem("Phone",result[4]);
           this.enrutamiento.navigate(['/GenerateTicketsRequest']);
         } else if (this.RolActual === 'Admin') {
           localStorage.setItem("Name", result[0]);
@@ -120,8 +132,7 @@ export class LoginComponent implements OnInit {
         this.statusLoginIncorrecto = true;
 
         this.ErrorMessageLogin = JSON.stringify(
-          'Ocurrio un error al validar la informacion con el servidor: ' +
-          JSON.stringify(error.error)
+         "Server Code:"+ error.status + JSON.stringify(error.error)
         );
       }
     );

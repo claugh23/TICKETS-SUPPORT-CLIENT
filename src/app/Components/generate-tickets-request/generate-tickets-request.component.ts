@@ -57,18 +57,18 @@ export class GenerateTicketsRequestComponent implements OnInit {
     this.GeneratingTicket = true;
 
     const Ticket: TicketRequesModel = {
-      Name: localStorage.getItem("Name"),
-      LastName: localStorage.getItem("LastName"),
-      Email: localStorage.getItem("Email"),
-      Phone: Number.parseInt(localStorage.getItem("Phone")),
-      TypeRequest: this.FormTicket.get('FormTicketCategory').value,
-      Details: this.FormTicket.get('FormTicketDetails').value,
-      TicketNumber: Math.floor(Math.random() * 15000)
+      name: localStorage.getItem("Name"),
+      lastName: localStorage.getItem("LastName"),
+      email: localStorage.getItem("Email"),
+      phone: Number.parseInt(localStorage.getItem("Phone")),
+      typeRequest: this.FormTicket.get('FormTicketCategory').value,
+      details: this.FormTicket.get('FormTicketDetails').value,
+      ticketNumber: Math.floor(Math.random() * 15000)
     }
 
     this.TicketAPI.PostTicket(Ticket).subscribe((result: any) => {
 
-      alert("SE HA GENERADO EL TICKET NUMERO: " + Ticket.TicketNumber);
+      alert("SE HA GENERADO EL TICKET NUMERO: " + Ticket.ticketNumber);
 
     }, (error: HttpErrorResponse) => {
 

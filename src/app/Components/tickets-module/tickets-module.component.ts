@@ -161,7 +161,7 @@ export class TicketsModuleComponent implements OnInit {
 
     if (comprobacion) {
       const Ticket: LogsTicketsModel = {
-        _id: this.GetId,
+        id: this.GetId,
         ticketNumber: this.Getticket,
         name: this.Getclient,
         typeRequest: ticket.typeRequest,
@@ -195,16 +195,16 @@ export class TicketsModuleComponent implements OnInit {
 
     if (Confirmation) {
       const DeleteTicketModel: TicketRequesModel = {
-        _id: IdTicket,
-        Details: '',
-        Email: '',
-        LastName: '',
-        Name: '',
-        Phone: 0,
-        TicketNumber: 0,
-        TypeRequest: '',
+        id: IdTicket,
+        details: '',
+        email: '',
+        lastName: '',
+        name: '',
+        phone: 0,
+        ticketNumber: 0,
+        typeRequest: '',
       };
-      this.TicketsServiceAPI.DeleteTicket(DeleteTicketModel._id).subscribe(
+      this.TicketsServiceAPI.DeleteTicket(DeleteTicketModel.id).subscribe(
         () => {
           alert('Se elimino el ticket: ' + IdTicket);
         },

@@ -9,7 +9,7 @@ import { AuthModel } from 'src/app/Interfaces/IAuth';
 export class LoginService {
 
   ServerRegistroUsuario = 'http://localhost:8080/api/Users';
-  ServerAutenticacion = 'http://localhost:8080/api/Users';
+  ServerAutenticacion = 'http://localhost:8080/api/Autentication';
   ServerUsers = 'http://localhost:8080/api/Users';
   statusSetLoginUser:any;
 

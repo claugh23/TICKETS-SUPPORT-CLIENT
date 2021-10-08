@@ -1,6 +1,6 @@
 export interface LogsTicketsModel {
     
-    _id:string;
+    id:string;
     name:string;
     ticketNumber:number;
     typeRequest:string;

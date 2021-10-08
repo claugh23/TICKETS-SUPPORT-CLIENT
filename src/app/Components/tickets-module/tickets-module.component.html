@@ -101,14 +101,14 @@
                 item.name,
                 item.ticketNumber,
                 item.details,
-                item._id
+                item.id
               )
             ">
                         Complete Ticket
                     </button>
                     <hr />
                     <button class="d-block mx-auto ml-3" mat-raised-button color="warn"
-                        (click)="DeleteSelectedTicket(item._id)">
+                        (click)="DeleteSelectedTicket(item.id)">
                         Reject Ticket
                     </button>
 

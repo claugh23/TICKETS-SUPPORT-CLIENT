@@ -1,6 +1,6 @@
 export interface UsersModel {
     _id?:string;
-    name:String;
+    name:string;
     lastName:string;
     phone:string;
     email:string;
