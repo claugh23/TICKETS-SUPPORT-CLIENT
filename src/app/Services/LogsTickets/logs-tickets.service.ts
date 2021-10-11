@@ -9,7 +9,7 @@ import { LogsTicketsModel } from "src/app/Interfaces/IlogsTickets";
 export class LogsTicketsService {
 
   //serverLogsTicket = 'https://localhost:5001/api/LogTickets/'
-  serverLogsTickets = 'https://192.168.3.5:5002/api/LogTickets/'
+  serverLogsTickets = 'https://spring-app-tickets.herokuapp.com/api/LogTickets/'
 
   constructor(private httpRequest:HttpClient) { }
 

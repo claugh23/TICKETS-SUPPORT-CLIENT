@@ -7,7 +7,7 @@ import { ContactModel } from "src/app/Interfaces/IContact";
 })
 export class ContactsService {
 
-  serverContacts = 'https://192.168.3.5:5002/api/Contacts/'
+  serverContacts = 'https://spring-app-tickets.herokuapp.com/api/Contacts/'
 
   constructor(private httpRequest:HttpClient) { }
 

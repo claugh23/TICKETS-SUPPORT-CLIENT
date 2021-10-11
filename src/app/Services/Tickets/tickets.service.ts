@@ -11,8 +11,8 @@ export class TicketsService {
   constructor(private httpRequest:HttpClient) { }
 
   //ServerTestLocal = "https://localhost:5001/api/Tickets/";
-  ServerTicketsAPI = "http://localhost:8080/api/Tickets/";
-  ServerTicketsAPITickets = "https://192.168.3.5:5002/Tickets/GetClientTickets/";
+  ServerTicketsAPI = "https://spring-app-tickets.herokuapp.com/api/Tickets/";
+  ServerTicketsAPITickets = "https://spring-app-tickets.herokuapp.com/Tickets/GetClientTickets/";
 
   
   PostTicket(NewTicket:TicketRequesModel):Observable<TicketRequesModel>{
