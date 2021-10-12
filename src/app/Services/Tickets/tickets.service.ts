@@ -34,7 +34,7 @@ export class TicketsService {
   }
 
   DeleteTicket(CurrentTicketId:string){
-    return this.httpRequest.delete<string>(this.ServerTicketsAPI+CurrentTicketId);
+    return this.httpRequest.delete<any>(this.ServerTicketsAPI+CurrentTicketId);
   }
 
 }

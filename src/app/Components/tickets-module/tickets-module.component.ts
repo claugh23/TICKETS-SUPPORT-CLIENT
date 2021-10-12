@@ -190,23 +190,14 @@ export class TicketsModuleComponent implements OnInit {
     }
   }
 
-  DeleteSelectedTicket(IdTicket: string) {
+  DeleteSelectedTicket(id: string) {
     const Confirmation = confirm('DO YOU WANT TO DELETE THE TICKET: ');
 
     if (Confirmation) {
-      const DeleteTicketModel: TicketRequesModel = {
-        id: IdTicket,
-        details: '',
-        email: '',
-        lastName: '',
-        name: '',
-        phone: 0,
-        ticketNumber: 0,
-        typeRequest: '',
-      };
-      this.TicketsServiceAPI.DeleteTicket(DeleteTicketModel.id).subscribe(
+     
+      this.TicketsServiceAPI.DeleteTicket(id).subscribe(
         () => {
-          alert('Se elimino el ticket: ' + IdTicket);
+          alert('Se elimino el ticket: ' + id);
         },
         (error: HttpErrorResponse) => {
           this.GetTicketsAll();
