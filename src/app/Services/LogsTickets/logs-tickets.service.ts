@@ -3,31 +3,35 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { LogsTicketsModel } from "src/app/Interfaces/IlogsTickets";
+import { TicketsService } from '../Tickets/tickets.service';
 @Injectable({
   providedIn: 'root'
 })
 export class LogsTicketsService {
 
   //serverLogsTicket = 'https://localhost:5001/api/LogTickets/'
-  serverLogsTickets = 'https://spring-app-tickets.herokuapp.com/api/LogTickets/'
+  EndpointLogsTickets = 'https://spring-app-tickets.herokuapp.com/api/LogsTickets/';
+  EndpointTickets: 'https://spring-app-tickets.herokuapp.com/api/Tickets/';
 
-  constructor(private httpRequest:HttpClient) { }
+  constructor(private httpRequest: HttpClient) { }
 
-  PostLogUser(TicketCompleted:LogsTicketsModel):Observable<LogsTicketsModel>{
+  PostLogUser(TicketCompleted: LogsTicketsModel): Observable<LogsTicketsModel> {
 
-    return this.httpRequest.post<LogsTicketsModel>(this.serverLogsTickets,TicketCompleted);
+    this.httpRequest.delete<any>(this.EndpointTickets+TicketCompleted.id);
 
-  }
-
-  GetTicketsCompleted(){
-
-    return this.httpRequest.get<LogsTicketsModel>(this.serverLogsTickets);
+    return this.httpRequest.post<LogsTicketsModel>(this.EndpointLogsTickets, TicketCompleted);
 
   }
 
-  GetFilteredLogs(name:string){
+  GetTicketsCompleted() {
 
-    return this.httpRequest.get<LogsTicketsModel>(this.serverLogsTickets+name);
+    return this.httpRequest.get<LogsTicketsModel>(this.EndpointLogsTickets);
+
   }
-  
+
+  GetFilteredLogs(name: string) {
+
+    return this.httpRequest.get<LogsTicketsModel>(this.EndpointLogsTickets + name);
+  }
+
 }

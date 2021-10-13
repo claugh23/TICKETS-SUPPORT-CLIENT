@@ -12,6 +12,7 @@ export class TicketsService {
 
   //ServerTestLocal = "https://localhost:5001/api/Tickets/";
   ServerTicketsAPI = "https://spring-app-tickets.herokuapp.com/api/Tickets/";
+  EndpointLogs =  "https://spring-app-tickets.herokuapp.com/api/Tickets/";
   ServerTicketsAPITickets = "https://spring-app-tickets.herokuapp.com/Tickets/GetClientTickets/";
 
   

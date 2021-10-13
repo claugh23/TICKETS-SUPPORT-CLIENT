@@ -55,7 +55,7 @@ export class TicketsModuleComponent implements OnInit {
       FormDetailsSolutions: ['', Validators.required],
     });
     this.FormSearchTickets = this.FormSearchBuilder.group({
-      FormNameForSearch: ['',Validators.required]
+      FormNameForSearch: ['', Validators.required]
     })
   }
 
@@ -82,8 +82,8 @@ export class TicketsModuleComponent implements OnInit {
       (error: HttpErrorResponse) => {
         alert(
           'OCURRIO UN PROBLEMA AL CARGAR EL HISTORIAL DE TICKETS: ' +
-            '\n' +
-            JSON.stringify(error.error)
+          '\n' +
+          JSON.stringify(error.error)
         );
       }
     );
@@ -92,8 +92,8 @@ export class TicketsModuleComponent implements OnInit {
   GetFilteredTicketsCompleted() {
 
     const FilteredName = this.FormSearchTickets.get('FormNameForSearch').value;
-    
-    
+
+
     this.LogsTicketsAPI.GetFilteredLogs(FilteredName).subscribe(
       (result: any) => {
         this.ListaLogsTickets = result;
@@ -106,9 +106,9 @@ export class TicketsModuleComponent implements OnInit {
     );
   }
 
-  async   DownloadReportLogs() {
-    const LogsDocument = new jspdf.jsPDF('l','cm','a4') as jsPDFWithPlugin;
-    LogsDocument.text("REPORTE DE TICKETS RESUELTOS",1,1);
+  async DownloadReportLogs() {
+    const LogsDocument = new jspdf.jsPDF('l', 'cm', 'a4') as jsPDFWithPlugin;
+    LogsDocument.text("REPORTE DE TICKETS RESUELTOS", 1, 1);
     this.ListaLogsTickets.forEach(LogsElements => {
 
       LogsDocument.autoTable({
@@ -194,7 +194,7 @@ export class TicketsModuleComponent implements OnInit {
     const Confirmation = confirm('DO YOU WANT TO DELETE THE TICKET: ');
 
     if (Confirmation) {
-     
+
       this.TicketsServiceAPI.DeleteTicket(id).subscribe(
         () => {
           alert('Se elimino el ticket: ' + id);
@@ -215,7 +215,7 @@ export class TicketsModuleComponent implements OnInit {
     this.SetCurrentTicketTrue = true;
     this.SetHistoryTickets = false;
     this.GetTicketsAll();
-   
+
 
   }
 }
