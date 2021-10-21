@@ -8,9 +8,9 @@ import { AuthModel } from 'src/app/Interfaces/IAuth';
 })
 export class LoginService {
 
-  ServerRegistroUsuario = 'https://spring-app-tickets.herokuapp.com/api/Users';
-  ServerAutenticacion = 'https://spring-app-tickets.herokuapp.com/api/Autentication';
-  ServerUsers = 'https://spring-app-tickets.herokuapp.com/api/Users';
+  ServerRegistroUsuario = 'http://localhost:4300/api/Users/';
+  ServerAutenticacion = 'http://localhost:4300/api/Autentication';
+  ServerUsers = 'http://localhost:4300/api/Users/';
   statusSetLoginUser:any;
 
   constructor(private httpRequest:HttpClient) { }

@@ -127,7 +127,6 @@ export class UsersDatabaseComponent implements OnInit {
       role: this.FormAddUser.get('Formrole').value
     };
 
-
     this.UserServiceAPI.PostUserRegister(registro).subscribe(
       (result) => {
 
@@ -142,7 +141,7 @@ export class UsersDatabaseComponent implements OnInit {
 
   GetSelectedUser(CurrentUser: any) {
     this.UserInfo = {
-      _id: CurrentUser._id,
+      _id: CurrentUser.id,
       name: CurrentUser.name,
       lastName: CurrentUser.lastName,
       phone: CurrentUser.phone,
@@ -153,7 +152,7 @@ export class UsersDatabaseComponent implements OnInit {
 
     CurrentUser = this.UserInfo
     this.FormUpdateUser.patchValue(
-      { FormUpdateName: this.UserInfo.name},
+      { FormUpdateName: this.UserInfo.name },
     )
     this.FormUpdateUser.patchValue(
       { FormUpdateLastName: this.UserInfo.lastName },
@@ -171,8 +170,8 @@ export class UsersDatabaseComponent implements OnInit {
       { FormUpdateRole: this.UserInfo.role },
     )
 
-   console.log(this.FormUpdateUser);
-   
+    console.log(this.FormUpdateUser);
+
   }
 
   UpdateUser() {
@@ -187,7 +186,6 @@ export class UsersDatabaseComponent implements OnInit {
       role: this.FormUpdateUser.get('FormUpdateRole').value
     }
 
-
     alert(JSON.stringify(this.UserInfo._id))
 
     this.UserServiceAPI.UpdateSelectedUser(UserInfoUpdate).subscribe((result: any) => {
@@ -196,13 +194,12 @@ export class UsersDatabaseComponent implements OnInit {
     }, (error: HttpErrorResponse) => {
       alert("Algo paso: " + JSON.stringify(error.error));
 
-
     })
   }
 
-  DeleteUser(CurrentId: any) {
+  DeleteUser(CurrentId: UsersModel) {
 
-    this.UserServiceAPI.DeleteSelectedUser(CurrentId._id).subscribe((result: any) => {
+    this.UserServiceAPI.DeleteSelectedUser(CurrentId?._id).subscribe((result: any) => {
       alert("Usuario Borrado!");
     }, (error: HttpErrorResponse) => {
       alert(JSON.stringify(error.error));
@@ -212,7 +209,6 @@ export class UsersDatabaseComponent implements OnInit {
   RefreshUsers() {
     this.ObtenerUsers();
   }
-
 
   displayedColumns: string[] = ['name', 'lastname', 'phone', 'email', 'pass', 'role', 'approvals', 'rejects'];
   ngOnInit() {
