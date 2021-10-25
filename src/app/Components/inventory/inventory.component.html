@@ -8,33 +8,16 @@
 
             <li class="nav-item dropdown active">
                 <a class="btn btn-warning dropdown-toggle active" style="margin-right: 5px;" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">EQUIPMENT CATEGORIES</a>
+                aria-expanded="false">INVENTORY OPTIONS</a>
              
 
                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                    
                   
-                    <a class="dropdown-item" type="button" (click)="GetInventoryComputers()">COMPUTERS</a>
+                    <a class="dropdown-item" type="button" (click)="GetInventoryAll()">LOAD GENERAL INVENTORY</a>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" type="button" (click)="GetInventoryMultimedia()">PROYECTION AND MULTIMEDIA
-                        DEVICES</a>
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" type="button" (click)="GetInventoryNetworks()">NETWORK DEVICES</a>
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" type="button" (click)="GetInventoryCameras()">SECURITY CAMERAS</a>
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" type="button" (click)="GetInventorySound()">SOUND EQUIPMENTS</a>
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" type="button" (click)="GetInventoryTablets()">TABLETS OR IPADS</a>
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" type="button" (click)="GetInventorySoftware()">UTILITIES SOFTWARE</a>
-                    <div class="dropdown-divider"></div>
+                  
 
                 </div>
             </li>
@@ -141,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Form</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="GetInventoryAll()">Close Form</button>
                                 <button type="button" class="btn btn-primary">Save</button>
                             </div>
                         </div>
@@ -203,7 +186,7 @@
                 <td class="text-center">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalUpdateItem"
-                        (click)="CaptureItemSelected(item._id,item.code,item.quantity,item.tag,item.brand,item.roomLocation,item.category,item.currentStatus)">
+                        (click)="CaptureItemSelected(item.id,item.code,item.quantity,item.tag,item.brand,item.roomLocation,item.category,item.currentStatus)">
                         EDIT {{item.code}}
                     </button>
 
@@ -308,7 +291,7 @@
                                                     </div>
                                                     <div class="col">
                                                         <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal" (click)="GetInventoryComputers()">Close
+                                                            data-dismiss="modal" (click)="GetInventoryAll()">Close
                                                             Form</button>
                                                     </div>
                                                     <div class="col">

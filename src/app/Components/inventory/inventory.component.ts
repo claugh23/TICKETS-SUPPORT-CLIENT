@@ -51,12 +51,16 @@ export class InventoryComponent implements OnInit {
       currentStatus: this.FormItemInventory.get('FormItemStatus').value
     };
 
+    console.log(NewItem);
+    
+
     this.confirmInsert = confirm("THE INFORMATION IS CORRECT?");
 
     if (this.confirmInsert) {
       (await this.InventoryAPI.PostInventario(NewItem)).subscribe((result: any) => {
         alert("YOU HAVE ENTER A NEW ITEM TO THE INVENTORY!!")
       }, (error: HttpErrorResponse) => {
+        this.GetInventoryAll();
         alert("SOMETHING HAPPEN IN THE SERVER: " + JSON.stringify(error.error));
         this.confirmInsert = true;
       })
@@ -136,7 +140,10 @@ export class InventoryComponent implements OnInit {
       currentStatus: ''
     };
 
-    (await this.InventoryAPI.PostDeleteItem(DeleteItem)).subscribe(() => {
+    console.log(JSON.stringify(DeleteItem._id));
+    
+
+    (await this.InventoryAPI.DeleteItem(DeleteItem._id)).subscribe(() => {
       console.log("ALGO OCURRIO EN EL APP");
 
     }, (error: HttpErrorResponse) => {
@@ -144,61 +151,22 @@ export class InventoryComponent implements OnInit {
     })
   }
   ////////////////////////////////////////////
-  async GetInventoryComputers() {
-    const categoryComputer = "COMPUTERS";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+  async GetInventoryAll(){
 
-      this.ListInventory = result;
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result :any) =>{
+
+      this.ListInventory= result;
+     
+    },(error:HttpErrorResponse) =>{
+      this.GetInventoryAll();
+      alert("Ocurrio un problema al cargar el inventario: "+error.message);
     })
-  }
-  async GetInventoryNetworks() {
-    const categoryComputer = "NETWORK DEVICES";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
 
-      this.ListInventory = result;
-    })
   }
-  async GetInventoryCameras() {
-    const categoryComputer = "SECURITY CAMERAS";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
-
-      this.ListInventory = result;
-    })
-  }
-  async GetInventorySound() {
-    const categoryComputer = "SOUND EQUIPMENT";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
-
-      this.ListInventory = result;
-    })
-  }
-  async GetInventoryMultimedia() {
-    const categoryComputer = "PROYECTION AND MULTIMEDIA DEVICES";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
-
-      this.ListInventory = result;
-    })
-  }
-  async GetInventoryTablets() {
-    const categoryComputer = "TABLETS OR IPADS";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
-
-      this.ListInventory = result;
-    })
-  }
-  async GetInventorySoftware() {
-    const categoryComputer = "SOFTWARE UTILITIES";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
-
-      this.ListInventory = result;
-    })
-  }
-
 
   ngOnInit() {
     this.confirmInsert = false;
-    this.GetInventoryComputers();
-
+    
     this.FormItemInventory.get('FormItemCode').valueChanges.subscribe(CurrentValue => {
       this.GetItemCode = CurrentValue;
 

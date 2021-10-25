@@ -9,14 +9,14 @@ export class InventoryService {
 
   ServerInventory = 'https://spring-app-tickets.herokuapp.com//api/Inventory/';
 
-  ServerLoadSelectedInventory = 'https://spring-app-tickets.herokuapp.com/api/Inventory/GetInventorySelected/';
-  ServerMaintainceInventory = 'https://spring-app-tickets.herokuapp.com/api/Inventory/DeleteItemInventory/';
-  ServerMaintainceInventoryUpdated = 'https://spring-app-tickets.herokuapp.com/api/Inventory/DeleteItemInventory/';
+  ServerLoadSelectedInventory = 'https://spring-app-tickets.herokuapp.com//api/Inventory/GetInventorySelected/';
+  ServerMaintainceInventory = 'https://spring-app-tickets.herokuapp.com//api/Inventory/';
+  ServerMaintainceInventoryUpdated = 'https://spring-app-tickets.herokuapp.com//api/Inventory/DeleteItemInventory/';
   constructor(private httpRequest: HttpClient) { }
 
-  async GetCurrentInventory(category: string) {
+  async GetCurrentInventory() {
 
-    return this.httpRequest.get<InventoryItemModel[]>(this.ServerInventory + category);
+    return this.httpRequest.get<InventoryItemModel[]>(this.ServerInventory);
 
   }
 
@@ -26,8 +26,8 @@ export class InventoryService {
 
   }
   //this delete
-  async PostDeleteItem(item: InventoryItemModel) {
-    return this.httpRequest.post<InventoryItemModel>(this.ServerMaintainceInventory, item);
+   DeleteItem(Currentid: string): Observable<string> {
+    return this.httpRequest.delete<string>(this.ServerInventory+Currentid);
   }
 
   //this update

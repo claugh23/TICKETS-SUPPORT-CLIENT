@@ -91,49 +91,49 @@ export class GenerateTicketsRequestComponent implements OnInit {
 
   async GetInventoryComputers() {
     const categoryComputer = "COMPUTERS";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
   async GetInventoryNetworks() {
     const categoryComputer = "NETWORK DEVICES";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
   async GetInventoryCameras() {
     const categoryComputer = "SECURITY CAMERAS";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
   async GetInventorySound() {
     const categoryComputer = "SOUND EQUIPMENT";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
   async GetInventoryMultimedia() {
     const categoryComputer = "PROYECTION AND MULTIMEDIA DEVICES";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
   async GetInventoryTablets() {
     const categoryComputer = "TABLETS OR IPADS";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
   }
   async GetInventorySoftware() {
     const categoryComputer = "SOFTWARE UTILITIES";
-    (await this.InventoryAPI.GetCurrentInventory(categoryComputer)).subscribe((result: any) => {
+    (await this.InventoryAPI.GetCurrentInventory()).subscribe((result: any) => {
 
       this.ListInventory = result;
     })
