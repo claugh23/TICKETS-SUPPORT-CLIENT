@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   async ServiceRegistroUsuario() {
     this.statusRegistro = false;
     const registro: UsersModel = {
-      _id: "",
+      id: "",
       name: this.FormRegistroUser.get('FormName').value,
       lastName: this.FormRegistroUser.get('FormLastName').value,
       phone: this.FormRegistroUser.get('FormPhone').value,
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
       name: '',
       phone: '',
       role: 'Admin',
-      _id: '',
+      id: '',
     };
 
     this.WebServiceUser.PostUserAutentication(credentials).subscribe(

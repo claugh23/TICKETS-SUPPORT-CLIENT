@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersModel } from 'src/app/Interfaces/IUsers';
 import { LoginService } from 'src/app/Services/Autentication/login.service';
+import { AuthorizationServiceService } from "src/app/Services/Authorization/authorization-service.service";
 
 @Component({
   selector: 'app-users-database',
@@ -17,6 +18,7 @@ export class UsersDatabaseComponent implements OnInit {
   //listados
   ListaUsers: UsersModel[];
   ListaUsersRegistrations: UsersModel[];
+
   UserInfo: UsersModel;
 
   //Formulario Agregar User
@@ -25,7 +27,11 @@ export class UsersDatabaseComponent implements OnInit {
   FormUpdateUser: FormGroup;
 
 
-  constructor(private FormAddUserBuilder: FormBuilder, private FormUpdateUserBuilder: FormBuilder, private UserServiceAPI: LoginService) {
+  constructor(
+    private FormAddUserBuilder: FormBuilder, 
+    private FormUpdateUserBuilder: FormBuilder, 
+    private UserServiceAPI: LoginService, 
+    private AuthorizationServiceAPI: AuthorizationServiceService) {
 
     this.FormAddUser = this.FormAddUserBuilder.group({
       Formname: new FormControl(''),
@@ -58,7 +64,7 @@ export class UsersDatabaseComponent implements OnInit {
 
   ObtenerInscripciones() {
 
-    this.UserServiceAPI.GetSuscriptions().subscribe((result: any) => {
+    this.AuthorizationServiceAPI.GetSuscriptions().subscribe((result: any) => {
 
       this.ListaUsersRegistrations = result;
     }, (error: HttpErrorResponse) => {
@@ -71,21 +77,22 @@ export class UsersDatabaseComponent implements OnInit {
     this.GetSelectedUser(CurrentUser);
 
     const registro: UsersModel = {
+      id:this.UserInfo.id,
       name: this.UserInfo.name,
       lastName: this.UserInfo.lastName,
       phone: this.UserInfo.phone,
       email: this.UserInfo.email,
       pass: this.UserInfo.pass,
-      role: "Approve"
+      role: "User"
     };
-    this.UserServiceAPI.PostUserRegister(registro).subscribe(
+    this.AuthorizationServiceAPI.PostUserRegister(registro).subscribe(
       (result) => {
 
       },
       (RegistroCompleto: any) => {
         alert("EL USUARIO: " + this.UserInfo.name + " HA SIDO APROBADO!")
         this.ObtenerInscripciones();
-
+      
         this.GetSelectedUser(CurrentUser);
 
         this.UserServiceAPI.DeleteSuscription(CurrentUser._id).subscribe(
@@ -102,12 +109,12 @@ export class UsersDatabaseComponent implements OnInit {
 
   }
 
-  RejectSuscription(CurrentUser: any) {
-    this.GetSelectedUser(CurrentUser);
+  RejectSuscription(id:String) {
+    this.GetSelectedUser(id);
 
-    this.UserServiceAPI.DeleteSuscription(CurrentUser._id).subscribe(
+    this.AuthorizationServiceAPI.DeleteSuscription(id).subscribe(
       (result) => {
-
+        
       },
       (RegistroCompleto: any) => {
         alert("EL USUARIO: " + this.UserInfo.name + "HA SIDO RECHAZADO Y ELIMINADO!");
@@ -141,7 +148,7 @@ export class UsersDatabaseComponent implements OnInit {
 
   GetSelectedUser(CurrentUser: any) {
     this.UserInfo = {
-      _id: CurrentUser.id,
+      id: CurrentUser.id,
       name: CurrentUser.name,
       lastName: CurrentUser.lastName,
       phone: CurrentUser.phone,
@@ -177,7 +184,7 @@ export class UsersDatabaseComponent implements OnInit {
   UpdateUser() {
 
     const UserInfoUpdate: UsersModel = {
-      _id: this.UserInfo._id,
+      id: this.UserInfo.id,
       name: this.FormUpdateUser.get('FormUpdateName').value,
       lastName: this.FormUpdateUser.get('FormUpdateLastName').value,
       phone: this.FormUpdateUser.get('FormUpdatePhone').value,
@@ -186,7 +193,7 @@ export class UsersDatabaseComponent implements OnInit {
       role: this.FormUpdateUser.get('FormUpdateRole').value
     }
 
-    alert(JSON.stringify(this.UserInfo._id))
+    alert(JSON.stringify(this.UserInfo.id))
 
     this.UserServiceAPI.UpdateSelectedUser(UserInfoUpdate).subscribe((result: any) => {
       alert("El usuario: " + UserInfoUpdate.name + " fue actualizado!!");
@@ -199,7 +206,7 @@ export class UsersDatabaseComponent implements OnInit {
 
   DeleteUser(CurrentId: UsersModel) {
 
-    this.UserServiceAPI.DeleteSelectedUser(CurrentId?._id).subscribe((result: any) => {
+    this.UserServiceAPI.DeleteSelectedUser(CurrentId?.id).subscribe((result: any) => {
       alert("Usuario Borrado!");
     }, (error: HttpErrorResponse) => {
       alert(JSON.stringify(error.error));

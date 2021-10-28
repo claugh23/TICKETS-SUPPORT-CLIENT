@@ -1,5 +1,5 @@
 export interface InventoryItemModel {
-    _id?:string;
+    id?:string;
     code:string;
     quantity:Number;
     tag:string;

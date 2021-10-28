@@ -7,11 +7,11 @@ import { InventoryItemModel } from "src/app/Interfaces/IInventory";
 })
 export class InventoryService {
 
-  ServerInventory = 'https://spring-app-tickets.herokuapp.com//api/Inventory/';
+  ServerInventory = 'https://spring-app-tickets.herokuapp.com/api/Inventory/';
 
-  ServerLoadSelectedInventory = 'https://spring-app-tickets.herokuapp.com//api/Inventory/GetInventorySelected/';
-  ServerMaintainceInventory = 'https://spring-app-tickets.herokuapp.com//api/Inventory/';
-  ServerMaintainceInventoryUpdated = 'https://spring-app-tickets.herokuapp.com//api/Inventory/DeleteItemInventory/';
+  ServerLoadSelectedInventory = 'https://spring-app-tickets.herokuapp.com/api/Inventory/GetInventorySelected/';
+  ServerMaintainceInventory = 'https://spring-app-tickets.herokuapp.com/api/Inventory/';
+  ServerMaintainceInventoryUpdated = 'https://spring-app-tickets.herokuapp.com/api/Inventory/DeleteItemInventory/';
   constructor(private httpRequest: HttpClient) { }
 
   async GetCurrentInventory() {

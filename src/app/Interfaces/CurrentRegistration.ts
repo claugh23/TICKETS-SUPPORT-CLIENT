@@ -1,4 +1,4 @@
-export interface UsersModel {
+export interface CurrentRegistrationModel{
     id?:string;
     name:string;
     lastName:string;

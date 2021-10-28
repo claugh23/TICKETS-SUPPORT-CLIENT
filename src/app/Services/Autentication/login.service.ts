@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { UsersModel } from "src/app/Interfaces/IUsers";
 import { Observable } from 'rxjs';
-import { AuthModel } from 'src/app/Interfaces/IAuth';
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  ServerRegistroUsuario = 'https://spring-app-tickets.herokuapp.com//api/Users/';
-  ServerAutenticacion = 'https://spring-app-tickets.herokuapp.com//api/Autentication';
-  ServerUsers = 'https://spring-app-tickets.herokuapp.com//api/Users/';
+  ServerRegistroUsuario = 'https://spring-app-tickets.herokuapp.com/api/Users/';
+  ServerAutenticacion = 'https://spring-app-tickets.herokuapp.com/api/Autentication';
+  ServerUsers = 'https://spring-app-tickets.herokuapp.com/api/Users/';
   statusSetLoginUser:any;
 
   constructor(private httpRequest:HttpClient) { }

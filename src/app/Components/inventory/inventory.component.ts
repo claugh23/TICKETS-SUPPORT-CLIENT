@@ -28,6 +28,7 @@ export class InventoryComponent implements OnInit {
   constructor(private InventoryAPI: InventoryService, private FormBuilderInventory: FormBuilder) {
 
     this.FormItemInventory = this.FormBuilderInventory.group({
+      FormItemIdDb: new FormControl(),
       FormItemCode: new FormControl(),
       FormItemQuantity: new FormControl(),
       FormItemTag: new FormControl(),
@@ -68,19 +69,20 @@ export class InventoryComponent implements OnInit {
 
   }
   /////////////////////////////////////////////
-  async CaptureItemSelected(IdSelected: string, Code: string, Quantity: Number, Tag: string, Brand: string, RoomLocation: string, Category: string, CurrentStatus: string) {
+  async CaptureItemSelected(id: string, Code: string, Quantity: Number, Tag: string, Brand: string, RoomLocation: string, category: string, CurrentStatus: string) {
 
-    const SelectionItem = { IdSelected, Code, Quantity, Tag, Brand, RoomLocation, Category, CurrentStatus }
+    const SelectionItem = { id, Code, Quantity, Tag, Brand, RoomLocation, category, CurrentStatus }
 
-    this.GetIdItem = SelectionItem.IdSelected;
+    this.GetIdItem = SelectionItem.id;
     this.GetItemCode = SelectionItem.Code;
     this.GetItemQuantity = SelectionItem.Quantity;
     this.GetItemTag = SelectionItem.Tag;
     this.GetItemBrand = SelectionItem.Brand;
     this.GetItemRoomLocation = SelectionItem.RoomLocation;
-    this.GetItemCategory = SelectionItem.Category;
+    this.GetItemCategory = SelectionItem.category;
     this.GetItemStatus = SelectionItem.CurrentStatus;
 
+    this.FormItemInventory.patchValue({FormItemIdDb: this.GetIdItem})
     this.FormItemInventory.patchValue(
       { FormItemCode: this.GetItemCode },
     )
@@ -109,7 +111,7 @@ export class InventoryComponent implements OnInit {
   async UpdateItemInventory() {
 
     const UpdatedItem: InventoryItemModel = {
-      _id: this.GetIdItem,
+      id: this.GetIdItem,
       code: this.FormItemInventory.get('FormItemCode').value,
       quantity: Number.parseInt(this.FormItemInventory.get('FormItemQuantity').value),
       tag: this.FormItemInventory.get('FormItemTag').value,
@@ -130,7 +132,7 @@ export class InventoryComponent implements OnInit {
   async DeleteItemInventory() {
 
     const DeleteItem: InventoryItemModel = {
-      _id: this.GetIdItem,
+      id: this.GetIdItem,
       code: '',
       quantity: 0,
       tag: '',
@@ -140,14 +142,14 @@ export class InventoryComponent implements OnInit {
       currentStatus: ''
     };
 
-    console.log(JSON.stringify(DeleteItem._id));
+    console.log(JSON.stringify(DeleteItem.id));
     
 
-    (await this.InventoryAPI.DeleteItem(DeleteItem._id)).subscribe(() => {
+    (await this.InventoryAPI.DeleteItem(DeleteItem.id)).subscribe(() => {
       console.log("ALGO OCURRIO EN EL APP");
 
     }, (error: HttpErrorResponse) => {
-      alert("ITEM: " + DeleteItem._id + " HA SIDO ELIMINADO")
+      alert("ITEM: " + DeleteItem.id + " HA SIDO ELIMINADO")
     })
   }
   ////////////////////////////////////////////
